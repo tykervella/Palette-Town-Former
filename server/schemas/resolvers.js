@@ -1,21 +1,21 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Deck } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('thoughts');
+      return User.find().populate('decks');
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('thoughts');
     },
-    thoughts: async (parent, { username }) => {
+    decks: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+      return Deck.find(params).sort({ createdAt: -1 });
     },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    deck: async (parent, { deckId }) => {
+      return Deck.findOne({ _id: deckId });
     },
   },
 
@@ -42,19 +42,19 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-      const thought = await Thought.create({ thoughtText, thoughtAuthor });
+    addDeck: async (parent, { deckName, deckList, deckOwner }) => {
+      const deck = await Deck.create({ deckName, deckList, deckOwner });
 
       await User.findOneAndUpdate(
-        { username: thoughtAuthor },
-        { $addToSet: { thoughts: thought._id } }
+        { username: deckOwner },
+        { $addToSet: { decks: deck._id } }
       );
 
-      return thought;
+      return deck;
     },
-    addComment: async (parent, { thoughtId, commentText, commentAuthor }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
+    addComment: async (parent, { deckId, commentText, commentAuthor }) => {
+      return Deck.findOneAndUpdate(
+        { _id: deckId },
         {
           $addToSet: { comments: { commentText, commentAuthor } },
         },
@@ -64,12 +64,12 @@ const resolvers = {
         }
       );
     },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
+    removeDeck: async (parent, { deckId }) => {
+      return Deck.findOneAndDelete({ _id: deckId });
     },
-    removeComment: async (parent, { thoughtId, commentId }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
+    removeComment: async (parent, { deckId, commentId }) => {
+      return Deck.findOneAndUpdate(
+        { _id: deckId },
         { $pull: { comments: { _id: commentId } } },
         { new: true }
       );

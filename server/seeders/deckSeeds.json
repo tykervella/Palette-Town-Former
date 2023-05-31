@@ -1,0 +1,13 @@
+[
+  {
+    "deckName": "Gen 1 Faves",
+    "deckList": "string of text",
+    "deckOwner": "Brian Kernighan"
+  },
+  {
+    "deckName": "Flower Babes",
+    "deckList": "string of text",
+    "deckOwner": "Max Kanat-Alexander"
+  }
+ 
+]
