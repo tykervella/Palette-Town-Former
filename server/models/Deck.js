@@ -15,8 +15,8 @@ const deckSchema = new Schema({
     trim: true,
   },
   deckOwner: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     trim: true,
   },
   createdAt: {
