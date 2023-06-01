@@ -1,4 +1,8 @@
 const express = require('express');
+// added babel package and sass package
+const babel = require('babel');
+const sass = require('sass');
+const result = sass.compile(style.scss)
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
