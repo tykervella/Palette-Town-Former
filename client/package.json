@@ -9,12 +9,16 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^1.4.0",
+    "Babel": "^0.0.1",
     "graphql": "^15.4.0",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.1",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
+    "sass": "^1.62.1",
+    "tailwindcss": "^3.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
