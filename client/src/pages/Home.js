@@ -6,11 +6,21 @@ import TrendingPalettes from '../components/TrendingPalettes';
 import CaughtDecks from '../components/CaughtDecks';
 import TopListing from '../components/TopListing';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import banner from "../assets/pokemon.paint.banner.noBG.png"
+
+
 const Home = () => {
   return (
-      <div>
-        
-      </div>
+    // primary container for entire page
+    <Container>
+      {/* banner */}
+      <img style={{ width: "90%", display:'block'}} src={banner} alt="banner" className="banner" />
+      
+    </Container>
   )
 };
 
