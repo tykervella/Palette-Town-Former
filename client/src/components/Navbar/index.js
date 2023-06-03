@@ -20,13 +20,13 @@ const Navbar = () => {
         </div>
         <div className="navbar navbar-expand-lg navbar-light text-white d-flex align-items-center"> 
           <div className="btn-group"> 
-            <Link className="btn btn-primary" to="/page1"> 
+            <Link className="btn btn-primary" to="/"> 
               Home
             </Link>
-            <Link className="btn btn-primary" to="/page2"> 
+            <Link className="btn btn-primary" to="/profile"> 
               Create
             </Link>
-            <Link className="btn btn-primary" to="/page3"> 
+            <Link className="btn btn-primary" to="/marketplace"> 
               Marketplace
             </Link>
           </div>

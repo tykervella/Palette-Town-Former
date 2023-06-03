@@ -10,12 +10,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ImageSlider from './components/ImagesSlider';
 import { SliderData } from './components/SliderData';
 
-
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Marketplace from './pages/Marketplace';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -50,27 +50,33 @@ function App() {
           <ImageSlider slides={SliderData} />
           <div className="container">
             <Routes>
-              
-              <Route 
-                path="/" 
-                element={<Home />} 
+
+              <Route
+                path="/"
+                element={<Home />}
               />
 
-              <Route 
-                path="/login" 
-                element={<Login />} 
+              <Route
+                path="/login"
+                element={<Login />}
               />
 
-              <Route 
-                path="/signup" 
-                element={<Signup />} 
+              <Route
+                path="/signup"
+                element={<Signup />}
               />
-             
+
+              <Route
+                path="/marketplace"
+                element={<Marketplace />}
+              />
+
             </Routes>
           </div>
           <Footer />
         </div>
       </Router>
+
     </ApolloProvider>
   );
 }
