@@ -15,7 +15,6 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import Marketplace from './pages/Marketplace';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -46,8 +45,9 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
-          <Navbar />
-          <ImageSlider slides={SliderData} />
+          <Navbar 
+          
+          />
           <div className="container">
             <Routes>
 
