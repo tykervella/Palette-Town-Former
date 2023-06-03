@@ -7,8 +7,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ImageSlider from './components/ImagesSlider';
-import { SliderData } from './components/SliderData';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
@@ -43,9 +41,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className="flex-column justify-flex-start">
           <Navbar />
-           <ImageSlider slides={SliderData} />
+           
           <div className="container">
             <Routes>
 
@@ -70,6 +68,7 @@ function App() {
               /> */}
 
             </Routes>
+            
           </div>
           <Footer />
         </div>
