@@ -26,3 +26,5 @@ const Home = () => {
 
 export default Home;
 
+
+{/* <ImageSlider slides={SliderData} />; */}

@@ -7,8 +7,10 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ImageSlider from './components/ImagesSlider';
-import { SliderData } from './components/SliderData';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
@@ -43,12 +45,10 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
         <div className="flex-column justify-flex-start min-100-vh">
-          <Navbar 
-          
-          />
-          <div className="container">
+          <Navbar />
+  
+          <Container>
             <Routes>
 
               <Route
@@ -66,16 +66,15 @@ function App() {
                 element={<Signup />}
               />
 
-              <Route
+              {/* <Route
                 path="/marketplace"
                 element={<Marketplace />}
-              />
+              /> */}
 
             </Routes>
-          </div>
+          </Container>
           <Footer />
         </div>
-      </Router>
 
     </ApolloProvider>
   );
