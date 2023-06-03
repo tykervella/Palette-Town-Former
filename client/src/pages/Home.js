@@ -10,23 +10,50 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import ImageSlider from '../components/ImagesSlider';
-import { SliderData } from '../components/SliderData';
-
-
-import banner from "../assets/pokemon.paint.banner.noBG.png"
-
-
 const Home = () => {
   return (
     // primary container for entire page
+    <div>
     <Container>
-      {/* banner */}
-      
-      <ImageSlider slides={SliderData} />
 
-      
+      {/* banner */}
+      <Row>
+        <Col xs='auto' className='border border-black rounded-xl bg-red-200 p-16 m-2'>
+          <Row className='text-center'>
+              <h2 className='text-3xl font-bold text-white text-center'>Banner Section</h2>
+          </Row>
+
+          <Row className='float-right'>
+            <button className='border border-black rounded-xl bg-red-400'>Go To MarketPlace</button>
+          </Row>
+
+        </Col>
+      </Row>
+
+      {/* trending palettes/decks */}
+      <Row>
+        <Col xs='auto' className='border border-black rounded-xl bg-slate-400 p-56 m-2'>
+          <h2 className='text-3xl font-bold text-white text-center'>Trending Palettes</h2>
+            <div></div>
+        </Col>
+      </Row>
+
+      {/* bottom row */}
+      <Row>
+        {/* caught decks */}
+        <Col xs="auto" className='border border-black rounded-xl bg-slate-400 p-16 m-2'>
+          <h2 className='text-3xl font-bold text-white text-center'>Caught Decks</h2>
+            <div></div>
+        </Col>
+        {/* top card listings */}
+        <Col xs="3" className='border border-black rounded-xl bg-slate-400 p-16 m-2'>
+          <h2 className='text-3xl font-bold text-white text-center'>Today's Top Listings</h2>
+            <div><TopListing/></div>
+        </Col>
+      </Row>
+
     </Container>
+  </div>
   )
 };
 
