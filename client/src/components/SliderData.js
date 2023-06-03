@@ -20,3 +20,4 @@ export const SliderData = [
         'https://www.playbite.com/wp-content/uploads/2022/09/en_US-XY10-078-lugia-1200x1674.jpg'
     }
   ];
+

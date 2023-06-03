@@ -18,7 +18,7 @@ const Home = () => {
     // primary container for entire page
     <Container>
       {/* banner */}
-      <img style={{ width: "90%", display:'block'}} src={banner} alt="banner" className="banner" />
+      
       
     </Container>
   )
@@ -26,5 +26,3 @@ const Home = () => {
 
 export default Home;
 
-
-{/* <ImageSlider slides={SliderData} />; */}
