@@ -1,42 +1,38 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
+
 import Auth from "../../utils/auth";
-import logo from "../Navbar/assets/pokemon-logo-noBG.png";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
 
 const Navbar = () => {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
-  }; 
+  };
 
   return (
-    <header className="bg-primary text-light mb-4 py-3">
-      <Container>
-        <Row className="justify-content-between align-items-center">
-          <Col className="d-flex align-items-center">
-            <Link className="text-light me-4" to="/">
-              <img src={logo} alt="Logo" className="h-16 w-16" />
+    <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
+      <div className="container flex-row justify-space-between-lg justify-center align-center">
+        <div className="text-center"> 
+          <Link className="text-light" to="/">
+            <h1 className="m-0">Palette Town</h1>
+          </Link>
+          <p className="m-0">Where Hexcodes and Pokémon Collide</p>
+        </div>
+        <div className="navbar navbar-expand-lg navbar-light text-white d-flex align-items-center"> 
+          <div className="btn-group"> 
+            <Link className="btn btn-primary" to="/"> 
+              Home
             </Link>
-            <div className="btn-group">
-              <Link className="btn bg-primary" to="/page1"> 
-                Home
-              </Link>
-              <Link className="btn bg-primary" to="/page2"> 
-                Create
-              </Link>
-              <Link className="btn bg-primary" to="/page3"> 
-                Marketplace
-              </Link>
-            </div>
-          </Col>
-          <Col className="d-flex align-items-center justify-content-end">
-            <div className="rounded-circle bg-secondary profile-pic me-2"></div>
-            <span className="text-white">Profile Name</span>
-          </Col>
-        </Row>
-      </Container>
+            <Link className="btn btn-primary" to="/profile"> 
+              Create
+            </Link>
+            <Link className="btn btn-primary" to="/marketplace"> 
+              Marketplace
+            </Link>
+          </div>
+        </div>
+      </div>
     </header>
   );
 };
