@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Builder from './pages/Builder';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 
@@ -43,7 +44,6 @@ function App() {
     <ApolloProvider client={client}>
         <div className="flex-column justify-flex-start">
           <Navbar />
-           
           <div className="container">
             <Routes>
 
@@ -60,6 +60,11 @@ function App() {
               <Route
                 path="/signup"
                 element={<Signup />}
+              />
+
+              <Route
+                path="/builder"
+                element={<Builder />}
               />
 
               {/* <Route
