@@ -3,15 +3,20 @@ const { User, Deck } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
+  Deck: {
+    cardCount: (parent) => parent.cards.length,
+    commentCount: (parent) => parent.comments.length,
+  },
+
   Query: {
     users: async () => {
       return User.find().populate('decks');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts');
+      return User.findOne({ username }).populate('decks');
     },
     decks: async (parent, { username }) => {
-      const params = username ? { username } : {};
+      const params = username ? { deckOwner: username } : {};
       return Deck.find(params).sort({ createdAt: -1 });
     },
     deck: async (parent, { deckId }) => {
@@ -42,8 +47,8 @@ const resolvers = {
 
       return { token, user };
     },
-    addDeck: async (parent, { deckName, deckList, deckOwner }) => {
-      const deck = await Deck.create({ deckName, deckList, deckOwner });
+    addDeck: async (parent, { deckName, deckOwner }) => {
+      const deck = await Deck.create({ deckName, deckOwner });
 
       await User.findOneAndUpdate(
         { username: deckOwner },
@@ -52,17 +57,19 @@ const resolvers = {
 
       return deck;
     },
-    addComment: async (parent, { deckId, commentText, commentAuthor }) => {
-      return Deck.findOneAndUpdate(
+    addComment: async (parent, { deckId, commentInput }) => {
+      const comment = {
+        commentText: commentInput.commentText,
+        commentAuthor: commentInput.commentAuthor,
+      };
+  
+      const updatedDeck = await Deck.findOneAndUpdate(
         { _id: deckId },
-        {
-          $addToSet: { comments: { commentText, commentAuthor } },
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
+        { $push: { comments: comment } },
+        { new: true }
       );
+  
+      return updatedDeck;
     },
     removeDeck: async (parent, { deckId }) => {
       return Deck.findOneAndDelete({ _id: deckId });
@@ -73,6 +80,33 @@ const resolvers = {
         { $pull: { comments: { _id: commentId } } },
         { new: true }
       );
+    },
+    addCard: async (parent, { deckId, cardInput }) => {
+      const card = {
+        cardId: cardInput.cardId,
+        cardName: cardInput.cardName,
+        cardImage: cardInput.cardImage,
+        cardType: cardInput.cardType,
+        quantity: cardInput.quantity,
+      };
+
+      const updatedDeck = await Deck.findOneAndUpdate(
+        { _id: deckId },
+        { $push: { cards: card } },
+        { new: true }
+      );
+
+      return updatedDeck;
+    },
+
+    removeCard: async (parent, { deckId, cardId }) => {
+      const updatedDeck = await Deck.findOneAndUpdate(
+        { _id: deckId },
+        { $pull: { cards: { _id: cardId } } },
+        { new: true }
+      );
+
+      return updatedDeck;
     },
   },
 };
