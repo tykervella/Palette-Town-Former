@@ -1,13 +1,64 @@
 [
   {
-    "deckName": "Gen 1 Faves",
-    "deckList": "string of text",
-    "deckOwner": "Brian Kernighan"
+    "deckName": "Deck 1",
+    "deckOwner": "user1",
+    "published": true,
+    "cards": [
+      {
+        "cardId": "card1",
+        "cardName": "Card 1",
+        "cardImage": "image1.jpg",
+        "cardType": "Type 1",
+        "quantity": 3
+      },
+      {
+        "cardId": "card2",
+        "cardName": "Card 2",
+        "cardImage": "image2.jpg",
+        "cardType": "Type 2",
+        "quantity": 2
+      }
+    ],
+    "comments": [
+      {
+        "commentText": "Great deck!",
+        "commentAuthor": "user2"
+      },
+      {
+        "commentText": "Nice cards!",
+        "commentAuthor": "user3"
+      }
+    ]
   },
   {
-    "deckName": "Flower Babes",
-    "deckList": "string of text",
-    "deckOwner": "Max Kanat-Alexander"
+    "deckName": "Deck 2",
+    "deckOwner": "user1",
+    "published": false,
+    "cards": [
+      {
+        "cardId": "card3",
+        "cardName": "Card 3",
+        "cardImage": "image3.jpg",
+        "cardType": "Type 1",
+        "quantity": 4
+      },
+      {
+        "cardId": "card4",
+        "cardName": "Card 4",
+        "cardImage": "image4.jpg",
+        "cardType": "Type 2",
+        "quantity": 1
+      }
+    ],
+    "comments": [
+      {
+        "commentText": "Needs improvement.",
+        "commentAuthor": "user2"
+      },
+      {
+        "commentText": "Interesting strategy!",
+        "commentAuthor": "user3"
+      }
+    ]
   }
- 
 ]
