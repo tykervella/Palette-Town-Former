@@ -6,11 +6,15 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ImageSlider from './components/ImagesSlider';
+import { SliderData } from './components/SliderData';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 import Marketplace from './pages/Marketplace';
 
 // Construct our main GraphQL API endpoint
@@ -40,35 +44,39 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      {/* <div className="flex-column justify-flex-start min-100-vh"> */}
+      <Router>
+        <div className="flex-column justify-flex-start min-100-vh">
+          <Navbar />
+          <ImageSlider slides={SliderData} />
+          <div className="container">
+            <Routes>
 
-        {/* <div className="container"> */}
-          <Routes>
+              <Route
+                path="/"
+                element={<Home />}
+              />
 
-            <Route
-              exact
-              path="/"
-              element={<Home />}
-            />
+              <Route
+                path="/login"
+                element={<Login />}
+              />
 
-            <Route
-              path="/login"
-              element={<Login />}
-            />
+              <Route
+                path="/signup"
+                element={<Signup />}
+              />
 
-            <Route
-              path="/signup"
-              element={<Signup />}
-            />
+              <Route
+                path="/marketplace"
+                element={<Marketplace />}
+              />
 
-            <Route
-              path="/marketplace"
-              element={<Marketplace />}
-            />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </Router>
 
-          </Routes>
-        {/* </div>
-      </div> */}
     </ApolloProvider>
   );
 }
