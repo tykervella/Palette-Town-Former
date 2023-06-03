@@ -6,14 +6,12 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
+import Marketplace from './pages/Marketplace';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -42,34 +40,35 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Navbar 
-          
-          />
-          <div className="container">
-            <Routes>
-              
-              <Route 
-                path="/" 
-                element={<Home />} 
-              />
+      {/* <div className="flex-column justify-flex-start min-100-vh"> */}
 
-              <Route 
-                path="/login" 
-                element={<Login />} 
-              />
+        {/* <div className="container"> */}
+          <Routes>
 
-              <Route 
-                path="/signup" 
-                element={<Signup />} 
-              />
-             
-            </Routes>
-          </div>
-          <Footer />
-        </div>
-      </Router>
+            <Route
+              exact
+              path="/"
+              element={<Home />}
+            />
+
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
+
+            <Route
+              path="/marketplace"
+              element={<Marketplace />}
+            />
+
+          </Routes>
+        {/* </div>
+      </div> */}
     </ApolloProvider>
   );
 }

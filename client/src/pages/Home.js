@@ -8,9 +8,9 @@ import TopListing from '../components/TopListing';
 
 const Home = () => {
   return (
-      <div>
-        
-      </div>
+    <div>
+
+    </div>
   )
 };
 
