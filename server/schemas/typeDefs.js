@@ -52,25 +52,22 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addDeck(deckName: String!, deckOwner: String!): Deck
-    addComment(deckId: ID!, commentInput: CommentInput!): Deck
+    addComment(
+      deckId: ID!, 
+      commentText: String!
+      commentAuthor: String!
+    ): Deck
     removeDeck(deckId: ID!): Deck
     removeComment(deckId: ID!, commentId: ID!): Deck
-    addCard(deckId: ID!, cardInput: CardInput!): Deck
     removeCard(deckId: ID!, cardId: ID!): Deck
-  }
-
-  input CardInput {
-    cardId: String!
-    cardName: String!
-    cardImage: String!
-    cardType: String!
-    quantity: Int!
-  }
-
-  input CommentInput {
-  commentText: String!
-  commentAuthor: String!
-  }
+    addCardToDeckList(
+      deckId: ID!, 
+      cardId: String!
+      cardName: String!
+      cardImage: String!
+      cardType: String!
+    ): Deck
+    }
 
 `;
 
