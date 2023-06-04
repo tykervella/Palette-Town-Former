@@ -25,6 +25,7 @@ function DeckBuilder() {
         cardId: card.cardId,
         image: card.cardImage,
         cardName: card.cardName,
+        quantity: card.quantity
       }));
       setDecklist(decklistFromData);
     }
@@ -124,9 +125,11 @@ function DeckBuilder() {
           {/* Render the decklist */}
            {decklist.map((card) => (
             <DeckElement
-              key={card.id}
-              image={card.image}
+              key={card.cardId}
+              cardId={card.cardId}
+              cardImage={card.image}
               cardName={card.cardName}
+              quantity={card.quantity}
             />
           ))} 
          

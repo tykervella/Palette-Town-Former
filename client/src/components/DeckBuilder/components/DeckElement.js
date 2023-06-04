@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function DeckElement({ image, cardName }) {
-  const [value, setValue] = useState(1);
+function DeckElement({ cardId, cardImage, cardName, quantity }) {
+  const [value, setValue] = useState(quantity);
 
   const handleIncrement = () => {
     setValue(value + 1);
@@ -13,7 +13,7 @@ function DeckElement({ image, cardName }) {
 
   return (
     <div className="col-span-4 my-2 flex flex-col items-center">
-      <img src={image} alt={cardName} />
+      <img src={cardImage} alt={cardName} data={cardId}/>
       <h1 className="text-xs mt-1 text-center">{cardName}</h1>
       <div className="flex items-center mt-1">
         <button

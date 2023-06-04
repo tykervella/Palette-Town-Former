@@ -57,8 +57,8 @@ const resolvers = {
 
       return { token, user };
     },
-    addDeck: async (parent, { deckName, deckOwner }) => {
-      const deck = await Deck.create({ deckName, deckOwner });
+    addDeck: async (parent, { deckOwner }) => {
+      const deck = await Deck.create({ deckOwner });
 
       await User.findOneAndUpdate(
         { username: deckOwner },
