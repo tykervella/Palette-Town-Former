@@ -33,6 +33,8 @@ const typeDefs = gql`
     cardName: String!
     cardImage: String!
     cardType: String!
+    superType: String!
+    quantity: Int!
     # ... other card fields
   }
 
@@ -51,7 +53,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addDeck(deckName: String!, deckOwner: String!): Deck
+    addDeck(deckOwner: String!): Deck
     addComment(
       deckId: ID!, 
       commentText: String!
@@ -66,7 +68,14 @@ const typeDefs = gql`
       cardName: String!
       cardImage: String!
       cardType: String!
+      superType: String!
     ): Deck
+    updateCardQuantity(
+      deckId: ID! 
+      cardId: ID! 
+      quantity: Int!
+    ): Deck
+  
     }
 
 `;

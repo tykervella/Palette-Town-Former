@@ -20,6 +20,10 @@ const cardSchema = new Schema({
       type: String,
       required: true,
   },
+  superType: {
+    type: String,
+    required: true,
+},
   quantity: {
     type: Number,
     default:1,
@@ -51,7 +55,6 @@ const commentSchema = new Schema ({
 const deckSchema = new Schema({
   deckName: {
     type: String,
-    required: 'You need to name your deck!',
     minlength: 1,
     maxlength: 20,
     trim: true,
@@ -72,12 +75,21 @@ const deckSchema = new Schema({
   },
   cards: [cardSchema],
   comments: [commentSchema],
+    // Add a virtual field for total card count
+    cardCount: {
+      type: Number,
+      default: 0,
+      get: function () {
+        let totalCount = 0;
+        this.cards.forEach((card) => {
+          totalCount += card.quantity;
+        });
+        return totalCount;
+      },
+    },
 });
 
-// Virtual for card count
-deckSchema.virtual('cardCount').get(function () {
-  return this.cards.length;
-});
+
 
 // Virtual for comment count
 deckSchema.virtual('commentCount').get(function () {

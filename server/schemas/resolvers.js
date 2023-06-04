@@ -57,8 +57,8 @@ const resolvers = {
 
       return { token, user };
     },
-    addDeck: async (parent, { deckName, deckOwner }) => {
-      const deck = await Deck.create({ deckName, deckOwner });
+    addDeck: async (parent, { deckOwner }) => {
+      const deck = await Deck.create({ deckOwner });
 
       await User.findOneAndUpdate(
         { username: deckOwner },
@@ -91,7 +91,7 @@ const resolvers = {
         { new: true }
       );
     },
-    addCardToDeckList: async (_, { deckId, cardId, cardName, cardImage, cardType }) => {
+    addCardToDeckList: async (_, { deckId, cardId, cardName, cardImage, cardType, superType }) => {
       // Find the deck by deckId and add the card
       const deck = await findDeckById(deckId);
       if (!deck) {
@@ -103,6 +103,7 @@ const resolvers = {
         cardName: cardName,
         cardImage: cardImage,
         cardType: cardType,
+        superType: superType,
         // ... other card fields
       };
 
@@ -123,6 +124,22 @@ const resolvers = {
       );
 
       return updatedDeck;
+    },
+    updateCardQuantity: async (parent, { deckId, cardId, quantity }) => {
+      const deck = await findDeckById(deckId);
+      if (!deck) {
+        throw new Error('Deck not found');
+      }
+
+      const card = deck.cards.find((card) => card.cardId.toString() === cardId);
+      if (!card) {
+        throw new Error('Card not found in the deck');
+      }
+
+      card.quantity = quantity;
+      await deck.save();
+
+      return deck;
     },
   },
 };

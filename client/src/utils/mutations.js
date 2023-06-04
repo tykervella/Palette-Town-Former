@@ -54,16 +54,18 @@ export const ADD_TO_DECK = gql`
   mutation AddCardToDeckList(
   $deckId: ID!,
   $cardId: String!,
-  $cardName: String!,
-  $cardImage: String!,
+  $cardName: String!
+  $cardImage: String!
   $cardType: String!
+  $superType: String!
 ) {
   addCardToDeckList(
-    deckId: $deckId,
-    cardId: $cardId,
-    cardName: $cardName,
-    cardImage: $cardImage,
+    deckId: $deckId
+    cardId: $cardId
+    cardName: $cardName
+    cardImage: $cardImage
     cardType: $cardType
+    superType: $superType
   ) {
     cards {
       cardName
@@ -71,3 +73,20 @@ export const ADD_TO_DECK = gql`
   }
 }
 `
+
+export const UPDATE_CARD_QUANTITY = gql`
+  mutation Mutation(
+    $deckId: ID! 
+    $cardId: ID! 
+    $quantity: Int!
+  ) {
+  updateCardQuantity(
+    deckId: $deckId 
+    cardId: $cardId 
+    quantity: $quantity
+  ) {
+    cards {
+      quantity
+    }
+  }
+}`

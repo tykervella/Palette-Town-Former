@@ -6,17 +6,201 @@
     "cards": [
       {
         "cardId": "ex3-77",
-        "cardName": "Torchic",
         "cardImage": "https://images.pokemontcg.io/ex3/77.png",
+        "cardName": "Torchic",
         "cardType": "Fire",
-        "quantity": 3
+        "superType": "Pokémon",
+        "quantity": 2
       },
       {
         "cardId": "ex13-83",
-        "cardName": "Torchic",
         "cardImage": "https://images.pokemontcg.io/ex13/83.png",
+        "cardName": "Torchic",
         "cardType": "Fire",
+        "superType": "Pokémon",
         "quantity": 2
+      },
+      {
+        "cardId": "sm75-5",
+        "cardImage": "https://images.pokemontcg.io/sm75/5.png",
+        "cardName": "Combusken",
+        "cardType": "Fire",
+        "superType": "Pokémon",
+        "quantity": 3
+      },
+      {
+        "cardId": "pl3-2",
+        "cardImage": "https://images.pokemontcg.io/pl3/2.png",
+        "cardName": "Blaziken FB",
+        "cardType": "Fire",
+        "superType": "Pokémon",
+        "quantity": 1
+
+      },
+      {
+        "cardId": "bw8-14",
+        "cardImage": "https://images.pokemontcg.io/bw8/14.png",
+        "cardName": "Moltres-EX",
+        "cardType": "Fire",
+        "superType": "Pokémon",
+        "quantity": 1
+
+      },
+      {
+        "cardId": "xy0-16",
+        "cardImage": "https://images.pokemontcg.io/xy0/16.png",
+        "cardName": "Poochyena",
+        "cardType": "Darkness",
+        "superType": "Pokémon",
+        "quantity": 3
+      },
+      {
+        "cardId": "ex8-12",
+        "cardImage": "https://images.pokemontcg.io/ex8/12.png",
+        "cardName": "Mightyena",
+        "cardType": "Darkness",
+        "superType": "Pokémon",
+        "quantity": 2
+      },
+      {
+        "cardId": "pop4-9",
+        "cardImage": "https://images.pokemontcg.io/pop4/9.png",
+        "cardName": "Pokémon Fan Club",
+        "cardType": "other",
+        "superType": "Trainer",
+        "quantity": 3
+      },
+      {
+        "cardId": "pop5-7",
+        "cardImage": "https://images.pokemontcg.io/pop5/7.png",
+        "cardName": "Rare Candy",
+        "cardType": "other",
+        "superType": "Trainer",
+        "quantity": 1
+
+      },
+      {
+        "cardId": "ex9-86",
+        "cardImage": "https://images.pokemontcg.io/ex9/86.png",
+        "cardName": "Darkness Energy",
+        "cardType": "other",
+        "superType": "Energy",
+        "quantity": 10
+      },
+      {
+        "cardId": "g1-76",
+        "cardImage": "https://images.pokemontcg.io/g1/76.png",
+        "cardName": "Fire Energy",
+        "cardType": "other",
+        "superType": "Energy",
+        "quantity": 4
+      },
+      {
+        "cardId": "col1-89",
+        "cardImage": "https://images.pokemontcg.io/col1/89.png",
+        "cardName": "Fire Energy",
+        "cardType": "other",
+        "superType": "Energy",
+        "quantity": 4
+      }
+    ],
+    "comments": [
+      {
+        "commentText": "Great deck!",
+        "commentAuthor": "user2"
+      },
+      {
+        "commentText": "Nice cards!",
+        "commentAuthor": "user3"
+      }
+    ]
+  },
+  {
+    "deckName": "Squirtle Squad",
+    "deckOwner": "user2",
+    "published": false,
+    "cards": [
+      {
+        "cardId": "bw10-14",
+        "cardImage": "https://images.pokemontcg.io/bw10/14.png",
+        "cardName": "Squirtle",
+        "cardType": "Water",
+        "superType": "Pokémon",
+        "quantity": 3
+      },
+      {
+        "cardId": "bw10-15",
+        "cardImage": "https://images.pokemontcg.io/bw10/15.png",
+        "cardName": "Wartortle",
+        "cardType": "Water",
+        "superType": "Pokémon",
+        "quantity": 2
+      },
+      {
+        "cardId": "pl1-2",
+        "cardImage": "https://images.pokemontcg.io/pl1/2.png",
+        "cardName": "Blastoise",
+        "cardType": "Water",
+        "superType": "Pokémon",
+        "quantity": 1
+
+      },
+      {
+        "cardId": "gym1-18",
+        "cardImage": "https://images.pokemontcg.io/gym1/18.png",
+        "cardName": "Misty",
+        "cardType": "other",
+        "superType": "Trainer",
+        "quantity": 4
+      },
+      {
+        "cardId": "dp1-7",
+        "cardImage": "https://images.pokemontcg.io/dp1/7.png",
+        "cardName": "Luxray",
+        "cardType": "Lightning",
+        "superType": "Pokémon",
+        "quantity": 1
+
+      },
+      {
+        "cardId": "dpp-DP15",
+        "cardImage": "https://images.pokemontcg.io/dpp/DP15.png",
+        "cardName": "Shinx",
+        "cardType": "Lightning",
+        "superType": "Pokémon",
+        "quantity": 3
+      },
+      {
+        "cardId": "bw4-43",
+        "cardImage": "https://images.pokemontcg.io/bw4/43.png",
+        "cardName": "Shinx",
+        "cardType": "Lightning",
+        "superType": "Pokémon",
+        "quantity": 1
+      },
+      {
+        "cardId": "xy2-33",
+        "cardImage": "https://images.pokemontcg.io/xy2/33.png",
+        "cardName": "Luxio",
+        "cardType": "Lightning",
+        "superType": "Pokémon",
+        "quantity": 2
+      },
+      {
+        "cardId": "col1-91",
+        "cardImage": "https://images.pokemontcg.io/col1/91.png",
+        "cardName": "Lightning Energy",
+        "cardType": "other",
+        "superType": "Energy",
+        "quantity": 10
+      },
+      {
+        "cardId": "col1-90",
+        "cardImage": "https://images.pokemontcg.io/col1/90.png",
+        "cardName": "Water Energy",
+        "cardType": "other",
+        "superType": "Energy",
+        "quantity": 10
       }
     ],
     "comments": [
