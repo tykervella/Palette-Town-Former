@@ -64,7 +64,7 @@ const CustomNavbar = () => {
                   marginRight: "5px"
                 }}
               ></div>
-              <a className="text-white" href="#login">PokemonLover4000</a>
+              <a className="text-white" href="/Profile">PokemonLover4000</a>
             </Nav.Link>
             <Nav.Link className="text-white" onClick={logout}>
               Logout
