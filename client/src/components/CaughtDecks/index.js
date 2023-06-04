@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 const CaughtDecks = () => {
     return (
         <Container>
-            <Row className='sm:flex-col'>
+            <Row className=''>
                 <Col xs="4" className='border border-black rounded-xl bg-slate-600 mt-10'>
                     <div> .col-4 </div>
                 </Col>

@@ -26,17 +26,17 @@ export const SliderData = [
   {
     title: 'Card 6',
     image:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftcg.pokemon.com%2Fen-us%2Fgalleries%2Ftcg-go%2F&psig=AOvVaw3q7A43xpGhefr_bi_e7K_b&ust=1685929873528000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNjqhazAqP8CFQAAAAAdAAAAABAI",
+      "https://i.ebayimg.com/images/g/O3QAAOSweU9jrt4a/s-l1600.png",
   },
   {
     title: 'Card 7',
     image:
-      "https://1.bp.blogspot.com/_EqYSOZLTe9s/S8D3tl28B2I/AAAAAAAAAHI/Mf-10o62wAg/s1600/90-misty%27s-psyduck.jpg",
+      "https://cdn.shopify.com/s/files/1/1952/7119/products/041354_P_ARUSEUSUV.jpg?v=1657175625&width=2048",
   },
   {
     title: 'Card 8',
     image:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.playbite.com%2Fshop%2Fcharmander-pokemon-card%2F&psig=AOvVaw3q7A43xpGhefr_bi_e7K_b&ust=1685929873528000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNjqhazAqP8CFQAAAAAdAAAAABAV",
+      "https://product-images.tcgplayer.com/274436.jpg",
   },
   {
     title: 'Card 9',
