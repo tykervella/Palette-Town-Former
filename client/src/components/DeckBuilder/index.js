@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { GET_DECK } from '../../utils/getdeck'; // Import the GraphQL query
+import axios from 'axios'; // Import axios for making API requests
+
 
 import CardElement from './components/CardElement.js';
 import SearchCards from './components/SearchCards.js';
 import DeckElement from './components/DeckElement.js';
-import Energy from './components/Energy.js';
 
 function DeckBuilder() {
   const { _id } = useParams(); // Retrieve _id from URL params
@@ -30,15 +31,58 @@ function DeckBuilder() {
   }, [data]);
 
   const getCards = (cardName, cardType, cardSubtype, cardColor, pageNumber) => {
-    // Rest of the code
+    let queryString = '';
+
+    if (cardName !== '') {
+      queryString += `name:${cardName} `;
+    }
+
+    if (cardType !== '0') {
+      queryString += `supertype:${cardType} `;
+    }
+
+    if (cardSubtype !== '0') {
+      queryString += `subtypes:${cardSubtype} `;
+    }
+
+    if (cardColor !== '0') {
+      queryString += `types:${cardColor} `;
+    }
+
+    axios
+      .get('https://api.pokemontcg.io/v2/cards', {
+        params: {
+          q: queryString.trim(),
+          page: pageNumber,
+          pageSize: 9,
+        },
+      })
+      .then(response => {
+        const rawData = response.data;
+        const cardsArray = rawData.data.map(card => ({
+          id: card.id,
+          name: card.name,
+          series: card.set.name,
+          series_symbol: card.set.images.symbol,
+          images: card.images,
+          types: card.types,
+          supertype: card.supertype,
+        }));
+        setCards(cardsArray);
+      })
+      .catch(error => {
+        console.error(error);
+        setCards([]);
+      });
   };
 
   const handleSearch = (cardName, cardType, cardSubtype, cardColor) => {
-    // Rest of the code
+    getCards(cardName, cardType, cardSubtype, cardColor, 1);
   };
 
   const addCardToDecklist = (image, cardName) => {
-    // Rest of the code
+    const newCard = { image, cardName };
+    setDecklist(prevDecklist => [...prevDecklist, newCard]);
   };
 
   return (
