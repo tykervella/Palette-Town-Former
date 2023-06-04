@@ -7,16 +7,16 @@ const CaughtDecks = () => {
     return (
         <Container>
             <Row className=''>
-                <Col xs="4" className='border border-black rounded-xl bg-slate-600 mt-10'>
-                    <div> .col-4 </div>
+                <Col className='border border-black rounded-xl bg-slate-600 mt-10'>
+                    <div>  </div>
                 </Col>
 
-                <Col xs="4" className='border border-black rounded-xl bg-slate-600 mt-10'>
-                    <div> .col-4 </div>
+                <Col className='border border-black rounded-xl bg-slate-600 mt-10'>
+                    <div>  </div>
                 </Col>
 
-                <Col xs="4" className='border border-black rounded-xl bg-slate-600 mt-10'>
-                    <div> .col-4 </div>
+                <Col className='border border-black rounded-xl bg-slate-600 mt-10'>
+                    <div>  </div>
                 </Col>
             </Row>
 
