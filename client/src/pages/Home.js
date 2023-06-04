@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import FeaturedDeck from '../components/FeaturedDeck';
 import TrendingPalettes from '../components/TrendingPalettes';
 import CaughtDecks from '../components/CaughtDecks';
 import TopListing from '../components/TopListing';
@@ -31,9 +30,9 @@ const Home = () => {
 
       {/* trending palettes/decks */}
       <Row>
-        <Col xs='auto' className='border border-black rounded-xl bg-slate-400 p-56 m-2'>
+        <Col xs='auto' className='border border-black rounded-xl bg-slate-400 m-2'>
           <h2 className='text-3xl font-bold text-white text-center'>Trending Palettes</h2>
-            <div></div>
+            <div><TrendingPalettes /></div>
         </Col>
       </Row>
 
