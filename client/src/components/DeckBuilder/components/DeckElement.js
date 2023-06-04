@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function DeckElement({ image, cardName }) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
 
   const handleIncrement = () => {
     setValue(value + 1);

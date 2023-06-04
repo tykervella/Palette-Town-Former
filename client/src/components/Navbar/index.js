@@ -35,7 +35,7 @@ const CustomNavbar = () => {
             <Link className="nav-link text-white ms-6" to="/page1">
               Home
             </Link>
-            <Link className="nav-link text-white" to="/page2">
+            <Link className="btn btn-primary" to="/profile"> 
               Create
             </Link>
 

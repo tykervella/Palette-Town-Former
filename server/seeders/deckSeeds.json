@@ -1,21 +1,21 @@
 [
   {
-    "deckName": "Deck 1",
+    "deckName": "Flame Lick",
     "deckOwner": "user1",
-    "published": true,
+    "published": false,
     "cards": [
       {
-        "cardId": "card1",
-        "cardName": "Card 1",
-        "cardImage": "image1.jpg",
-        "cardType": "Type 1",
+        "cardId": "ex3-77",
+        "cardName": "Torchic",
+        "cardImage": "https://images.pokemontcg.io/ex3/77.png",
+        "cardType": "Fire",
         "quantity": 3
       },
       {
-        "cardId": "card2",
-        "cardName": "Card 2",
-        "cardImage": "image2.jpg",
-        "cardType": "Type 2",
+        "cardId": "ex13-83",
+        "cardName": "Torchic",
+        "cardImage": "https://images.pokemontcg.io/ex13/83.png",
+        "cardType": "Fire",
         "quantity": 2
       }
     ],
@@ -26,37 +26,6 @@
       },
       {
         "commentText": "Nice cards!",
-        "commentAuthor": "user3"
-      }
-    ]
-  },
-  {
-    "deckName": "Deck 2",
-    "deckOwner": "user1",
-    "published": false,
-    "cards": [
-      {
-        "cardId": "card3",
-        "cardName": "Card 3",
-        "cardImage": "image3.jpg",
-        "cardType": "Type 1",
-        "quantity": 4
-      },
-      {
-        "cardId": "card4",
-        "cardName": "Card 4",
-        "cardImage": "image4.jpg",
-        "cardType": "Type 2",
-        "quantity": 1
-      }
-    ],
-    "comments": [
-      {
-        "commentText": "Needs improvement.",
-        "commentAuthor": "user2"
-      },
-      {
-        "commentText": "Interesting strategy!",
         "commentAuthor": "user3"
       }
     ]
