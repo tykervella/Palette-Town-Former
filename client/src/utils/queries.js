@@ -1,5 +1,19 @@
 import { gql } from '@apollo/client';
 
+export const GET_DECK = gql`
+  query Deck($deckId: ID!) {
+  deck(deckId: $deckId) {
+    cardCount
+    cards {
+      cardId
+      cardImage
+      cardName
+      cardType
+    }
+  }
+}
+`
+
 export const QUERY_PRODUCTS = gql`
   query getProducts($category: ID) {
     products(category: $category) {

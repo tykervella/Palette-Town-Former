@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { GET_DECK } from '../../utils/getdeck'; // Import the GraphQL query
+import { GET_DECK } from '../../utils/queries';
 import axios from 'axios'; // Import axios for making API requests
 
 
@@ -130,6 +130,8 @@ function DeckBuilder() {
               onAddToDecklist={addCardToDecklist}
             />
           ))}
+       
+
         </div>
       </div>
     </div>
