@@ -17,7 +17,6 @@ import Login from './pages/Login';
 import Builder from './pages/Builder';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import TrendingPalettes from './components/TrendingPalettes';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -46,44 +45,42 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-        <div className="font-link flex-column justify-flex-start min-100-vh">
-        <div className="flex-column justify-flex-start">
-          <Navbar />
-          <TrendingPalettes />
-           <ImageSlider slides={SliderData} />
-          <div className="container">
-            <Routes>
+      <div className="font-link flex-column justify-flex-start min-100-vh">
+        <Navbar />
 
-              <Route
-                path="/"
-                element={<Home />}
-              />
+        <div className="container">
+          <Routes>
 
-              <Route
-                path="/login"
-                element={<Login />}
-              />
+            <Route
+              path="/"
+              element={<Home />}
+            />
 
-              <Route
-                path="/signup"
-                element={<Signup />}
-              />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
 
-              <Route
-                path="/builder"
-                element={<Builder />}
-              />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
 
-              {/* <Route
+            <Route
+              path="/builder"
+              element={<Builder />}
+            />
+
+            {/* <Route
                 path="/marketplace"
                 element={<Marketplace />}
               /> */}
 
-            </Routes>
-            
-          </div>
-          <Footer />
+          </Routes>
+
         </div>
+        <Footer />
+      </div>
 
     </ApolloProvider>
   );
