@@ -22,9 +22,9 @@ function DeckBuilder() {
     if (data && data.deck) {
       // Retrieve the decklist from the GraphQL response data and update the state
       const decklistFromData = data.deck.cards.map((card) => ({
+        cardId: card.cardId,
         image: card.cardImage,
         cardName: card.cardName,
-        // Add any additional properties you need from the card model
       }));
       setDecklist(decklistFromData);
     }
@@ -80,11 +80,6 @@ function DeckBuilder() {
     getCards(cardName, cardType, cardSubtype, cardColor, 1);
   };
 
-  const addCardToDecklist = (image, cardName) => {
-    const newCard = { image, cardName };
-    setDecklist(prevDecklist => [...prevDecklist, newCard]);
-  };
-
   return (
     <div className="grid grid-cols-12 gap-4 ml-auto mr-auto flex-row mt-4 px-4">
       {/* Left side. Search Element */}
@@ -93,7 +88,13 @@ function DeckBuilder() {
         <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
           {/* Render the card list */}
           {cards.map((card) => (
-            <CardElement key={card.id} image={card.images.small} cardName={card.name} />
+            <CardElement 
+            key={card.id}
+            cardId={card.id} 
+            cardImage={card.images.small} 
+            cardName={card.name} 
+            cardType={card.types[0]}
+            deckId={_id} />
           ))}
         </div>
       </div>
@@ -127,7 +128,6 @@ function DeckBuilder() {
               key={card.id}
               image={card.image}
               cardName={card.cardName}
-              onAddToDecklist={addCardToDecklist}
             />
           ))} */}
           <DeckElement image={"https://images.pokemontcg.io/ex3/77.png%22%7D"} cardName={"Torchic"} />

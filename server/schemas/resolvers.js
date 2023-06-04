@@ -2,6 +2,16 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Deck } = require('../models');
 const { signToken } = require('../utils/auth');
 
+// Helper function to find a deck by ID
+async function findDeckById(deckId) {
+  try {
+    const deck = await Deck.findById(deckId);
+    return deck;
+  } catch (error) {
+    throw new Error('Error finding deck');
+  }
+}
+
 const resolvers = {
   Deck: {
     cardCount: (parent) => parent.cards.length,
@@ -62,13 +72,13 @@ const resolvers = {
         commentText: commentInput.commentText,
         commentAuthor: commentInput.commentAuthor,
       };
-  
+
       const updatedDeck = await Deck.findOneAndUpdate(
         { _id: deckId },
         { $push: { comments: comment } },
         { new: true }
       );
-  
+
       return updatedDeck;
     },
     removeDeck: async (parent, { deckId }) => {
@@ -81,22 +91,28 @@ const resolvers = {
         { new: true }
       );
     },
-    addCard: async (parent, { deckId, cardInput }) => {
-      const card = {
-        cardId: cardInput.cardId,
-        cardName: cardInput.cardName,
-        cardImage: cardInput.cardImage,
-        cardType: cardInput.cardType,
-        quantity: cardInput.quantity,
+    addCardToDeckList: async (_, { deckId, cardId, cardName, cardImage, cardType }) => {
+      // Find the deck by deckId and add the card
+      const deck = await findDeckById(deckId);
+      if (!deck) {
+        throw new Error('Deck not found');
+      }
+
+      const newCard = {
+        cardId: cardId,
+        cardName: cardName,
+        cardImage: cardImage,
+        cardType: cardType,
+        // ... other card fields
       };
 
-      const updatedDeck = await Deck.findOneAndUpdate(
-        { _id: deckId },
-        { $push: { cards: card } },
-        { new: true }
-      );
+      deck.cards.push(newCard);
+      deck.cardCount += 1;
 
-      return updatedDeck;
+      // Save the updated deck to the database or any storage
+      await deck.save();
+
+      return deck;
     },
 
     removeCard: async (parent, { deckId, cardId }) => {
