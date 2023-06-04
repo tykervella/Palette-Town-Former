@@ -41,7 +41,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="font-link flex-column justify-flex-start min-100-vh bg-black">
+      <div className="font-link flex-column justify-flex-start min-100-vh bg-white">
         <Navbar />
 
         <div className="container">
@@ -67,9 +67,9 @@ function App() {
                 element={<DeckBuilder />} 
               />
 
-              {/* <Route
+              <Route
               path="/Profile"
-              element={<Profile />} /> */}
+              element={<Profile />} />
 
               {/* <Route
                 path="/marketplace"
