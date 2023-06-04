@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 const TopListings = () => {
     return (
         <Container>
-            <ImageSlider slides={SliderData} />
+            {/* <ImageSlider slides={SliderData} /> */}
         </Container>
     )
 }
