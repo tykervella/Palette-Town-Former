@@ -49,3 +49,25 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_TO_DECK = gql`
+  mutation AddCardToDeckList(
+  $deckId: ID!,
+  $cardId: String!,
+  $cardName: String!,
+  $cardImage: String!,
+  $cardType: String!
+) {
+  addCardToDeckList(
+    deckId: $deckId,
+    cardId: $cardId,
+    cardName: $cardName,
+    cardImage: $cardImage,
+    cardType: $cardType
+  ) {
+    cards {
+      cardName
+    }
+  }
+}
+`
