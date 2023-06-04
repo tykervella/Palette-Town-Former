@@ -12,16 +12,21 @@ import Container from 'react-bootstrap/Container';
 
 // import banner from "../assets/pokemon.paint.banner.noBG.png"
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Home = () => {
   return (
     // primary container for entire page
+    <div>
     <Container>
+
       {/* banner */}
       
       
       
     </Container>
+  </div>
   )
 };
 

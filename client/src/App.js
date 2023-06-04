@@ -7,8 +7,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ImageSlider from './components/ImagesSlider';
-import { SliderData } from './components/SliderData';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +14,7 @@ import { SliderData } from './components/SliderData';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Builder from './pages/Builder';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import TrendingPalettes from './components/TrendingPalettes';
@@ -48,6 +47,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
         <div className="font-link flex-column justify-flex-start min-100-vh">
+        <div className="flex-column justify-flex-start">
           <Navbar />
           <TrendingPalettes />
            <ImageSlider slides={SliderData} />
@@ -69,12 +69,18 @@ function App() {
                 element={<Signup />}
               />
 
+              <Route
+                path="/builder"
+                element={<Builder />}
+              />
+
               {/* <Route
                 path="/marketplace"
                 element={<Marketplace />}
               /> */}
 
             </Routes>
+            
           </div>
           <Footer />
         </div>
