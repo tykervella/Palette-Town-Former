@@ -48,3 +48,13 @@
     transition-duration: 1s;
     transform: scale(1.08);
   }
+
+  /* Font for Whole Application */
+  .font-link {
+    font-family: 'Arvo';
+  }
+
+  /* Navbar Font Size/Styles */
+  .custom-navbar {
+    font-size: 20px;
+  }

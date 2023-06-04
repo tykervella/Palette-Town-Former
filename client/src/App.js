@@ -10,11 +10,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ImageSlider from './components/ImagesSlider';
 import { SliderData } from './components/SliderData';
 
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import TrendingPalettes from './components/TrendingPalettes';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -43,8 +47,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className="font-link flex-column justify-flex-start min-100-vh">
           <Navbar />
+          <TrendingPalettes />
            <ImageSlider slides={SliderData} />
           <div className="container">
             <Routes>
