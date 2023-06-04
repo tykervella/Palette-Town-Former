@@ -65,8 +65,7 @@ function DeckBuilder() {
           series: card.set.name,
           series_symbol: card.set.images.symbol,
           images: card.images,
-          types: card.types,
-          supertype: card.supertype,
+          types: card.types !== undefined ? card.types : ["other"],          supertype: card.supertype,
         }));
         setCards(cardsArray);
       })
