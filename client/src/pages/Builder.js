@@ -1,7 +1,7 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 
-import DeckBuilder from "../components/DeckBuilder";
+import DeckBuilder from "../components/DeckBuilder/index.js";
 
 const Builder = () => {
     return (

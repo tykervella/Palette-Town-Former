@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -14,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Builder from './pages/Builder';
+import DeckBuilder from './components/DeckBuilder';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 
@@ -66,12 +61,12 @@ function App() {
               element={<Signup />}
             />
 
-            <Route
-              path="/builder"
-              element={<Builder />}
-            />
+              <Route 
+                path="/deck/:_id" 
+                element={<DeckBuilder />} 
+              />
 
-            {/* <Route
+              {/* <Route
                 path="/marketplace"
                 element={<Marketplace />}
               /> */}

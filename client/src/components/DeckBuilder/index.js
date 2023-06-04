@@ -1,72 +1,94 @@
-import React from "react";
-import SearchCards from "./components/SearchCards";
-import DeckElement from "./components/DeckElement";
-import CardElement from "./components/CardElement";
-import Energy from "./components/Energy";
+import React, { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
+import { GET_DECK } from '../../utils/getdeck'; // Import the GraphQL query
 
-// The ...props means, spread all of the passed props onto this element
-// That way we don't have to define them all individually
-function DeckBuilder(props) {
+import CardElement from './components/CardElement.js';
+import SearchCards from './components/SearchCards.js';
+import DeckElement from './components/DeckElement.js';
+import Energy from './components/Energy.js';
+
+function DeckBuilder() {
+  const { _id } = useParams(); // Retrieve _id from URL params
+  const [cards, setCards] = useState([]);
+  const [decklist, setDecklist] = useState([]);
+
+  const { loading, error, data } = useQuery(GET_DECK, {
+    variables: { deckId: _id },
+  });
+
+  useEffect(() => {
+    if (data && data.deck) {
+      // Retrieve the decklist from the GraphQL response data and update the state
+      const decklistFromData = data.deck.cards.map((card) => ({
+        image: card.cardImage,
+        cardName: card.cardName,
+        // Add any additional properties you need from the card model
+      }));
+      setDecklist(decklistFromData);
+    }
+  }, [data]);
+
+  const getCards = (cardName, cardType, cardSubtype, cardColor, pageNumber) => {
+    // Rest of the code
+  };
+
+  const handleSearch = (cardName, cardType, cardSubtype, cardColor) => {
+    // Rest of the code
+  };
+
+  const addCardToDecklist = (image, cardName) => {
+    // Rest of the code
+  };
+
   return (
-    <div className="grid grid-cols-12 gap-4  ml-auto mr-auto flex-row mt-4 px-4">
+    <div className="grid grid-cols-12 gap-4 ml-auto mr-auto flex-row mt-4 px-4">
       {/* Left side. Search Element */}
       <div className="col-span-8 border-2 border-red-700 min-h-screen">
-        <SearchCards />
+        <SearchCards onSearch={handleSearch} />
         <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
-            <CardElement image={"https://images.pokemontcg.io/mcd19/4.png"} cardName={"Alolan Sandshrew"}/>
-            <CardElement image={"https://images.pokemontcg.io/hgss1/2.png"} cardName={"Azumarill"}/>
-            <CardElement image={"https://images.pokemontcg.io/pop3/1.png"} cardName={"Blastoise"}/>
-            <CardElement image={"https://images.pokemontcg.io/hgss4/5.png"} cardName={"Mamoswine"}/>
-            <CardElement image={"https://images.pokemontcg.io/hgss1/4.png"} cardName={"Gyrados"}/>
-            <CardElement image={"https://images.pokemontcg.io/ecard2/H4.png"} cardName={"Azumarill"}/>
-        
-            <CardElement image={"https://images.pokemontcg.io/base6/2.png"} cardName={"Articuno"}/>
-            <CardElement image={"https://images.pokemontcg.io/ex4/3.png"} cardName={"Team Aqua's Kyogre"}/>
-            <CardElement image={"https://images.pokemontcg.io/ex4/2.png"} cardName={"Team Aqua's Crawdaunt"}/>
+          {/* Render the card list */}
+          {cards.map((card) => (
+            <CardElement key={card.id} image={card.images.small} cardName={card.name} />
+          ))}
         </div>
       </div>
 
       {/* Right Side. WIP Deck Element */}
       <div className="col-span-4 ml-4 border-2 border-red-700 min-h-screen">
-        {/* Deck Name,  */}
+        {/* Deck Name */}
         <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
-          <input id="searchbar" className="col-span-9 rounded text-center border-2 border-red-700" placeholder="Deck Name"/>
-          <h1 className="col-span-3 text-center">41/60</h1>
+          <input
+            id="searchbar"
+            className="col-span-9 rounded text-center border-2 border-red-700"
+            placeholder="Deck Name"
+            value={data && data.deck ? data.deck.deckName : ''}
+          />
+          <h1 className="col-span-3 text-center">{decklist.length}/60</h1>
         </div>
 
-        <div className="grid grid-cols-12  flex-row items-center justify-items-center justify-between ml-2 mt-1 ">
-          <button className="btn text-xs col-span-4" id="savebtn">Save as Draft</button>
-          <button className="btn text-xs col-span-4 ml-4" id="searchbtn">Publish Deck</button>
-        </div>
-
-
-        <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
-          <h1 className="col-span-12 text-center"> Pokemon Cards (14) </h1>
-          <DeckElement image={"https://images.pokemontcg.io/base6/95.png"} cardName={"Squirtle"}/>
-          <DeckElement image={"https://images.pokemontcg.io/pgo/16.png"} cardName={"Wartortle"}/>
-          <DeckElement image={"https://images.pokemontcg.io/pop3/1.png"} cardName={"Blastoise"}/>
-          <DeckElement image={"https://images.pokemontcg.io/base6/2.png"} cardName={"Articuno"} />
-          
-        </div>
-
-        <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
-          <h1 className="col-span-12 text-center"> Trainer Cards (7) </h1>
-          <DeckElement image={"https://images.pokemontcg.io/gym1/16.png"} cardName={"Erika"}/>
-          <DeckElement image={"https://images.pokemontcg.io/dv1/18.png"} cardName={"Exp. Share"}/>
+        <div className="grid grid-cols-12 flex-row items-center justify-items-center justify-between ml-2 mt-1">
+          <button className="btn text-xs col-span-4" id="savebtn">
+            Save as Draft
+          </button>
+          <button className="btn text-xs col-span-4 ml-4" id="searchbtn">
+            Publish Deck
+          </button>
         </div>
 
         <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
-          <h1 className="col-span-12 text-center"> Energy Cards (20) </h1>
-          <Energy image={"https://images.pokemontcg.io/ex12/81.png"} cardName={"Rainbow Energy"}/>
-          <Energy image={"https://images.pokemontcg.io/ecard1/165.png"} cardName={"Water Energy"}/>
+          {/* Render the decklist */}
+          {decklist.map((card) => (
+            <DeckElement
+              key={card.id}
+              image={card.image}
+              cardName={card.cardName}
+              onAddToDecklist={addCardToDecklist}
+            />
+          ))}
         </div>
-
-
-      
       </div>
-
     </div>
-
   );
 }
 
