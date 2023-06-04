@@ -33,6 +33,7 @@ const typeDefs = gql`
     cardName: String!
     cardImage: String!
     cardType: String!
+    superType: String!
     quantity: Int!
     # ... other card fields
   }
@@ -67,7 +68,14 @@ const typeDefs = gql`
       cardName: String!
       cardImage: String!
       cardType: String!
+      superType: String!
     ): Deck
+    updateCardQuantity(
+      deckId: ID! 
+      cardId: ID! 
+      quantity: Int!
+    ): Deck
+  
     }
 
 `;

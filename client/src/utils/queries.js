@@ -9,6 +9,8 @@ export const GET_DECK = gql`
       cardImage
       cardName
       cardType
+      superType
+      quantity
     }
   }
 }

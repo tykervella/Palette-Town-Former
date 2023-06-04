@@ -20,6 +20,10 @@ const cardSchema = new Schema({
       type: String,
       required: true,
   },
+  superType: {
+    type: String,
+    required: true,
+},
   quantity: {
     type: Number,
     default:1,
