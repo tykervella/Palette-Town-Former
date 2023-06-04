@@ -6,27 +6,27 @@ import likeButton from "../TrendingPalettes/assets/pokeball-like.png";
 
 const TrendingPalettes = () => {
   const firstSectionData = SliderData.slice(0, 5);
-  const secondSectionData = SliderData.slice(5, 10);
+  const secondSectionData = SliderData.slice(0, 5);
 
   return (
     <div className="flex justify-center items-center p-4">
       <div className="w-full max-w-6xl mx-auto">
-        <h2 className="mt-8 mb-4 text-xl font-bold text-left px-2">
-          Trending Palettes
-        </h2>
-        <div className="bg-black p-1">
+        
           <div className="border border-black rounded-lg">
             <Container className="bg-white p-4 px-4">
               <div className="border-black border-2 rounded-lg p-2 mb-4">
                 <Row className="flex-wrap">
-                  <Col sm={12} md={9} className="mb-4 md:mb-0">
+                  <Col className="">
                     <Row className="flex-wrap">
                       {firstSectionData.map((item, index) => (
-                        <Col key={index} sm={6} md={2}>
+                        <Col>
+
+                        {/* card container here */}
                           <div>
                             <h3>{item.title}</h3>
                             <img src={item.image} alt={item.title} />
                           </div>
+
                         </Col>
                       ))}
                     </Row>
@@ -61,11 +61,14 @@ const TrendingPalettes = () => {
                   <Col sm={12} md={9} className="mb-4 md:mb-0">
                     <Row className="flex-wrap">
                       {secondSectionData.map((item, index) => (
-                        <Col key={index} sm={6} md={2}>
+                        <Col>
+
+                         {/* card container here */}
                           <div>
                             <h3>{item.title}</h3>
                             <img src={item.image} alt={item.title} />
                           </div>
+                          
                         </Col>
                       ))}
                     </Row>
@@ -98,7 +101,7 @@ const TrendingPalettes = () => {
           </div>
         </div>
       </div>
-    </div>
+ 
   );
 };
 
