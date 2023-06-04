@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import DeckBuilder from './components/DeckBuilder';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Profile from './pages/Profile'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -40,7 +41,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="font-link flex-column justify-flex-start min-100-vh bg-black">
+      <div className="font-link flex-column justify-flex-start min-100-vh bg-white">
         <Navbar />
 
         <div className="container">
@@ -65,6 +66,10 @@ function App() {
                 path="/deck/:_id" 
                 element={<DeckBuilder />} 
               />
+
+              <Route
+              path="/Profile"
+              element={<Profile />} />
 
               {/* <Route
                 path="/marketplace"
