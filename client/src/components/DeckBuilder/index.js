@@ -122,14 +122,17 @@ function DeckBuilder() {
 
         <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
           {/* Render the decklist */}
-          {decklist.map((card) => (
+          {/* {decklist.map((card) => (
             <DeckElement
               key={card.id}
               image={card.image}
               cardName={card.cardName}
               onAddToDecklist={addCardToDecklist}
             />
-          ))}
+          ))} */}
+          <DeckElement image={"https://images.pokemontcg.io/ex3/77.png%22%7D"} cardName={"Torchic"} />
+          <DeckElement image={"https://images.pokemontcg.io/ex3/77.png%22%7D"} cardName={"Torchic"} />
+
         </div>
       </div>
     </div>

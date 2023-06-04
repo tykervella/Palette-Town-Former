@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import DeckBuilder from './components/DeckBuilder';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Profile from './pages/Profile'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -65,6 +66,10 @@ function App() {
                 path="/deck/:_id" 
                 element={<DeckBuilder />} 
               />
+
+              {/* <Route
+              path="/Profile"
+              element={<Profile />} /> */}
 
               {/* <Route
                 path="/marketplace"
