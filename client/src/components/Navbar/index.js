@@ -1,40 +1,79 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Auth from "../../utils/auth";
+import logo from "../Navbar/assets/logo-correct.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col } from "react-bootstrap";
 
-const Navbar = () => {
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
+const CustomNavbar = () => {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
 
   return (
-    <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
-      <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <div className="text-center"> 
-          <Link className="text-light" to="/">
-            <h1 className="m-0">Palette Town</h1>
-          </Link>
-          <p className="m-0">Where Hexcodes and Pokémon Collide</p>
-        </div>
-        <div className="navbar navbar-expand-lg navbar-light text-white d-flex align-items-center"> 
-          <div className="btn-group"> 
-            <Link className="btn btn-primary" to="/"> 
+    <Navbar bg="primary" variant="dark" expand="lg" className="text-whitemb-4 py-3 custom-navbar">
+      <Container>
+      <Navbar.Brand className="text-center">
+      <Link className="text-white me-4 d-inline-block" to="/" style={{ textDecoration: 'none' }}>
+        <img
+          src={logo}
+          alt="Logo"
+          className="h-66 w-auto d-inline-block align-top"
+          style={{ marginBottom: "0px" }}
+        />
+        <h1 className="text-black text-xs mb-0">Where HexCodes and Pokemon Collide</h1>
+      </Link>
+    </Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className=" text-md me-auto">
+            <Link className="nav-link text-white ms-6" to="/page1">
               Home
             </Link>
-            <Link className="btn btn-primary" to="/profile"> 
+            <Link className="nav-link text-white" to="/page2">
               Create
             </Link>
-            <Link className="btn btn-primary" to="/marketplace"> 
-              Marketplace
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
+
+            <NavDropdown title="Marketplace" id="basic-nav-dropdown" className="text-white ">
+              <NavDropdown.Item href="#action/3.1">Top Listings</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Saved Decks
+              </NavDropdown.Item>
+              {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Your Cart
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Nav className="align-items-center">
+            <Nav.Link className="text-white d-flex align-items-center">
+              <span className="me-2">Signed in as:</span>
+              <div
+                className="profile-picture"
+                style={{
+                  width: "35px",
+                  height: "35px",
+                  borderRadius: "50%",
+                  backgroundColor: "white",
+                  marginRight: "5px"
+                }}
+              ></div>
+              <a className="text-white" href="#login">PokemonLover4000</a>
+            </Nav.Link>
+            <Nav.Link className="text-white" onClick={logout}>
+              Logout
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default CustomNavbar;
