@@ -72,7 +72,7 @@ const Profile = () => {
 
   return (
     <Container>
-      <h2 className="mb-2 mt-4 ">Your Profile</h2>
+      <h2 className="mb-4 mt-4 ">Your Profile</h2>
 
       <div className="border border-black p-4">
         <Row>
@@ -147,7 +147,9 @@ const Profile = () => {
             className="mb-4 bg-gray-200 border border-black p-4"
           >
             {/* <div className="border border-black p-4"> */}
-            <h4 className="mt-2 text-lg font-semibold text-center">Deck Name</h4>
+            <h4 className="mt-2 text-lg font-semibold text-center">
+              Deck Name
+            </h4>
             <p className="text-sm text-center">@username</p>
             <div className="flex items-center justify-center">
               <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-16 rounded">
@@ -183,7 +185,9 @@ const Profile = () => {
             className="mb-4 bg-gray-200 border border-black p-4"
           >
             {/* <div className="border border-black p-4"> */}
-            <h4 className="mt-2 text-lg font-semibold text-center">Deck Name</h4>
+            <h4 className="mt-2 text-lg font-semibold text-center">
+              Deck Name
+            </h4>
             <p className="text-sm text-center">@username</p>
             <div className="flex items-center justify-center">
               <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-16 rounded">
