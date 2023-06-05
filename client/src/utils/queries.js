@@ -84,3 +84,16 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const GET_LISTINGS = gql`
+  query GetListings {
+    listings {
+      id
+      name
+      cardType
+      image
+      price
+      seller
+    }
+  }
+`;
