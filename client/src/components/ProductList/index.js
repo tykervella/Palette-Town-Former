@@ -1,68 +1,39 @@
-import React, { useEffect } from 'react';
-import ProductItem from '../ProductItem';
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
-import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCTS } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-function ProductList() {
-  const [state, dispatch] = useStoreContext();
+const ProductList = () => {
 
-  const { currentCategory } = state;
+  const [listings, setListings] = useState([]);
 
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const response = await axios.get('https://api.pokemontcg.io/v2/cards');
+        setListings(response.data.data);
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+      }
+    };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch({
-  //       type: UPDATE_PRODUCTS,
-  //       products: data.products,
-  //     });
-  //     data.products.map((product) => {
-  //       idbPromise('products', 'put', product);
-  //     });
-  //   } else if (!loading) {
-  //     idbPromise('products', 'get').then((products) => {
-  //       dispatch({
-  //         type: UPDATE_PRODUCTS,
-  //         products: products,
-  //       });
-  //     });
-  //   }
-  // }, [data, loading, dispatch]);
-
-  function filterProducts() {
-    if (!currentCategory) {
-      return state.products;
-    }
-
-    return state.products.filter(
-      (product) => product.category._id === currentCategory
-    );
-  }
+    fetchListings();
+  }, []);
 
   return (
-    <div className="my-2">
-      <h2>Our Products:</h2>
-      {/* {state.products.length ? (
-        <div className="flex-row">
-          {filterProducts().map((product) => (
-            <ProductItem
-              key={product._id}
-              _id={product._id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              quantity={product.quantity}
-            />
-          ))}
-        </div>
-      ) : (
-        <h3>You haven't added any products yet!</h3>
-      )} */}
+    <div className="product=list">
+      {listings.map((listing) => (
+        <Link to={`/listing/${listing.id}`} key={listing.id}>
+          <div className="product-card">
+            <img src={listing.images.small} alt={listing.name} />
+            <h3>{listing.name}</h3>
+            <p>Card Type: {listing.types.join(', ')}</p>
+            <p>Price: ${listing.price}</p>
+            <p>Seller: {listing.seller}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
-}
+};
 
 export default ProductList;
