@@ -14,6 +14,10 @@
   --tertiary-color-dark: #030E12;
 }
 
+.wallpaper {
+  background-image: url('./assets/desktop-wallpaper-rowlet.jpg');
+}
+
 .slider {
     position: relative;
     display: flex;
@@ -69,3 +73,18 @@
   .custom-navbar {
     font-size: 20px;
   }
+
+  /* main button styling */
+  .main-button {
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+    border-radius: 10000px;
+    padding: 1rem;
+  }
+
+  .main-button:hover {
+    
+  }
+  
+.banner-section {
+  background-color: var(--primary-color-dark);
+}
