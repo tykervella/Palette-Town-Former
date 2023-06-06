@@ -31,33 +31,13 @@ const cardSchema = new Schema({
   },
 });
 
-const commentSchema = new Schema ({
-
-  commentText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
-  },
-  commentAuthor: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-
-})
-
 const deckSchema = new Schema({
   deckName: {
     type: String,
     minlength: 1,
     maxlength: 20,
     trim: true,
+    unique: true, 
   },
   deckOwner: {
     type: String,
@@ -73,28 +53,11 @@ const deckSchema = new Schema({
     type: Boolean,
     default: false, // Set to be a draft unless otherwise specified 
   },
-  cards: [cardSchema],
-  comments: [commentSchema],
-    // Add a virtual field for total card count
-    cardCount: {
-      type: Number,
-      default: 0,
-      get: function () {
-        let totalCount = 0;
-        this.cards.forEach((card) => {
-          totalCount += card.quantity;
-        });
-        return totalCount;
-      },
-    },
+  cards: [cardSchema]
 });
 
 
 
-// Virtual for comment count
-deckSchema.virtual('commentCount').get(function () {
-  return this.comments.length;
-});
 
 const Deck = model('Deck', deckSchema);
 

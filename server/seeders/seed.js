@@ -1,12 +1,14 @@
 const db = require('../config/connection');
-const { User, Deck } = require('../models');
+const { User, Deck, Listing } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const deckSeeds = require('./deckSeeds.json');
+const listingSeeds = require('./listingSeeds.json');
 
 db.once('open', async () => {
   try {
     await Deck.deleteMany({});
     await User.deleteMany({});
+    await Listing.deleteMany({})
 
     await User.create(userSeeds);
 
@@ -21,27 +23,23 @@ db.once('open', async () => {
         }
       );
     }
+
+    for (let i = 0; i < listingSeeds.length; i++) {
+      const { _id, seller } = await Listing.create(listingSeeds[i]);
+      const user = await User.findOneAndUpdate(
+        { username: seller },
+        {
+          $addToSet: {
+            listings: _id,
+          },
+        }
+      );
+    }
   } catch (err) {
     console.error(err);
     process.exit(1);
   }
-
-  // await Listing.deleteMany();
-
-  // const listings = await Listing.insertMany([
-  //   {
-  //     cardId: 1,
-  //     cardName: 'Bulbasaur',
-  //     cardImage: 'bulbasaur.jpg',
-  //     cardType: 'Normal',
-  //     price: 2999.99,
-  //     seller: 'Gary',
-  //     createdAt: '',
-  //   },
-  // ]);
-
-  // console.log('listings seeded');
-
+  
   console.log('all done!');
   process.exit(0);
 });

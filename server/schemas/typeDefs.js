@@ -7,25 +7,18 @@ const typeDefs = gql`
     email: String!
     password: String
     decks: [Deck!]!
-  }
+    listings: [Listing!]!
+    posts: [Post!]!
 
-  type Comment {
-    _id: ID!
-    commentText: String!
-    commentAuthor: String!
-    createdAt: String!
   }
 
   type Deck {
     _id: ID!
     deckName: String
     deckOwner: String
-    createdAt: String
+    createdAt: String 
     cards: [Card!]
-    comments: [Comment!]
     published: Boolean!
-    cardCount: Int!
-    commentCount: Int!
   }
 
   type Card {
@@ -35,6 +28,47 @@ const typeDefs = gql`
     cardType: String!
     superType: String!
     quantity: Int!
+    # ... other card fields
+  }
+
+
+  type Comment {
+    _id: ID!
+    commentText: String!
+    commentAuthor: String!
+    createdAt: String!
+  }
+
+  type Palette {
+    _id: ID!
+    colorOne: String! 
+    colorTwo: String!
+    colorThree: String!
+    colorFour: String! 
+    colorFive: String! 
+  }
+
+  type Post {
+    _id: ID!
+    deckOwner: String!
+    deckName: String!
+    postText: String
+    createdAt: String
+    comments: [Comment!]
+    colors: [Palette!]
+    commentCount: Int!
+  }
+
+  type Listing {
+    _id: ID!
+    cardId: String!
+    cardName: String!
+    cardImage: String!
+    cardType: String!
+    superType: String!
+    price: Float!
+    seller: String! 
+    createdAt: String
     # ... other card fields
   }
 
@@ -48,6 +82,10 @@ const typeDefs = gql`
     user(username: String!): User
     decks(username: String!): [Deck]
     deck(deckId: ID!): Deck
+    listings(username: String!): [Listing]
+    listing(listingId: ID!): Listing
+    posts(username: String!): [Post]
+    post(postId: ID!): Post
   }
 
   type Mutation {
@@ -59,6 +97,20 @@ const typeDefs = gql`
       commentText: String!
       commentAuthor: String!
     ): Deck
+    addListing(
+      cardId: String!
+      cardName: String!
+      cardImage: String!
+      cardType: String!
+      superType: String!
+      price: Float!
+      seller: String! 
+    ): Listing
+    addPost(
+      deckOwner: String!
+      deckName: String!
+      postText: String
+    ): Post
     removeDeck(deckId: ID!): Deck
     removeComment(deckId: ID!, commentId: ID!): Deck
     removeCard(deckId: ID!, cardId: ID!): Deck
