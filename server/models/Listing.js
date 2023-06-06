@@ -3,9 +3,8 @@ const dateFormat = require('../utils/dateFormat');
 
 const listingSchema = new Schema({
     cardId: {
-        type: Number,
+        type: String,
         required: true,
-        unique: true,
         trim: true,
     },
     cardName: {
@@ -22,15 +21,19 @@ const listingSchema = new Schema({
         type: String,
         required: true,
     },
+    superType: {
+        type: String,
+        required: true,
+    },
     price: {
         type: Number,
         required: true,
         min: 0,
     },
     seller: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true,
+        trim: true,
     },
     createdAt: {
         type: Date,

@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Deck } = require('../models');
+const { User, Deck, Listing, Post } = require('../models');
 const { signToken } = require('../utils/auth');
 
 // Helper function to find a deck by ID
@@ -13,8 +13,7 @@ async function findDeckById(deckId) {
 }
 
 const resolvers = {
-  Deck: {
-    cardCount: (parent) => parent.cards.length,
+  Post: {
     commentCount: (parent) => parent.comments.length,
   },
 
@@ -31,6 +30,20 @@ const resolvers = {
     },
     deck: async (parent, { deckId }) => {
       return Deck.findOne({ _id: deckId });
+    },
+    listings: async (parent, { username }) => {
+      const params = username ? { seller: username } : {};
+      return Listing.find(params).sort({ createdAt: -1 });
+    },
+    listing: async (parent, { listingId }) => {
+      return Listing.findOne({ _id: listingId });
+    },
+    posts: async (parent, { username }) => {
+      const params = username ? { deckOwner: username } : {};
+      return Post.find(params).sort({ createdAt: -1 });
+    },
+    post: async (parent, { postId }) => {
+      return Post.findOne({ _id: postId });
     },
   },
 
@@ -66,6 +79,39 @@ const resolvers = {
       );
 
       return deck;
+    },
+    addListing: async (parent, { cardId, cardName, cardImage, cardType,superType, price, seller }) => {
+      const newListing = await Listing.create( {
+        cardId: cardId,
+        cardName: cardName,
+        cardImage: cardImage,
+        cardType: cardType,
+        superType: superType,
+        price: price, 
+        seller: seller,
+        // ... other card fields
+      });
+
+      await User.findOneAndUpdate(
+        { username: seller },
+        { $addToSet: { listings: newListing._id } }
+      );
+
+      return newListing;
+    },
+    addPost: async (parent, { deckOwner, deckName, postText }) => {
+      const newPost = await Post.create( {
+        deckOwner: deckOwner,
+        deckName: deckName,
+        postText: postText
+      });
+
+      await User.findOneAndUpdate(
+        { username: deckOwner },
+        { $addToSet: { posts: newPost._id } }
+      );
+
+      return newPost;
     },
     addComment: async (parent, { deckId, commentInput }) => {
       const comment = {
@@ -108,7 +154,6 @@ const resolvers = {
       };
 
       deck.cards.push(newCard);
-      deck.cardCount += 1;
 
       // Save the updated deck to the database or any storage
       await deck.save();
