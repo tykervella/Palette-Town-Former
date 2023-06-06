@@ -25,6 +25,18 @@ const userSchema = new Schema({
       ref: 'Deck',
     },
   ],
+  listings: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Listing',
+    },
+  ],
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

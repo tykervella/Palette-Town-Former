@@ -63,6 +63,7 @@ function Marketplace() {
       <div className="col-span-8 border-2 border-red-700 min-h-screen">
         {/* <Cart /> */}
         <CategoryMenu onSearch={handleSearch} />
+
         <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
           {loading ? (
             <p>Loading listings...</p>
