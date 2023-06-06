@@ -9,6 +9,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+// import Background from "../pages/assets/tinted-bg.png";
+
 const Home = () => {
   return (
     // primary container for entire page
