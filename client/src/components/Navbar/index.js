@@ -15,7 +15,7 @@ const CustomNavbar = () => {
   };
 
   return (
-    <Navbar bg="primary" variant="dark" expand="lg" className="text-white mb-4 py-3 custom-navbar">
+    <Navbar variant="dark" expand="lg" className="text-white mb-4 py-3 custom-navbar" style={{ backgroundColor: '#AFD7CA' }}>
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
