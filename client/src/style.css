@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* light mode below */
+  --primary-color: #AFD7CA;
+  --secondary-color: #4B957E;
+  --tertiary-color: #0B3C49;
+  --accent-color: #FFEC99;
+  /* dark mode below */
+  --primary-color-dark: #376D5B;
+  --secondary-color-dark: #1B362E;
+  --tertiary-color-dark: #030E12;
+}
+
 .slider {
     position: relative;
     display: flex;
