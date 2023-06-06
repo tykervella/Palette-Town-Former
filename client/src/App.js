@@ -42,7 +42,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="font-link flex-column justify-flex-start min-100-vh bg-white">
+      <div className="font-link flex-column justify-flex-start min-100-vh bg-white wallpaper">
         <Navbar />
 
         <div className="container">
