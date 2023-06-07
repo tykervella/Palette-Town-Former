@@ -9,8 +9,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-// import Background from "../pages/assets/tinted-bg.png";
-
 const Home = () => {
   return (
     // primary container for entire page
@@ -19,9 +17,9 @@ const Home = () => {
 
         {/* banner */}
         <Row>
-          <Col className='banner-section border border-black rounded-xl p-16 m-2'>
+          <Col className='banner-section border border-black rounded-xl p-16 m-2 bg-[#AFD7CA]'>
             <Row className='text-center'>
-              <h2 className='text-3xl font-bold text-white text-center'>Banner Section</h2>
+              {/* <h2 className='text-3xl font-bold text-white text-center'>Banner Section</h2> */}
             </Row>
 
             <Row className='float-right'>
@@ -41,8 +39,8 @@ const Home = () => {
 
         {/* trending palettes/decks */}
         <Row>
-          <Col className='border border-black rounded-xl bg-slate-400 p-10 m-2'>
-            <h2 className='text-3xl font-bold text-white text-center'>Trending Palettes</h2>
+          <Col className='border border-black rounded-xl bg-[#376D5B] p-10 m-2'>
+            <h2 className='text-3xl font-bold text-white text-center mb-4'>Trending Palettes</h2>
             <div><TrendingPalettes /></div>
           </Col>
         </Row>
@@ -50,12 +48,12 @@ const Home = () => {
         {/* bottom row */}
         <Row>
           {/* caught decks */}
-          <Col className='border border-black rounded-xl bg-slate-400 p-16 m-2'>
+          <Col className='border border-black rounded-xl bg-[#376D5B] p-16 m-2 mb-4'>
             <h2 className='text-3xl font-bold text-white text-center'>Caught Decks</h2>
             <div><CaughtDecks /></div>
           </Col>
           {/* top card listings */}
-          <Col className='border border-black rounded-xl bg-slate-400 p-16 m-2'>
+          <Col className='border border-black rounded-xl bg-[#376D5B] p-16 m-2 mb-4'>
             <h2 className='text-3xl font-bold text-white text-center mb-4'>Today's Top Listings</h2>
             <div><TopListing /></div>
           </Col>
@@ -67,3 +65,4 @@ const Home = () => {
 };
 
 export default Home;
+

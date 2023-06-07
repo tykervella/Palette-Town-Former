@@ -74,7 +74,7 @@ const Profile = () => {
     <Container>
       <h2 className="mb-4 mt-4 ">Your Profile</h2>
 
-      <div className="border border-black p-4">
+      <div className="border border-[black] rounded-lg p-4 mb-8 bg-[#AFD7CA]">
         <Row>
           <Col md={6} className="border-right border-black pr-4">
             <Form className="text-black">
@@ -130,80 +130,80 @@ const Profile = () => {
 
       <h2 className="mt-14 mb-4">Your Pallets</h2>
 
-      <div className="border border-black rounded-lg p-4 mb-8">
-        <Row className="flex-wrap">
-          {firstSectionData.map((item, index) => (
-            <Col key={index} xs={6} sm={4} md={2} className="mb-4">
-              <div className="border border-black p-4">
-                <img src={item.image} alt={item.title} />
-                <h3 className="mt-4 mb-0">{item.title}</h3>
-              </div>
-            </Col>
-          ))}
-          <Col
-            xs={6}
-            sm={4}
-            md={2}
-            className="mb-4 bg-gray-200 border border-black p-4"
-          >
-            {/* <div className="border border-black p-4"> */}
-            <h4 className="mt-2 text-lg font-semibold text-center">
-              Deck Name
-            </h4>
-            <p className="text-sm text-center">@username</p>
-            <div className="flex items-center justify-center">
-              <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-16 rounded">
-                View Deck
-              </Button>
-              <a href="#" className="text-red-500 text-2xl ml-4 mt-16">
-                <img
-                  src={likeButton}
-                  alt="Like"
-                  style={{ width: "30px", height: "auto" }}
-                />
-              </a>
-            </div>
-            {/* </div> */}
-          </Col>
-        </Row>
+      <div className="border border-black rounded-lg p-4 bg-[#AFD7CA] mb-4">
+  <Row className="flex-wrap">
+    {firstSectionData.map((item, index) => (
+      <Col key={index} xs={6} sm={4} md={2} className="mb-4">
+        <div className="border border-black p-4 bg-[#376D5B]">
+          <img src={item.image} alt={item.title} />
+          <h3 className="mt-4 mb-0 text-white sm:text-black">{item.title}</h3>
+        </div>
+      </Col>
+    ))}
+    <Col
+      xs={6}
+      sm={4}
+      md={2}
+      className="mb-4 bg-gray-200 border border-black p-4 bg-[#376D5B]"
+    >
+      {/* <div className="border border-black p-4"> */}
+      <h4 className="mt-2 text-lg font-semibold text-center text-white sm:text-black">
+        Deck Name
+      </h4>
+      <p className="text-sm text-center text-white sm:text-black">@username</p>
+      <div className="flex items-center justify-center flex-col sm:flex-row">
+        <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-4 sm:mt-0 sm:ml-4 rounded">
+          View Deck
+        </Button>
+        <a href="#" className="text-red-500 text-2xl ml-0 mt-4 sm:mt-0 sm:ml-4">
+          <img
+            src={likeButton}
+            alt="Like"
+            style={{ width: "30px", height: "auto" }}
+          />
+        </a>
       </div>
+      {/* </div> */}
+    </Col>
+  </Row>
+</div>
 
-      <div className="border border-black rounded-lg p-4">
-        <Row className="flex-wrap">
-          {secondSectionData.map((item, index) => (
-            <Col key={index} xs={6} sm={4} md={2} className="mb-4">
-              <div className="border border-black p-4">
-                <img src={item.image} alt={item.title} />
-                <h3 className="mt-4 mb-0">{item.title}</h3>
-              </div>
-            </Col>
-          ))}
-          <Col
-            xs={6}
-            sm={4}
-            md={2}
-            className="mb-4 bg-gray-200 border border-black p-4"
-          >
-            {/* <div className="border border-black p-4"> */}
-            <h4 className="mt-2 text-lg font-semibold text-center">
-              Deck Name
-            </h4>
-            <p className="text-sm text-center">@username</p>
-            <div className="flex items-center justify-center">
-              <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-16 rounded">
-                View Deck
-              </Button>
-              <a href="#" className="text-red-500 text-2xl ml-4 mt-16">
-                <img
-                  src={likeButton}
-                  alt="Like"
-                  style={{ width: "30px", height: "auto" }}
-                />
-              </a>
-            </div>
-            {/* </div> */}
-          </Col>
-        </Row>
+<div className="border border-black rounded-lg p-4 bg-[#AFD7CA]">
+  <Row className="flex-wrap">
+    {secondSectionData.map((item, index) => (
+      <Col key={index} xs={6} sm={4} md={2} className="mb-4">
+        <div className="border border-black p-4 bg-[#376D5B]">
+          <img src={item.image} alt={item.title} />
+          <h3 className="mt-4 mb-0 text-white sm:text-black">{item.title}</h3>
+        </div>
+      </Col>
+    ))}
+    <Col
+      xs={6}
+      sm={4}
+      md={2}
+      className="mb-4 bg-[#376D5B] border border-black p-4"
+    >
+      {/* <div className="border border-black p-4"> */}
+      <h4 className="mt-2 text-lg font-semibold text-center text-white sm:text-black">
+        Deck Name
+      </h4>
+      <p className="text-sm text-center text-white sm:text-black">@username</p>
+      <div className="flex items-center justify-center flex-col sm:flex-row">
+        <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-4 sm:mt-0 sm:ml-4 rounded">
+          View Deck
+        </Button>
+        <a href="#" className="text-red-500 text-2xl ml-0 mt-4 sm:mt-0 sm:ml-4">
+          <img
+            src={likeButton}
+            alt="Like"
+            style={{ width: "30px", height: "auto" }}
+          />
+        </a>
+      </div>
+      {/* </div> */}
+    </Col>
+  </Row>
       </div>
 
       <div className="mt-4" style={{ paddingBottom: "50px" }}></div>

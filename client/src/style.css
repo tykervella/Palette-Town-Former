@@ -15,7 +15,9 @@
 }
 
 .wallpaper {
-  background-image: url('./assets/desktop-wallpaper-rowlet.jpg');
+  background-image: url('./pages/assets/bg-pallet.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .slider {
@@ -86,5 +88,8 @@
   }
   
 .banner-section {
-  background-color: var(--primary-color-dark);
+  background-image: url('./pages/assets/banner-test.jpg') ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
