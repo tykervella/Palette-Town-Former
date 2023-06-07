@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+
 import Auth from '../utils/auth';
 
 const Signup = () => {
@@ -39,17 +43,21 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
+    <Container>
+      <Row>
+        {data ? (
+          <p>
+            Success! You may now head{' '}
+            <Link to="/">back to the homepage.</Link>
+          </p>
+        ) : (
+          <>
+            <Col md="8" className="border border-black">
+
+            </Col>
+
+            {/* // email input */}
+            <Col md="4" className="border border-black">
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
@@ -59,6 +67,8 @@ const Signup = () => {
                   value={formState.name}
                   onChange={handleChange}
                 />
+
+                {/* email input */}
                 <input
                   className="form-input"
                   placeholder="Your email"
@@ -67,6 +77,8 @@ const Signup = () => {
                   value={formState.email}
                   onChange={handleChange}
                 />
+
+                {/* password input */}
                 <input
                   className="form-input"
                   placeholder="******"
@@ -75,25 +87,26 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+
+                {/* submit button */}
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
+                  type="submit">
                   Submit
                 </button>
               </form>
-            )}
+            </Col>
+          </>
+        )}
 
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
+        {error && (
+          <div className="my-3 p-3 bg-danger text-white">
+            {error.message}
           </div>
-        </div>
-      </div>
-    </main>
+        )}
+      </Row>
+    </Container>
   );
 };
 

@@ -35,8 +35,17 @@ const resolvers = {
       const params = username ? { seller: username } : {};
       return Listing.find(params).sort({ createdAt: -1 });
     },
-    listing: async (parent, { listingId }) => {
-      return Listing.findOne({ _id: listingId });
+    listing: async (_, { searchQuery, selectedTypes, selectedColors, sortOption }) => {
+      let filteredListings = await getFilteredListings(
+        _,
+        { searchQuery, selectedTypes, selectedColors }
+      );
+
+      if (sortOption) {
+        return getSortedListings(_, { sortOption });
+      }
+
+      return filteredListings;
     },
     allListings: async () => {
       return Listing.find();
@@ -48,6 +57,45 @@ const resolvers = {
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId });
     },
+    getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
+      let filteredListings = await Listing.find();
+
+      if (searchQuery) {
+        const searchRegex = new RegExp(searchQuery, 'i');
+        filteredListings = filteredListings.filter((listing) =>
+          listing.cardName.match(searchRegex)
+        );
+      }
+
+      if (selectedTypes.length > 0) {
+        filteredListings = filteredListings.filter((listing) =>
+          selectedTypes.includes(listing.cardType)
+        );
+      }
+
+      if (selectedColors.length > 0) {
+        filteredListings = filteredListings.filter((listing) =>
+          selectedColors.includes(listing.cardColor)
+        );
+      }
+
+      return filteredListings;
+    },
+    getSortedListings: async (_, { sortOption }) => {
+      let sortedListings = await Listing.find();
+
+      if (sortOption === 'nameAsc') {
+        sortedListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
+      } else if (sortOption === 'nameDesc') {
+        sortedListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
+      } else if (sortOption === 'priceAsc') {
+        sortedListings.sort((a, b) => a.price - b.price);
+      } else if (sortOption === 'priceDesc') {
+        sortedListings.sort((a, b) => b.price - a.price);
+      }
+
+      return sortedListings;
+    }
   },
 
   Mutation: {
@@ -83,14 +131,14 @@ const resolvers = {
 
       return deck;
     },
-    addListing: async (parent, { cardId, cardName, cardImage, cardType,superType, price, seller }) => {
-      const newListing = await Listing.create( {
+    addListing: async (parent, { cardId, cardName, cardImage, cardType, superType, price, seller }) => {
+      const newListing = await Listing.create({
         cardId: cardId,
         cardName: cardName,
         cardImage: cardImage,
         cardType: cardType,
         superType: superType,
-        price: price, 
+        price: price,
         seller: seller,
         // ... other card fields
       });
@@ -103,7 +151,7 @@ const resolvers = {
       return newListing;
     },
     addPost: async (parent, { deckOwner, deckName, postText }) => {
-      const newPost = await Post.create( {
+      const newPost = await Post.create({
         deckOwner: deckOwner,
         deckName: deckName,
         postText: postText
