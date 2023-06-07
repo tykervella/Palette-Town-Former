@@ -38,6 +38,9 @@ const resolvers = {
     listing: async (parent, { listingId }) => {
       return Listing.findOne({ _id: listingId });
     },
+    allListings: async () => {
+      return Listing.find();
+    },
     posts: async (parent, { username }) => {
       const params = username ? { deckOwner: username } : {};
       return Post.find(params).sort({ createdAt: -1 });

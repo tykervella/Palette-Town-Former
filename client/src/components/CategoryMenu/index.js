@@ -62,7 +62,7 @@ const CategoryMenu = ({ onSearch }) => {
     return (
         <div className="grid grid-cols-12 mt-3">
             {/* Search Bar + Filters */}
-            <div className="search-container col-span-6 w-full">
+            <div className="search-container col-span-12 w-full">
                 <input
                     id="searchbar"
                     className="rounded"
@@ -76,8 +76,15 @@ const CategoryMenu = ({ onSearch }) => {
                 </button>
             </div>
 
+            {/* Refresh Button */}
+            <div className="col-span-12 flex justify-end">
+                <button className="btn text-xs" onClick={handleRefresh}>
+                    Reset Filters
+                </button>
+            </div>
+
             {/* Select Type checkboxes */}
-            <div className="col-span-2">
+            <div className="col-span-12 w-full">
                 <div>
                     <label>
                         <input
@@ -115,7 +122,7 @@ const CategoryMenu = ({ onSearch }) => {
 
             {/* Select Color checkboxes */}
             {selectedTypes.includes('pokemon') && (
-                <div className="col-span-2">
+                <div className="col-span-12 w-full">
                     <div>
                         <label>
                             <input
@@ -239,13 +246,6 @@ const CategoryMenu = ({ onSearch }) => {
                     </div>
                 </div>
             )}
-
-            {/* Refresh Button */}
-            <div className="col-span-12 flex justify-end">
-                <button className="btn text-xs" onClick={handleRefresh}>
-                    Reset Filters
-                </button>
-            </div>
         </div>
     )
 };

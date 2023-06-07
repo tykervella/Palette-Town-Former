@@ -11,8 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 const Home = () => {
   return (
-    // primary container for entire page
-    <div className=''>
+    <div className="">
       <Container>
 
         {/* banner */}
@@ -22,14 +21,14 @@ const Home = () => {
               {/* <h2 className='text-3xl font-bold text-white text-center'>Banner Section</h2> */}
             </Row>
 
-            <Row className='float-right'>
-            {/* banner marketplace button */}
+            <Row className="float-right">
+              {/* banner marketplace button */}
               <div id="container">
-                <button class="learn-more">
-                  <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
+                <button className="learn-more">
+                  <span className="circle" aria-hidden="true">
+                    <span className="icon arrow"></span>
                   </span>
-                  <span class="button-text">Marketplace</span>
+                  <span className="button-text">Marketplace</span>
                 </button>
               </div>
             </Row>

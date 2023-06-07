@@ -1,11 +1,29 @@
 [
-    {
-        "cardId": "ex3-77",
-        "cardImage": "https://images.pokemontcg.io/ex3/77.png",
-        "cardName": "Torchic",
-        "cardType": "Fire",
-        "superType": "Pokémon",
-        "price": 2.99,
-        "seller": "user1"
-      }
+  {
+    "cardId": "ex3-77",
+    "cardImage": "https://images.pokemontcg.io/ex3/77.png",
+    "cardName": "Torchic",
+    "cardType": "Fire",
+    "superType": "Pokémon",
+    "price": 2.99,
+    "seller": "user1"
+  },
+  {
+    "cardId": "ex3-77",
+    "cardImage": "https://images.pokemontcg.io/ex3/77.png",
+    "cardName": "Torchic",
+    "cardType": "Fire",
+    "superType": "Pokémon",
+    "price": 2.99,
+    "seller": "user2"
+  },
+  {
+    "cardId": "ex3-77",
+    "cardImage": "https://images.pokemontcg.io/ex3/77.png",
+    "cardName": "Torchic",
+    "cardType": "Fire",
+    "superType": "Pokémon",
+    "price": 2.99,
+    "seller": "user3"
+  }
 ]
