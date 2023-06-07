@@ -9,13 +9,13 @@ const TrendingPalettes = () => {
 
   return (
     <Container>
-      {/* <h2 className="mt-14 mb-4">Trending Palettes</h2> */}
+      <h2 className="text-black mb-4 mt-4">Trending Palettes</h2>
 
       <div className="border border-black rounded-lg p-4 bg-[#376D5B] mb-4">
         <Row className="flex-wrap">
           {firstSectionData.map((item, index) => (
             <Col key={index} xs={6} sm={4} md={2} className="mb-4">
-              <div className="border border-black p-4 bg-[#AFD7CA]">
+              <div className="border border-black p-4 bg-[#AFD7CA] rounded-lg">
                 <img src={item.image} alt={item.title} />
                 <h3 className="mt-4 mb-0 text-white sm:text-black">
                   {item.title}
@@ -27,7 +27,7 @@ const TrendingPalettes = () => {
             xs={6}
             sm={4}
             md={2}
-            className="mb-4  border border-black p-4 bg-[#AFD7CA]"
+            className="mb-4  border border-black p-4 bg-[#AFD7CA] rounded-lg"
           >
             <h4 className="mt-2 text-lg font-semibold text-center text-white sm:text-black">
               Deck Name
@@ -58,7 +58,7 @@ const TrendingPalettes = () => {
         <Row className="flex-wrap">
           {secondSectionData.map((item, index) => (
             <Col key={index} xs={6} sm={4} md={2} className="mb-4">
-              <div className="border border-black p-4 bg-[#AFD7CA]">
+              <div className="border border-black p-4 bg-[#AFD7CA] rounded-lg">
                 <img src={item.image} alt={item.title} />
                 <h3 className="mt-4 mb-0 text-white sm:text-black">
                   {item.title}
@@ -70,7 +70,7 @@ const TrendingPalettes = () => {
             xs={6}
             sm={4}
             md={2}
-            className="mb-4 bg-[#AFD7CA] border border-black p-4"
+            className="mb-4 bg-[#AFD7CA] border border-black p-4 rounded-lg"
           >
              <h4 className="mt-2 text-lg font-semibold text-center text-white sm:text-black">
               Deck Name
