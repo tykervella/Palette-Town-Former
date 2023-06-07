@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
-
 import Auth from '../utils/auth';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [showPassword, setShowPassword] = useState(false); // New state variable
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -18,6 +18,11 @@ const Login = (props) => {
       ...formState,
       [name]: value,
     });
+  };
+
+  // toggle password visibility
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   // submit form
@@ -65,10 +70,19 @@ const Login = (props) => {
                   className="form-input"
                   placeholder="******"
                   name="password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'} // Dynamically set the input type based on showPassword state
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <div>
+                  <input
+                    type="checkbox"
+                    id="showPassword"
+                    checked={showPassword}
+                    onChange={toggleShowPassword}
+                  />
+                  <label htmlFor="showPassword">Show Password</label>
+                </div>
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}
