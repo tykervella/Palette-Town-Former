@@ -25,15 +25,6 @@ function Marketplace() {
     return <div>Loading...</div>
   };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setListings(data.listings);
-  //   }
-  // }, [data]);
-
-  // useEffect(() => {
-  //   filterListings();
-  // }, [listings, searchQuery, selectedCategory]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -43,121 +34,30 @@ function Marketplace() {
     setSelectedCategory(category);
   };
 
-//   const filterListings = () => {
-//   let filtered = [...listings];
 
-//   if (selectedCategory !== 'All') {
-//     filtered = filtered.filter((listing) => listing.category === selectedCategory);
-//   }
+return (
+  <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
+    <div className="bg-white col-span-8 border-2 border-red-700 min-h-screen">
+      {loading ? (
+        <p>Loading listings...</p>
+      ) : (
+        list.map((listing) => (
+          <ProductList
+            id={listing.cardId}
+            image={listing.cardImage}
+            cardName={listing.cardName}
+            cardType={listing.cardType}
+            price={listing.price}
+          />
+        ))
+      )}
+    </div>
 
-//   if (searchQuery) {
-//     const lowerCaseQuery = searchQuery.toLowerCase();
-//     filtered = filtered.filter(
-//       (listing) =>
-//         listing.name.toLowerCase().includes(lowerCaseQuery) ||
-//         listing.type.toLowerCase().includes(lowerCaseQuery) ||
-//         listing.subtype.toLowerCase().includes(lowerCaseQuery) ||
-//         listing.color.toLowerCase().includes(lowerCaseQuery)
-//     );
-//   }
-
-//   setFilteredListings(filtered);
-// };
-
-  return (
-    <Container className="border border-black p-4 m-2">
-      <div className="col-span-8 border-2 border-red-700 min-h-screen">
-        {/* <Cart /> */}
-        <CategoryMenu onSearch={handleSearch} />
-
-        <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
-          {loading ? (
-            <p>Loading listings...</p>
-          ) : (
-            list.map((listing) => (
-              <ProductList
-                id={listing.cardId}
-                image={listing.cardImage}
-                cardName={listing.cardName}
-                cardType={listing.cardType}
-                price={listing.price}
-              />
-            ))
-          )}
-        </div>
-      </div>
-    </Container>
-  );
-}
+    <div className="bg-white col-span-4 ml-4 border-2 border-red-700 min-h-screen">
+      <CategoryMenu onSearch={handleSearch} />
+    </div>
+  </div>
+);
+};
 
 export default Marketplace;
-
-
-//   const getCards = (cardName, cardType, cardSubtype, cardColor, pageNumber) => {
-//     let queryString = '';
-
-//     if (cardName !== '') {
-//       queryString += `name:${cardName} `;
-//     }
-
-//     if (cardType !== '0') {
-//       queryString += `supertype:${cardType} `;
-//     }
-
-//     if (cardSubtype !== '0') {
-//       queryString += `subtypes:${cardSubtype} `;
-//     }
-
-//     if (cardColor !== '0') {
-//       queryString += `types:${cardColor} `;
-//     }
-
-//     axios
-//       .get('https://api.pokemontcg.io/v2/cards', {
-//         params: {
-//           q: queryString.trim(),
-//           page: pageNumber,
-//           pageSize: 9,
-//         },
-//       })
-//       .then(response => {
-//         const rawData = response.data;
-//         const cardsArray = rawData.data.map(card => ({
-//           id: card.id,
-//           name: card.name,
-//           series: card.set.name,
-//           series_symbol: card.set.images.symbol,
-//           images: card.images,
-//           types: card.types,
-//           supertype: card.supertype,
-//         }));
-//         setCards(cardsArray);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//         setCards([]);
-//       });
-//   };
-
-//   const handleSearch = (cardName, cardType, cardSubtype, cardColor) => {
-//     getCards(cardName, cardType, cardSubtype, cardColor, 1);
-//   };
-
-
-//   return (
-    
-//     <Container className="border border-black p-4 m-2">
-//       <div className="col-span-8 border-2 border-red-700 min-h-screen">
-//         <SearchCards onSearch={handleSearch} />
-//         <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
-//           {/* Render the card list */}
-//           {cards.map((card) => (
-//             <CardElement key={card.id} image={card.images.small} cardName={card.name} />
-//           ))}
-//         </div>
-//       </div>
-//     </Container>
-//   );
-// };
-
-// export default Marketplace;
