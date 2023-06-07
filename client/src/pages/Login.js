@@ -3,25 +3,26 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-
 import Auth from '../utils/auth';
 
-const Login = () => {
+const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [showPassword, setShowPassword] = useState(false);
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [showPassword, setShowPassword] = useState(false); // New state variable
 
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState((prevState) => ({
-      ...prevState,
+    setFormState({
+      ...formState,
       [name]: value,
-    }));
+    });
+  };
+
+  // toggle password visibility
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   // submit form
@@ -32,76 +33,75 @@ const Login = () => {
       const { data } = await login({
         variables: { ...formState },
       });
-
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
     }
 
     // clear form values
-    setFormState({ email: '', password: '' });
-  };
-
-  // toggle show/hide password
-  const toggleShowPassword = () => {
-    setShowPassword((prevState) => !prevState);
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
 
   return (
-    <Container>
-      <Row>
-        <Col md={8} className="d-none d-md-block">
-          {/* Left Column */}
-          <div className="left-column">
-            {/* Add your image or content here */}
-          </div>
-        </Col>
-        <Col md={4}>
-          {/* Right Column */}
-          <div className="right-column d-flex flex-column justify-content-center align-items-center">
-            <form className="border border-black p-3">
-              <input
-                className="form-input"
-                placeholder="Your email"
-                name="email"
-                type="email"
-                value={formState.email}
-                onChange={handleChange}
-              />
-
-              {/* password input */}
-              <div className="password-input">
+    <main className="flex-row justify-center mb-4">
+      <div className="col-12 col-lg-10">
+        <div className="card">
+          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <div className="card-body">
+            {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
+              <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Password"
+                  placeholder="Your email"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="******"
                   name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? 'text' : 'password'} // Dynamically set the input type based on showPassword state
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <div>
+                  <input
+                    type="checkbox"
+                    id="showPassword"
+                    checked={showPassword}
+                    onChange={toggleShowPassword}
+                  />
+                  <label htmlFor="showPassword">Show Password</label>
+                </div>
                 <button
-                  className="toggle-password"
-                  onClick={toggleShowPassword}
-                  type="button"
+                  className="btn btn-block btn-primary"
+                  style={{ cursor: 'pointer' }}
+                  type="submit"
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  Submit
                 </button>
-              </div>
+              </form>
+            )}
 
-              {/* submit button */}
-              <button
-                className="btn btn-block btn-primary mt-3"
-                style={{ cursor: 'pointer' }}
-                type="submit"
-                onClick={handleFormSubmit}
-              >
-                Login
-              </button>
-            </form>
+            {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </main>
   );
 };
 
