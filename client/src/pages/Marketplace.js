@@ -43,7 +43,8 @@ return (
       ) : (
         list.map((listing) => (
           <ProductList
-            id={listing.cardId}
+            id={listing._id}
+            cardId={listing.cardId}
             image={listing.cardImage}
             cardName={listing.cardName}
             cardType={listing.cardType}
