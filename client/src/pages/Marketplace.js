@@ -40,6 +40,7 @@ function Marketplace() {
   };
 
 
+
   return (
     <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
       <div className="bg-white col-span-8 border-2 border-red-700 min-h-screen">
@@ -48,7 +49,8 @@ function Marketplace() {
         ) : (
           list.map((listing) => (
             <ProductList
-              id={listing.cardId}
+              id={listing._id}
+              cardId={listing.cardId}
               image={listing.cardImage}
               cardName={listing.cardName}
               cardType={listing.cardType}
