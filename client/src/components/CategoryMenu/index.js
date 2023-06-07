@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const CategoryMenu = ({ onSearch }) => {
+const CategoryMenu = ({ onSearch, onSort }) => {
     const [cardName, setCardName] = useState('');
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
+    const [sortOption, setSortOption] = useState('');
 
     useEffect(() => {
         const storedCardName = localStorage.getItem('cardName');
@@ -13,7 +14,7 @@ const CategoryMenu = ({ onSearch }) => {
     }, []);
 
     const handleSearchClick = () => {
-        onSearch(cardName, selectedTypes, selectedColors);
+        onSearch(cardName, selectedTypes, [], selectedColors);
     };
 
     const handleInputChange = (event) => {
@@ -52,16 +53,23 @@ const CategoryMenu = ({ onSearch }) => {
         }
     };
 
+    const handleSortChange = (event) => {
+        const selectedSortOption = event.target.value;
+        setSortOption(selectedSortOption);
+        onSort(selectedSortOption);
+    }
+
     const handleRefresh = () => {
         localStorage.removeItem('cardName');
         setSelectedTypes([]);
         setSelectedColors([]);
+        setSortOption('');
         window.location.reload();
     };
 
     return (
         <div className="grid grid-cols-12 mt-3">
-            {/* Search Bar + Filters */}
+            {/* Search Bar */}
             <div className="search-container col-span-12 w-full">
                 <input
                     id="searchbar"
@@ -246,6 +254,16 @@ const CategoryMenu = ({ onSearch }) => {
                     </div>
                 </div>
             )}
+            {/* Sort options */}
+            <div className="col-span-12 w-full">
+                <select value={sortOption} onChange={handleSortChange}>
+                    <option value="">Sort by...</option>
+                    <option value="nameAsc">Name (A-Z)</option>
+                    <option value="nameDesc">Name (Z-A)</option>
+                    <option value="priceAsc">Price (Low to High)</option>
+                    <option value="priceDesc">Price (High to Low)</option>
+                </select>
+            </div>
         </div>
     )
 };
