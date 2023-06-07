@@ -1,38 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useQuery } from '@apollo/client';
+import { GET_LISTINGS } from '../../utils/queries';
 
-const ProductList = () => {
+const ProductList = (props) => {
 
-  const [listings, setListings] = useState([]);
+  // const [listings, setListings] = useState([]);
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        const response = await axios.get('https://api.pokemontcg.io/v2/cards');
-        setListings(response.data.data);
-      } catch (error) {
-        console.error('Error fetching listings:', error);
-      }
-    };
-
-    fetchListings();
-  }, []);
+  // const { loading, error, data } = useQuery(GET_LISTINGS);
+  // const list = data?.allListings || [];
+  // console.log(data);
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // };
+  // } if (!listings.length) {
+  //   return <div>No listings yet...</div>
+  // }
 
   return (
-    <div className="product=list">
-      {listings.map((listing) => (
-        <Link to={`/listing/${listing.id}`} key={listing.id}>
-          <div className="product-card">
-            <img src={listing.images.small} alt={listing.name} />
-            <h3>{listing.name}</h3>
-            <p>Card Type: {listing.types.join(', ')}</p>
-            <p>Price: ${listing.price}</p>
-            <p>Seller: {listing.seller}</p>
-          </div>
-        </Link>
-      ))}
-    </div>
+    <>
+      <Link to={`/listing/${props.id}`}>
+        <div className="product-card">
+          <img src={props.images} alt={props.cardName} />
+          <h3>{props.cardName}</h3>
+          <p>Card Type: {props.cardTypes}</p>
+          <p>Price: ${props.price}</p>
+          {/* <p>Seller: {props.seller}</p> */}
+        </div>
+      </Link>
+    </>
   );
 };
 
