@@ -12,22 +12,28 @@ import Cart from '../components/Cart';
 import CategoryMenu from '../components/CategoryMenu';
 
 function Marketplace() {
-  const [listings, setListings] = useState([]);
+  // const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const { loading, error, data } = useQuery(GET_LISTINGS);
 
-  useEffect(() => {
-    if (data) {
-      setListings(data.listings);
-    }
-  }, [data]);
+  const list = data?.allListings || [];
+  console.log(data);
+  if (loading) {
+    return <div>Loading...</div>
+  };
 
-  useEffect(() => {
-    filterListings();
-  }, [listings, searchQuery, selectedCategory]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setListings(data.listings);
+  //   }
+  // }, [data]);
+
+  // useEffect(() => {
+  //   filterListings();
+  // }, [listings, searchQuery, selectedCategory]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -37,26 +43,26 @@ function Marketplace() {
     setSelectedCategory(category);
   };
 
-  const filterListings = () => {
-  let filtered = [...listings];
+//   const filterListings = () => {
+//   let filtered = [...listings];
 
-  if (selectedCategory !== 'All') {
-    filtered = filtered.filter((listing) => listing.category === selectedCategory);
-  }
+//   if (selectedCategory !== 'All') {
+//     filtered = filtered.filter((listing) => listing.category === selectedCategory);
+//   }
 
-  if (searchQuery) {
-    const lowerCaseQuery = searchQuery.toLowerCase();
-    filtered = filtered.filter(
-      (listing) =>
-        listing.name.toLowerCase().includes(lowerCaseQuery) ||
-        listing.type.toLowerCase().includes(lowerCaseQuery) ||
-        listing.subtype.toLowerCase().includes(lowerCaseQuery) ||
-        listing.color.toLowerCase().includes(lowerCaseQuery)
-    );
-  }
+//   if (searchQuery) {
+//     const lowerCaseQuery = searchQuery.toLowerCase();
+//     filtered = filtered.filter(
+//       (listing) =>
+//         listing.name.toLowerCase().includes(lowerCaseQuery) ||
+//         listing.type.toLowerCase().includes(lowerCaseQuery) ||
+//         listing.subtype.toLowerCase().includes(lowerCaseQuery) ||
+//         listing.color.toLowerCase().includes(lowerCaseQuery)
+//     );
+//   }
 
-  setFilteredListings(filtered);
-};
+//   setFilteredListings(filtered);
+// };
 
   return (
     <Container className="border border-black p-4 m-2">
@@ -68,12 +74,12 @@ function Marketplace() {
           {loading ? (
             <p>Loading listings...</p>
           ) : (
-            filteredListings.map((listing) => (
+            list.map((listing) => (
               <ProductList
-                key={listing.id}
-                image={listing.image}
-                cardName={listing.name}
-                cardType={listing.type}
+                id={listing.cardId}
+                image={listing.cardImage}
+                cardName={listing.cardName}
+                cardType={listing.cardType}
                 price={listing.price}
               />
             ))

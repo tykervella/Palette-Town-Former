@@ -84,6 +84,7 @@ const typeDefs = gql`
     deck(deckId: ID!): Deck
     listings(username: String!): [Listing]
     listing(listingId: ID!): Listing
+    allListings: [Listing]
     posts(username: String!): [Post]
     post(postId: ID!): Post
   }

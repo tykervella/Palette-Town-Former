@@ -10,7 +10,6 @@ const listingSchema = new Schema({
     cardName: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
     },
     cardImage: {
