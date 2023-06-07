@@ -27,7 +27,7 @@ const TrendingPalettes = () => {
             xs={6}
             sm={4}
             md={2}
-            className="mb-4 bg-gray-200 border border-black p-4 bg-[#AFD7CA]"
+            className="mb-4  border border-black p-4 bg-[#AFD7CA]"
           >
             <h4 className="mt-2 text-lg font-semibold text-center text-white sm:text-black">
               Deck Name
