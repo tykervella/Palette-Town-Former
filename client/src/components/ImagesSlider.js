@@ -20,24 +20,32 @@ const ImageSlider = ({ slides }) => {
 
   return (
     <div className="slider">
-      <button className="prev-btn" onClick={prevSlide}>
-        <FiChevronLeft />
-      </button>
-
+     
       {slides.map((slide, index) => (
-        <div
-          className={index === current ? 'slide active' : 'slide'}
-          key={index}
-        >
+        <div className={index === current ? 'slide active' : 'slide'} key={index}>
           {index === current && (
-            <img src={slide.image} alt='travel image' className='image' />
+            <div className="slide-content">
+              <div className="arrows">
+                {index > 0 && (
+                   <button className="prev-btn" onClick={prevSlide}>
+                   <FiChevronLeft />
+                 </button>
+                )}
+              </div>
+              <img src={slide.image} alt='travel image' className='topListing' />
+              <div className="arrows">
+                {index < length - 1 && (
+                   <button className="next-btn" onClick={nextSlide}>
+                   <FiChevronRight />
+                 </button>
+                )}
+              </div>
+            </div>
           )}
         </div>
       ))}
 
-      <button className="next-btn" onClick={nextSlide}>
-        <FiChevronRight />
-      </button>
+     
     </div>
   );
 };
