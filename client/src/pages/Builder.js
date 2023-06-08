@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { GET_DECK } from '../utils/queries';
+import {GET_DECK} from '../utils/queries';
 import axios from 'axios'; // Import axios for making API requests
 
 import CardElement from '../components/CardElement';
@@ -17,6 +17,8 @@ function DeckBuilder() {
   const { loading, error, data } = useQuery(GET_DECK, {
     variables: { deckId: _id },
   });
+
+  console.log(data)
 
   useEffect(() => {
     if (data && data.deck) {

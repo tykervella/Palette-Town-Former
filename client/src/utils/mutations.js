@@ -50,6 +50,14 @@ export const ADD_USER = gql`
   }
 `;
 
+export const CREATE_DECK = gql`
+  mutation Mutation($deckOwner: String!) {
+  addDeck(deckOwner: $deckOwner) {
+    _id
+  }
+}
+`
+
 export const ADD_TO_DECK = gql`
   mutation AddCardToDeckList(
   $deckId: ID!,
@@ -73,6 +81,15 @@ export const ADD_TO_DECK = gql`
   }
 }
 `
+
+export const REMOVE_CARD = gql`
+  mutation Mutation($deckId: ID!, $cardId: String!) {
+    removeCard(deckId: $deckId, cardId: $cardId) {
+      cards {
+        cardName
+      }
+    }
+}`
 
 export const UPDATE_CARD_QUANTITY = gql`
   mutation Mutation(

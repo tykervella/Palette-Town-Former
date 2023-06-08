@@ -1,14 +1,33 @@
 // import React from "react";
-import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React  from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { useQuery } from '@apollo/client';
+import { GET_USER } from '../utils/queries';
 
 import likeButton from "./assets/pokeball-like.png";
 // import { SliderData } from "./assets/SliderData";
 import CircleImage from "./assets/profile-pic.webp";
-
-import UpdateProfile from '../components/Profile/UpdateForm'
+import ProfileInfo from "../components/ProfileInfo";
+import UpdateProfile from '../components/UpdateForm'
+import Auth from "../utils/auth";
 
 const Profile = () => {
+
+  const token = Auth.getToken();
+  const user_name = token ? Auth.getProfile().data.username : null;
+
+  const { loading, error, data } = useQuery(GET_USER, {
+    variables: { username: user_name },
+  });
+
+  console.log(data)
+
+  const userId = data.user._id
+  const name=data.user.name
+  const bio = data.user.bio
+  
+
+  console.log(user_name)
   const firstSectionData = [
     {
       title: "#FFFFFF",
@@ -62,16 +81,6 @@ const Profile = () => {
     },
   ];
 
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("");
-
-  const handleBioChange = (e) => {
-    const inputBio = e.target.value;
-    if (inputBio.length <= 500) {
-      setBio(inputBio);
-    }
-  };
 
   return (
     <Container>
@@ -80,7 +89,13 @@ const Profile = () => {
       <div className="border border-[black] rounded-lg p-4 mb-8 bg-[#AFD7CA]">
         <Row>
           <Col md={6} className="border-right border-black pr-4">
-            <UpdateProfile />
+            <ProfileInfo 
+              key={userId}
+              name={name}
+              username={user_name}
+              bio={bio}
+
+              />
           </Col>
           <Col md={6} className="text-center">
             <div className="d-flex flex-column align-items-center">

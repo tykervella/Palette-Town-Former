@@ -215,7 +215,7 @@ const resolvers = {
     removeCard: async (parent, { deckId, cardId }) => {
       const updatedDeck = await Deck.findOneAndUpdate(
         { _id: deckId },
-        { $pull: { cards: { _id: cardId } } },
+        { $pull: { cards: {cardId: cardId } } },
         { new: true }
       );
 

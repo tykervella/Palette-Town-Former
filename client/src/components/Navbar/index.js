@@ -18,6 +18,13 @@ const CustomNavbar = () => {
   const username = token ? Auth.getProfile().data.username : null;
 
 
+  // checks if user is logged in and if not, sends them to login page. 
+  // if user is logged in, then it sends them to the endpoint passed as a parameter to the function  
+  const checkStatus = (endpoint) => {
+    return token ? `${endpoint}` : "/login";
+  }
+
+
   return (
     <Navbar variant="dark" expand="lg" className="text-white mb-4 py-3 custom-navbar" style={{ backgroundColor: '#AFD7CA' }}>
       <Container>
@@ -27,19 +34,19 @@ const CustomNavbar = () => {
             <Link className="nav-link text-white me-4" to="/">
               Home
             </Link>
-            <Link to="#" style={{ textDecoration: 'none' }}>
+            <Link to={checkStatus('create')} style={{ textDecoration: 'none' }}>
               <span className="nav-link text-white me-4">
                 Create
               </span>
             </Link>
 
             <NavDropdown title="Marketplace" id="basic-nav-dropdown" className="text-white me-4">
-              <NavDropdown.Item href="/marketplace">Top Listings</NavDropdown.Item>
-              <NavDropdown.Item href="#">
+              <NavDropdown.Item href={checkStatus('marketplace')}>Top Listings</NavDropdown.Item>
+              <NavDropdown.Item href={checkStatus("#")}>
                 Saved Decks
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
+              <NavDropdown.Item href={checkStatus("#")}>
                 Your Cart
               </NavDropdown.Item>
             </NavDropdown>
@@ -97,3 +104,6 @@ const CustomNavbar = () => {
 };
 
 export default CustomNavbar;
+
+
+

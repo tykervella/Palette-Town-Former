@@ -1,16 +1,17 @@
 import { gql } from '@apollo/client';
 
 export const GET_DECK = gql`
-  query Deck($deckId: ID!) {
+  query Decks($deckId: ID!) {
   deck(deckId: $deckId) {
-    cardCount
+    _id
+    deckName
     cards {
       cardId
       cardImage
       cardName
-      cardType
-      superType
       quantity
+      superType
+      cardType
     }
   }
 }
@@ -41,6 +42,9 @@ query Query($username: String!) {
     }
     profileIMG
     username
+    name 
+    bio
+
   }
 }`
 
