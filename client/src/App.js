@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Marketplace from './pages/Marketplace';
 import Profile from './pages/Profile'
+import Contact from './pages/Contact';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -75,6 +76,11 @@ function App() {
               <Route
                 path="/marketplace"
                 element={<Marketplace />}
+              />
+
+              <Route
+              path="/Contact"
+              element={<Contact />}
               />
 
           </Routes>
