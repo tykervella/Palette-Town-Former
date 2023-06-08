@@ -13,6 +13,12 @@ const Home = () => {
   return (
     <div className="">
       <Container>
+        {/* start of dark mode toggle button */}
+        <div class="toggle">
+          <input type="checkbox" id="toggle" />
+          <label for="toggle"></label>
+        </div>
+
         {/* banner */}
         <Row>
           <Col className="banner-section border border-black rounded-xl p-16 m-2 bg-[#AFD7CA]">
