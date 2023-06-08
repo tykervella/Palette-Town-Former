@@ -15,7 +15,7 @@ const Home = () => {
       <Container>
         {/* start of dark mode toggle button */}
         <div class="toggle">
-          <input type="checkbox" id="toggle" />
+          <input type="checkbox" id="toggle" className="hidden" />
           <label for="toggle"></label>
         </div>
 

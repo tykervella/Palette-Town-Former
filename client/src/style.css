@@ -40,16 +40,8 @@
   }
 
   /* main button styling */
-  .main-button {
-    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-    border-radius: 10000px;
-    padding: 1rem;
-  }
 
-  .main-button:hover {
-    
-  }
-  
+
   .toggle label {
     background-color: #777;
     border: 2px solid #555;
@@ -91,4 +83,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.loginLogo {
+  background-image: url('./assets/yellow-cloud.jpg') ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
 }
