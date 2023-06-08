@@ -17,11 +17,10 @@ const Home = () => {
         <Row>
           <Col className="banner-section border border-black rounded-xl p-16 m-2 bg-[#AFD7CA]">
             <Row className="text-center">
-              {/* <h2 className='text-3xl font-bold text-white text-center'>Banner Section</h2> */}
             </Row>
 
             <Row className="float-right">
-              
+
               {/* banner marketplace button */}
               <div id="container">
                 <button className="learn-more">
@@ -35,10 +34,9 @@ const Home = () => {
           </Col>
         </Row>
 
-        {/* trending palettes/decks */}
+        {/* trending palettes */}
         <Row>
           <Col>
-            {/* <h2 className='text-3xl font-bold text-white text-center mb-4'>Trending Palettes</h2> */}
             <div>
               <TrendingPalettes />
             </div>
@@ -46,30 +44,41 @@ const Home = () => {
         </Row>
 
         {/* bottom row */}
-        <Row>
+        <div className="d-flex align-items-start">
+          {" "}
+
           {/* caught decks */}
           <Col md={7}>
+            <h2 className="text-black mb-6">Caught Decks</h2>
             <div className="border border-black rounded-xl bg-[#376D5B] p-16 m-2 mb-4">
-              {/* <h2 className="text-3xl font-bold text-white text-center">
-                Caught Decks
-              </h2> */}
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
                 <CaughtDecks />
               </div>
             </div>
           </Col>
           <Col md={5}>
+
             {/* top listings decks */}
+            <h2 className="text-black mb-6">Today's Top Listing</h2>
             <div className="border border-black rounded-xl bg-[#376D5B] p-16 m-2 mb-4">
-              {/* <h2 className="text-3xl font-bold text-white text-center mb-4">
-                Today's Top Listings
-              </h2> */}
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
                 <TopListing />
               </div>
             </div>
           </Col>
-        </Row>
+        </div>
       </Container>
     </div>
   );

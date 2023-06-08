@@ -21,14 +21,14 @@ const CaughtDecks = () => {
 
   return (
     <>
-      <h2 className="text-black mb-4 mt-4">Caught Decks</h2>
+      {/* <h2 className="text-black mb-4 mt-4">Caught Decks</h2> */}
       <Container>
-        <Row className='mt-4 justify-content-center'>
+        <Row className='justify-content-center'>
           {cards.map((card, index) => (
-            <Col key={index} className='border border-black rounded-xl bg-slate-600 mt-10 mx-2'>
+            <Col key={index} className='border border-black rounded-xl bg-[#AFD7CA] mt-10 mx-2'>
               <div>
-                <img src={card.image} alt={card.title} />
-                <h3 className='mt-4 mb-0 text-white text-center'>{card.title}</h3>
+                <img className="mt-4" src={card.image} alt={card.title} />
+                <h3 className='mt-4 mb-4 text-white text-center'>{card.title}</h3>
               </div>
             </Col>
           ))}

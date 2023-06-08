@@ -8,9 +8,9 @@ import Col from 'react-bootstrap/Col';
 const TopListings = () => {
   return (
     <Container>
-        <h2 className="text-black mb-4 mt-4">Today's Top Listings</h2>
+        {/* <h2 className="text-black mb-4 mt-4">Today's Top Listings</h2> */}
       <Row className="justify-content-center">
-        <Col md={6}>
+        <Col md={7}>
           <ImageSlider slides={SliderData} />
         </Col>
       </Row>
