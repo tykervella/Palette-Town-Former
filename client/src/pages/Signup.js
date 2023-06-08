@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -46,14 +48,18 @@ const Signup = () => {
       <Row>
 
         {/* left column */}
-        <Col md={8} className='d-none d-md-block'>
-          <div className='border border-black'>
-            <h1>Sign Up</h1>
+        <Col md={7} className='d-none d-md-block'>
+          <div className='loginLogo rounded-3xl shadow-xl'>
+            <div className='d-flex flex-column align-items-center text-center pt-60'>
+              <h1></h1>
+            </div>
           </div>
         </Col>
 
         {/* right column */}
-        <Col md={4} className='border border-black'>
+        <Col md={5} className='bg-white rounded-3xl shadow-xl'>
+          <h1 className='pt-10 text-center'>Palette Town</h1>
+          <h2 className='pt-20 text-center text-gray-400'>Where Hexcodes Choose YOU!</h2>
           {data ? (
             <p>
               Success! You may now head{' '}
@@ -62,11 +68,12 @@ const Signup = () => {
 
           ) : (
 
-            <div className='d-flex justify-content-center'>
+            <div className='d-flex justify-content-center align-items-center justify-content-center'>
               <form onSubmit={handleFormSubmit}>
-                <div className='mb-3'>
+                <div className='mb-3 pt-20'>
+                  <p className='text-gray-400 text-xs'>New Username</p>
                   <input
-                    className="form-input"
+                    className="form-input bg-transparent border-b-2 w-80"
                     placeholder="Your username"
                     name="username"
                     type="text"
@@ -76,8 +83,9 @@ const Signup = () => {
                 </div>
 
                 <div className='mb-3'>
+                  <p className='text-gray-400 text-xs'>User Email</p>
                   <input
-                    className="form-input"
+                    className="form-input bg-transparent border-b-2 w-80"
                     placeholder="Your email"
                     name="email"
                     type="email"
@@ -87,8 +95,9 @@ const Signup = () => {
                 </div>
 
                 <div className='mb-3'>
+                  <p className='text-gray-400 text-xs'>Password</p>
                   <input
-                    className="form-input"
+                    className="form-input bg-transparent border-b-2 w-80"
                     placeholder="******"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
@@ -100,8 +109,11 @@ const Signup = () => {
                     id="showPassword"
                     checked={showPassword}
                     onChange={toggleShowPassword}
+                    className="hidden"
                   />
-                  <label htmlFor="showPassword">Show</label>
+                  <label htmlFor="showPassword" className="icon-label text-xl" style={{ cursor: 'pointer' }}>
+                    {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                  </label>
                 </div>
 
                 <button
