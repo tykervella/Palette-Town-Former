@@ -51,8 +51,8 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_DECK = gql`
-  mutation Mutation($deckOwner: String!) {
-  addDeck(deckOwner: $deckOwner) {
+  mutation Mutation($deckOwner: String!, $deckName: String!) {
+  addDeck(deckOwner: $deckOwner, deckName: $deckName) {
     _id
   }
 }

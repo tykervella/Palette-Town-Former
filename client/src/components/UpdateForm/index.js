@@ -9,8 +9,10 @@ function UpdateForm() {
 
     const handleBioChange = (e) => {
         const inputBio = e.target.value;
-        if (inputBio.length <= 500) {
+        if (inputBio.length <= 280) {
           setBio(inputBio);
+        } else {
+          alert("Bios must be 280 characters or shorter!")
         }
       };
 
@@ -45,7 +47,7 @@ function UpdateForm() {
                   value={bio}
                   onChange={handleBioChange}
                 />
-                <p className="text-muted mt-2">{bio.length}/240</p>
+                <p className="text-muted mt-2">{bio.length}/280</p>
               </Form.Group>
             </Form>
     )

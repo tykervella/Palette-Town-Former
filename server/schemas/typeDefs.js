@@ -17,11 +17,10 @@ const typeDefs = gql`
 
   type Deck {
     _id: ID!
-    deckName: String
+    deckName: String!
     deckOwner: String!
     createdAt: String 
     cards: [Card!]
-    published: Boolean!
   }
 
   type Card {
@@ -95,7 +94,10 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addDeck(deckOwner: String!): Deck
+    addDeck(
+      deckOwner: String!
+      deckName: String!
+      ): Deck
     addComment(
       deckId: ID!, 
       commentText: String!
