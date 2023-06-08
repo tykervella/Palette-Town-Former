@@ -15,6 +15,7 @@ import DeckBuilder from './pages/Builder';
 import Navbar from './components/Navbar';
 import Marketplace from './pages/Marketplace';
 import Profile from './pages/Profile'
+import Contact from './pages/Contact';
 import CreateDeck from './pages/CreateDeck'
 
 // Construct our main GraphQL API endpoint
@@ -62,6 +63,11 @@ function App() {
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/create" element={<CreateDeck />}
             />
+              <Route
+              path="/Contact"
+              element={<Contact />}
+              />
+
           </Routes>
         </div>
 
