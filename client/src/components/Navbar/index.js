@@ -42,9 +42,6 @@ const CustomNavbar = () => {
 
             <NavDropdown title="Marketplace" id="basic-nav-dropdown" className="text-white me-4">
               <NavDropdown.Item href={checkStatus('marketplace')}>Top Listings</NavDropdown.Item>
-              <NavDropdown.Item href={checkStatus("#")}>
-                Saved Decks
-              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href={checkStatus("#")}>
                 Your Cart
