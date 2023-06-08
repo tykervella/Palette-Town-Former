@@ -25,7 +25,7 @@ const CaughtDecks = () => {
       <Container>
         <Row className='justify-content-center'>
           {cards.map((card, index) => (
-            <Col key={index} className='border border-black rounded-xl bg-[#AFD7CA] mt-10 mx-2'>
+            <Col key={index} className='border border-black rounded-xl bg-[#AFD7CA] mt-10 mx-2 mb-4'>
               <div>
                 <img className="mt-4" src={card.image} alt={card.title} />
                 <h3 className='mt-4 mb-4 text-white text-center'>{card.title}</h3>
@@ -39,4 +39,3 @@ const CaughtDecks = () => {
 }
 
 export default CaughtDecks;
-

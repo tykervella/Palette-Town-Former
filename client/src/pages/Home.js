@@ -14,19 +14,17 @@ const Home = () => {
     <div className="">
       <Container>
         {/* start of dark mode toggle button */}
-        <div class="toggle">
+        <div className="toggle">
           <input type="checkbox" id="toggle" />
-          <label for="toggle"></label>
+          <label htmlFor="toggle"></label>
         </div>
 
         {/* banner */}
         <Row>
           <Col className="banner-section border border-black rounded-xl p-16 m-2 bg-[#AFD7CA]">
-            <Row className="text-center">
-            </Row>
+            <Row className="text-center"></Row>
 
             <Row className="float-right">
-
               {/* banner marketplace button */}
               <div id="container">
                 <button className="learn-more">
@@ -50,9 +48,7 @@ const Home = () => {
         </Row>
 
         {/* bottom row */}
-        <div className="d-flex align-items-start">
-          {" "}
-
+        <div className="d-flex align-items-stretch"> 
           {/* caught decks */}
           <Col md={7}>
             <h2 className="text-black mb-6">Caught Decks</h2>
@@ -69,7 +65,6 @@ const Home = () => {
             </div>
           </Col>
           <Col md={5}>
-
             {/* top listings decks */}
             <h2 className="text-black mb-6">Today's Top Listing</h2>
             <div className="border border-black rounded-xl bg-[#376D5B] p-16 m-2 mb-4">
