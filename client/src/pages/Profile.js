@@ -1,11 +1,9 @@
-// import React from "react";
-import React  from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React from "react";
+import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 
 import likeButton from "./assets/pokeball-like.png";
-// import { SliderData } from "./assets/SliderData";
 import CircleImage from "./assets/profile-pic.webp";
 import ProfileInfo from "../components/ProfileInfo";
 import UpdateProfile from '../components/UpdateForm'
@@ -20,11 +18,25 @@ const Profile = () => {
     variables: { username: user_name },
   });
 
-  console.log(data)
+  if (loading) {
+    return (
+      <Container>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
 
-  const userId = data.user._id
-  const name=data.user.name
-  const bio = data.user.bio
+  if (error) {
+    console.log(error);
+    return <div>Error loading profile</div>;
+  }
+
+  const userId = data.user._id;
+  const name = data.user.name;
+  const bio = data.user.bio;
+
   
 
   console.log(user_name)

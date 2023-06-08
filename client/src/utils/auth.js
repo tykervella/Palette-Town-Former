@@ -28,18 +28,18 @@ class AuthService {
 
   getToken() {
     // Retrieves the user token from localStorage
-    return localStorage.getItem('id_token');
+    return sessionStorage.getItem('id_token');
   }
 
   login(idToken, userId, username) {
     // Saves user token, userId, and username to localStorage
-    localStorage.setItem('id_token', idToken);
+    sessionStorage.setItem('id_token', idToken);
     window.location.assign('/');
   }
 
   logout() {
     // Clear user token and profile data from localStorage
-    localStorage.removeItem('id_token');
+    sessionStorage.removeItem('id_token');
     sessionStorage.removeItem('cardName');
     sessionStorage.removeItem('cardType');
     sessionStorage.removeItem('cardSubtype');
