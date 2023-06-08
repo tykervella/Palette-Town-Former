@@ -4,19 +4,21 @@ const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
+    name: String!
     profileIMG: String
     email: String!
     password: String
-    decks: [Deck!]!
-    listings: [Listing!]!
-    posts: [Post!]!
+    decks: [Deck!]
+    listings: [Listing!]
+    posts: [Post!]
+    bio: String
 
   }
 
   type Deck {
     _id: ID!
     deckName: String
-    deckOwner: String
+    deckOwner: String!
     createdAt: String 
     cards: [Card!]
     published: Boolean!
@@ -115,7 +117,7 @@ const typeDefs = gql`
     ): Post
     removeDeck(deckId: ID!): Deck
     removeComment(deckId: ID!, commentId: ID!): Deck
-    removeCard(deckId: ID!, cardId: ID!): Deck
+    removeCard(deckId: ID!, cardId: String!): Deck
     addCardToDeckList(
       deckId: ID!, 
       cardId: String!

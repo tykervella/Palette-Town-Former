@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_TO_DECK } from "../../../utils/mutations";
+import { ADD_TO_DECK } from "../../utils/mutations";
 
 function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId }) {
   const [addToDeck] = useMutation(ADD_TO_DECK);

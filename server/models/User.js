@@ -8,6 +8,11 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
   },
+  name: {
+    type: String,
+    required: true,
+    maxlength: 30,
+},
   profileIMG: {
     type: String,
     trim: true,
@@ -41,6 +46,10 @@ const userSchema = new Schema({
       ref: 'Post',
     },
   ],
+  bio: {
+    type: String,
+    maxlength: 280,
+},
 });
 
 userSchema.pre('save', async function (next) {

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_CARD_QUANTITY } from "../../../utils/mutations";
+import { UPDATE_CARD_QUANTITY, REMOVE_CARD } from "../../utils/mutations";
 
 function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity }) {
   const [value, setValue] = useState(quantity);
 
   const [updateCardQuantity] = useMutation(UPDATE_CARD_QUANTITY);
+  const [removeCard] = useMutation(REMOVE_CARD);
 
   const handleIncrement = async () => {
     if (value < 4 || superType === "Energy") {
@@ -20,7 +21,6 @@ function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity 
           },
         });
         window.location.reload();
-
       } catch (error) {
         console.log("Failed to update card quantity:", error);
       }
@@ -31,19 +31,30 @@ function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity 
     const newValue = value - 1;
     setValue(newValue);
     try {
-      await updateCardQuantity({
-        variables: {
-          deckId,
-          cardId,
-          quantity: newValue,
-        },
-      });
-      window.location.reload();
+      if (newValue === 0) {
+        await removeCard({
+          variables: {
+            deckId: deckId,
+            cardId: cardId,
+          },
+        });
+        window.location.reload();
 
+      } else {
+        await updateCardQuantity({
+          variables: {
+            deckId: deckId,
+            cardId: cardId,
+            quantity: newValue,
+          },
+        });
+      }
+      window.location.reload();
     } catch (error) {
       console.log("Failed to update card quantity:", error);
     }
   };
+
 
   return (
     <div className="col-span-4 my-2 flex flex-col items-center">
