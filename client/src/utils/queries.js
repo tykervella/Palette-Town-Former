@@ -16,6 +16,34 @@ export const GET_DECK = gql`
 }
 `
 
+export const GET_USER = gql`
+query Query($username: String!) {
+  user(username: $username) {
+    decks {
+      _id
+      cards {
+        cardImage
+      }
+      deckName
+      published
+    }
+    email
+    posts {
+      _id
+      colors {
+        colorFive
+        colorFour
+        colorOne
+        colorThree
+        colorTwo
+      }
+      deckName
+    }
+    profileIMG
+    username
+  }
+}`
+
 export const QUERY_PRODUCTS = gql`
   query getProducts($category: ID) {
     products(category: $category) {

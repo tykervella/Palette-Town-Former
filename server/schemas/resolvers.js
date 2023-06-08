@@ -57,45 +57,45 @@ const resolvers = {
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId });
     },
-    getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
-      let filteredListings = await Listing.find();
+    // getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
+    //   let filteredListings = await Listing.find();
 
-      if (searchQuery) {
-        const searchRegex = new RegExp(searchQuery, 'i');
-        filteredListings = filteredListings.filter((listing) =>
-          listing.cardName.match(searchRegex)
-        );
-      }
+    //   if (searchQuery) {
+    //     const searchRegex = new RegExp(searchQuery, 'i');
+    //     filteredListings = filteredListings.filter((listing) =>
+    //       listing.cardName.match(searchRegex)
+    //     );
+    //   }
 
-      if (selectedTypes.length > 0) {
-        filteredListings = filteredListings.filter((listing) =>
-          selectedTypes.includes(listing.cardType)
-        );
-      }
+    //   if (selectedTypes.length > 0) {
+    //     filteredListings = filteredListings.filter((listing) =>
+    //       selectedTypes.includes(listing.cardType)
+    //     );
+    //   }
 
-      if (selectedColors.length > 0) {
-        filteredListings = filteredListings.filter((listing) =>
-          selectedColors.includes(listing.cardColor)
-        );
-      }
+    //   if (selectedColors.length > 0) {
+    //     filteredListings = filteredListings.filter((listing) =>
+    //       selectedColors.includes(listing.cardColor)
+    //     );
+    //   }
 
-      return filteredListings;
-    },
-    getSortedListings: async (_, { sortOption }) => {
-      let sortedListings = await Listing.find();
+    //   return filteredListings;
+    // },
+    // getSortedListings: async (_, { sortOption }) => {
+    //   let sortedListings = await Listing.find();
 
-      if (sortOption === 'nameAsc') {
-        sortedListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
-      } else if (sortOption === 'nameDesc') {
-        sortedListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
-      } else if (sortOption === 'priceAsc') {
-        sortedListings.sort((a, b) => a.price - b.price);
-      } else if (sortOption === 'priceDesc') {
-        sortedListings.sort((a, b) => b.price - a.price);
-      }
+    //   if (sortOption === 'nameAsc') {
+    //     sortedListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
+    //   } else if (sortOption === 'nameDesc') {
+    //     sortedListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
+    //   } else if (sortOption === 'priceAsc') {
+    //     sortedListings.sort((a, b) => a.price - b.price);
+    //   } else if (sortOption === 'priceDesc') {
+    //     sortedListings.sort((a, b) => b.price - a.price);
+    //   }
 
-      return sortedListings;
-    }
+    //   return sortedListings;
+    // }
   },
 
   Mutation: {

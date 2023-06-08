@@ -1,9 +1,12 @@
 // import React from "react";
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+
 import likeButton from "./assets/pokeball-like.png";
 // import { SliderData } from "./assets/SliderData";
 import CircleImage from "./assets/profile-pic.webp";
+
+import UpdateProfile from '../components/Profile/UpdateForm'
 
 const Profile = () => {
   const firstSectionData = [
@@ -77,39 +80,7 @@ const Profile = () => {
       <div className="border border-[black] rounded-lg p-4 mb-8 bg-[#AFD7CA]">
         <Row>
           <Col md={6} className="border-right border-black pr-4">
-            <Form className="text-black">
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  id="name"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  id="username"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  id="bio"
-                  rows={4}
-                  placeholder="Bio"
-                  value={bio}
-                  onChange={handleBioChange}
-                />
-                <p className="text-muted mt-2">{bio.length}/500</p>
-              </Form.Group>
-            </Form>
+            <UpdateProfile />
           </Col>
           <Col md={6} className="text-center">
             <div className="d-flex flex-column align-items-center">

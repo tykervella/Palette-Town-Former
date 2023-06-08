@@ -7,9 +7,9 @@ const typeDefs = gql`
     profileIMG: String
     email: String!
     password: String
-    decks: [Deck!]!
-    listings: [Listing!]!
-    posts: [Post!]!
+    decks: [Deck!]
+    listings: [Listing!]
+    posts: [Post!]
 
   }
 

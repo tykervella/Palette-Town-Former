@@ -7,7 +7,6 @@ import { Container } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import decode from 'jwt-decode';
 
 const CustomNavbar = () => {
   const logout = (event) => {
@@ -61,7 +60,7 @@ const CustomNavbar = () => {
             <Nav.Link className="text-white d-flex align-items-center me-4">
               {token && (
                 <>
-                  <span className="me-2">Signed in as:</span>
+                  
                   {/* {profileIMG && (
                     <div
                       className="profile-picture"
@@ -75,7 +74,10 @@ const CustomNavbar = () => {
                       }}
                     ></div>
                   )} */}
-                  <a className="text-white" href="/Profile">{username}</a>
+                  <span className="me-2">Signed in as:</span>
+                  <Link className="text-white"  to="/profile">
+                  {username}
+                  </Link>
                 </>
               )}
               {!token && (

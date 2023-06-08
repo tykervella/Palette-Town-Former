@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_CARD_QUANTITY } from "../../../utils/mutations";
+import { UPDATE_CARD_QUANTITY } from "../../utils/mutations";
 
 function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity }) {
   const [value, setValue] = useState(quantity);
