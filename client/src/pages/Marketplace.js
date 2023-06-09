@@ -40,31 +40,37 @@ function Marketplace() {
   };
 
   return (
-    <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
-      <div className="bg-white col-span-8 border-2 border-red-700 min-h-screen">
-        {loading ? (
-          <p>Loading listings...</p>
-        ) : (
-          list.map((listing) => (
-            <ProductList
-              id={listing._id}
-              cardId={listing.cardId}
-              image={listing.cardImage}
-              cardName={listing.cardName}
-              cardType={listing.cardType}
-              price={listing.price}
-            />
-          ))
-        )}
-      </div>
+    <Container className="">
+      <Row>
+       {/* left column */}
+        <Col md={7} className="bg-white border-2 border-red-700 min-h-screen">
+        <Row xs={1} sm={2} md={4} lg={4} className="g-4">
+          {loading ? (
+            <p>Loading listings...</p>
+          ) : (
+            list.map((listing) => (
+              <ProductList
+                id={listing._id}
+                cardId={listing.cardId}
+                images={listing.cardImage}
+                cardName={listing.cardName}
+                cardType={listing.cardType}
+                price={listing.price}
+              />
+            ))
+          )}
+          </Row>
+        </Col>
+        {/* right column */}
+        <Col md={5} className="bg-white border-2 border-red-700 min-h-screen">
+          <CategoryMenu
+            onSearch={handleSearch}
+            onSort={handleSort}
+          />
+        </Col>
 
-      <div className="bg-white col-span-4 ml-4 border-2 border-red-700 min-h-screen">
-        <CategoryMenu
-        onSearch={handleSearch}
-        onSort={handleSort}
-        />
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 
