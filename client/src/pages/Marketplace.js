@@ -21,7 +21,6 @@ function Marketplace() {
   const { loading, error, data } = useQuery(GET_LISTINGS);
 
   const list = data?.allListings || [];
-  console.log(data);
   if (loading) {
     return <div>Loading...</div>
   };
@@ -50,8 +49,8 @@ function Marketplace() {
           ) : (
             list.map((listing) => (
               <ProductList
+                key={listing._id}
                 id={listing._id}
-                cardId={listing.cardId}
                 images={listing.cardImage}
                 cardName={listing.cardName}
                 cardType={listing.cardType}
