@@ -14,14 +14,14 @@ const Home = () => {
     <div className="">
       <Container>
         {/* start of dark mode toggle button */}
-        <div class="toggle">
+        {/* <div class="toggle">
           <input type="checkbox" id="toggle" className="hidden" />
           <label for="toggle"></label>
-        </div>
+        </div> */}
 
         {/* banner */}
         <Row>
-          <Col className="banner-section border border-black rounded-xl p-16 m-2 bg-[#AFD7CA]">
+          <Col className="banner-section shadow-lg rounded-xl p-20 m-2 bg-[#AFD7CA]">
             <Row className="text-center"></Row>
 
             <Row className="float-right">

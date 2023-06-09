@@ -59,7 +59,7 @@ function Marketplace() {
           </Row>
         </Col>
         {/* right column */}
-        <Col md={4} className="bg-white">
+        <Col className="">
           <CategoryMenu onSearch={handleSearch} onSort={handleSort} />
         </Col>
       </Row>

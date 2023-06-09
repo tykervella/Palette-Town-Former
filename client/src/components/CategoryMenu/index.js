@@ -1,4 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import { FiRefreshCcw } from 'react-icons/fi';
+
+// refresh icon spin effect
+const handleRefreshHover = (event) => {
+    event.currentTarget.querySelector('.refresh-icon').classList.toggle('spin');
+};
 
 const CategoryMenu = ({ onSearch, onSort }) => {
     const [cardName, setCardName] = useState('');
@@ -68,31 +78,39 @@ const CategoryMenu = ({ onSearch, onSort }) => {
     };
 
     return (
-        <div className="grid grid-cols-12 mt-3">
+        <Container className="bg-[#0B3C49] rounded-3xl shadow-xl">
             {/* Search Bar */}
-            <div className="search-container col-span-12 w-full">
+            <div className="search-container flex items-center">
                 <input
                     id="searchbar"
-                    className="rounded"
+                    className="m-4 bg-transparent border-b-2 w-full border-[#376D5B] text-white focus:outline-none resize-none"
                     placeholder="Search for cards..."
                     name="cardName"
                     value={cardName}
                     onChange={handleInputChange}
                 />
-                <button className="btn text-xs" id="searchbtn" onClick={handleSearchClick}>
+                <button className="bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 rounded-lg" id="searchbtn" onClick={handleSearchClick}>
                     Search
                 </button>
             </div>
 
+
             {/* Refresh Button */}
             <div className="col-span-12 flex justify-end">
-                <button className="btn text-xs" onClick={handleRefresh}>
+                <button
+                    className="bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 rounded-lg flex items-center"
+                    onClick={handleRefresh}
+                    onMouseEnter={handleRefreshHover}
+                    onMouseLeave={handleRefreshHover}>
+                    <FiRefreshCcw className="mr-2 refresh-icon" />
                     Reset Filters
                 </button>
             </div>
 
+
             {/* Select Type checkboxes */}
-            <div className="col-span-12 w-full">
+            <div className="text-white">
+
                 <div>
                     <label>
                         <input
@@ -100,10 +118,12 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             value="pokemon"
                             checked={selectedTypes.includes('pokemon')}
                             onChange={handleTypeChange}
+                            className='mr-2'
                         />
                         Pokemon
                     </label>
                 </div>
+
                 <div>
                     <label>
                         <input
@@ -115,6 +135,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                         Trainer
                     </label>
                 </div>
+
                 <div>
                     <label>
                         <input
@@ -126,11 +147,13 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                         Energy
                     </label>
                 </div>
+
             </div>
 
             {/* Select Color checkboxes */}
             {selectedTypes.includes('pokemon') && (
                 <div className="col-span-12 w-full">
+
                     <div>
                         <label>
                             <input
@@ -142,6 +165,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Colorless
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -153,6 +177,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Darkness
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -164,6 +189,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Dragon
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -175,6 +201,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Fairy
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -186,6 +213,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Fighting
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -197,6 +225,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Fire
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -208,6 +237,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Grass
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -219,6 +249,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Lightning
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -230,6 +261,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Metal
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -241,6 +273,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Psychic
                         </label>
                     </div>
+
                     <div>
                         <label>
                             <input
@@ -252,10 +285,11 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                             Water
                         </label>
                     </div>
+
                 </div>
             )}
             {/* Sort options */}
-            <div className="col-span-12 w-full">
+            <div className="">
                 <select value={sortOption} onChange={handleSortChange}>
                     <option value="">Sort by...</option>
                     <option value="nameAsc">Name (A-Z)</option>
@@ -264,7 +298,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
                     <option value="priceDesc">Price (High to Low)</option>
                 </select>
             </div>
-        </div>
+        </Container>
     )
 };
 
