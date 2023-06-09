@@ -26,7 +26,6 @@ query Query($username: String!) {
         cardImage
       }
       deckName
-      published
     }
     email
     posts {

@@ -2,13 +2,8 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useMutation } from '@apollo/client';
 
-import { UPDATE_DECK_NAME, ADD_POST } from '../../utils/mutations';
-
+import { UPDATE_DECK_NAME  } from '../../utils/mutations';
 import { useParams, useNavigate } from 'react-router-dom';
-
-
-
-
 
 
 function BuilderInfo({ deckId, deckName, quantity }) {
