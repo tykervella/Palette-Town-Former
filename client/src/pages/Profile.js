@@ -18,6 +18,8 @@ const Profile = () => {
     variables: { username: user_name },
   });
 
+  console.log(data)
+
   if (loading) {
     return (
       <Container>
