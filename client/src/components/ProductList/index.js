@@ -9,32 +9,33 @@ const ProductList = (props) => {
 
   return (
     <Col className='rounded-xl bg-white shadow-lg p-2'>
-      <Link to={`/listing/${props.id}`}>
-        {/* card name/title */}
-        <h3 className='text-lg text-center overflow-hidden whitespace-nowrap text-truncate'>{props.cardName}</h3>
 
-        {/* primary card image */}
-        <div className='card-image text-center relative'>
-          <img src={props.images} alt={props.cardName} className='w-full hover:scale-150' />
-        </div>
-        {/* card type */}
-        {/* <p className='text-center'>Card Type: {props.cardTypes}</p> */}
+      {/* card name/title */}
+      <h1 className='text-lg text-center text-truncate text-decoration-none'>{props.cardName}</h1>
 
-        {/* card details */}
-        <div className='card-details'>
-          <Row>
-            <Col>
-              {/* card price */}
-              <p>Price: ${props.price}</p>
-            </Col>
-            <Col>
-              {/* go to listing button */}
-              <button className='bg-gray-400 rounded-xl' style={{ position: 'relative', zIndex: 1 }}>Go To Listing</button>
-            </Col>
-          </Row>
-          <p>Seller: {props.seller}</p>
-        </div>
-      </Link>
+      {/* primary card image */}
+      <div className='card-image text-center relative'>
+        <img src={props.images} alt={props.cardName} className='w-full hover:scale-150 mt-4' />
+      </div>
+      {/* card type */}
+      {/* <p className='text-center'>Card Type: {props.cardTypes}</p> */}
+
+      {/* card details */}
+      <div className='card-details'>
+        <Row>
+          <Col>
+            {/* card price */}
+            <p className='mt-5'>Price: ${props.price}</p>
+          </Col>
+          <Col>
+            {/* go to listing button */}
+            <button className='bg-gray-400 rounded-xl p-2 mt-5'>
+              <Link to={`/listing/${props.id}`} className='text-decoration-none text-white'>Listing </Link></button>
+          </Col>
+        </Row>
+        <p>Seller: {props.seller}</p>
+      </div>
+
     </Col>
   );
 };

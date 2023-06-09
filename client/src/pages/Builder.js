@@ -10,6 +10,10 @@ import SearchCards from '../components/SearchCards';
 import BuilderInfo from "../components/BuilderInfo"
 import DeckElement from '../components/DeckElement';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 function DeckBuilder() {
   const { _id } = useParams();
   const [cards, setCards] = useState([]);
@@ -136,13 +140,14 @@ function DeckBuilder() {
       </div>
 
       {/* Right Side. WIP Deck Element */}
-      <div className="col-span-4 ml-4 border-2 border-red-700 min-h-screen">
+      <Container className="col-span-4 ml-4 border-2 border-red-700 min-h-screen">
         < BuilderInfo 
             deckId = {_id}
             deckName={deckName}
             quantity={totalQuantity}
         />
 
+        {/* right side of page section */}
         <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
           {/* Render the decklist */}
           {decklist.map((card) => (
@@ -170,7 +175,7 @@ function DeckBuilder() {
             />
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }
