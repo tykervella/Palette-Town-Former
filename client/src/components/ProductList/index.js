@@ -19,7 +19,7 @@ const ProductList = (props) => {
             <img src={props.images} alt={props.cardName} />
           </div>
           {/* card type */}
-          <p className='text-center'>Card Type: {props.cardTypes}</p>
+          <p className='text-center'>Card Type: {props.cardType}</p>
 
           {/* card details */}
           <div className='card-details'>

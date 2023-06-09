@@ -35,14 +35,38 @@ const resolvers = {
       const params = username ? { seller: username } : {};
       return Listing.find(params).sort({ createdAt: -1 });
     },
-    listing: async (_, { searchQuery, selectedTypes, selectedColors, sortOption }) => {
-      let filteredListings = await getFilteredListings(
-        _,
-        { searchQuery, selectedTypes, selectedColors }
-      );
+    listing: async (_, { searchQuery, input: { selectedTypes, selectedColors, sortOption } }) => {
+      let filteredListings = await Listing.find();
+        
+      if (searchQuery) {
+        const searchRegex = new RegExp(searchQuery, 'i');
+        filteredListings = filteredListings.filter((listing) =>
+          listing.cardName.match(searchRegex)
+        );
+      }
+
+      if (selectedTypes.length > 0) {
+        filteredListings = filteredListings.filter((listing) =>
+          selectedTypes.includes(listing.cardType)
+        );
+      }
+
+      if (selectedColors.length > 0) {
+        filteredListings = filteredListings.filter((listing) =>
+          selectedColors.includes(listing.cardColor)
+        );
+      }
 
       if (sortOption) {
-        return getSortedListings(_, { sortOption });
+        if (sortOption === 'nameAsc') {
+          filteredListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
+        } else if (sortOption === 'nameDesc') {
+          filteredListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
+        } else if (sortOption === 'priceAsc') {
+          filteredListings.sort((a, b) => a.price - b.price);
+        } else if (sortOption === 'priceDesc') {
+          filteredListings.sort((a, b) => b.price - a.price);
+        }
       }
 
       return filteredListings;
@@ -56,46 +80,7 @@ const resolvers = {
     },
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId });
-    },
-    // getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
-    //   let filteredListings = await Listing.find();
-
-    //   if (searchQuery) {
-    //     const searchRegex = new RegExp(searchQuery, 'i');
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       listing.cardName.match(searchRegex)
-    //     );
-    //   }
-
-    //   if (selectedTypes.length > 0) {
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       selectedTypes.includes(listing.cardType)
-    //     );
-    //   }
-
-    //   if (selectedColors.length > 0) {
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       selectedColors.includes(listing.cardColor)
-    //     );
-    //   }
-
-    //   return filteredListings;
-    // },
-    // getSortedListings: async (_, { sortOption }) => {
-    //   let sortedListings = await Listing.find();
-
-    //   if (sortOption === 'nameAsc') {
-    //     sortedListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
-    //   } else if (sortOption === 'nameDesc') {
-    //     sortedListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
-    //   } else if (sortOption === 'priceAsc') {
-    //     sortedListings.sort((a, b) => a.price - b.price);
-    //   } else if (sortOption === 'priceDesc') {
-    //     sortedListings.sort((a, b) => b.price - a.price);
-    //   }
-
-    //   return sortedListings;
-    // }
+    }
   },
 
   Mutation: {
