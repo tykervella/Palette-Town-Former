@@ -18,6 +18,7 @@ import Profile from './pages/Profile'
 import Contact from './pages/Contact';
 import CreateDeck from './pages/CreateDeck'
 import CreatePost from './pages/CreatePost'
+import MarketItem from './pages/MarketItem';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -63,6 +64,7 @@ function App() {
             <Route path="/publish/:_id" element={<CreatePost />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/listing/:id" element={<MarketItem />} />
             <Route path="/create" element={<CreateDeck />}
             />
               <Route

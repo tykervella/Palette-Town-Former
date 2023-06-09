@@ -44,7 +44,7 @@ const Signup = () => {
   };
 
   return (
-    <Container>
+    <Container className='mb-5'>
       <Row>
 
         {/* left column */}
@@ -57,9 +57,9 @@ const Signup = () => {
         </Col>
 
         {/* right column */}
-        <Col md={5} className='bg-white rounded-3xl shadow-xl'>
-          <h1 className='pt-10 text-center'>Palette Town</h1>
-          <h2 className='pt-20 text-center text-gray-400'>Where Hexcodes Choose YOU!</h2>
+        <Col md={5} className='bg-[#0B3C49]  rounded-3xl shadow-xl'>
+          <h1 className='text-white pt-10 text-center'>Palette Town</h1>
+          <h2 className='text-white pt-20 text-center'>Where Hexcodes Choose YOU!</h2>
           {data ? (
             <p>
               Success! You may now head{' '}
@@ -71,9 +71,9 @@ const Signup = () => {
             <div className='d-flex justify-content-center align-items-center justify-content-center'>
               <form onSubmit={handleFormSubmit}>
                 <div className='mb-3 pt-20'>
-                  <p className='text-gray-400 text-xs'>New Username</p>
+                  <p className='text-white  text-xs'>New Username</p>
                   <input
-                    className="form-input bg-transparent border-b-2 w-80"
+                    className="form-input bg-transparent border-b-2 border-[#376D5B] w-full text-white focus:outline-none resize-none"
                     placeholder="Your username"
                     name="username"
                     type="text"
@@ -83,10 +83,10 @@ const Signup = () => {
                 </div>
 
                 <div className='mb-3'>
-                  <p className='text-gray-400 text-xs'>User Email</p>
+                  <p className='text-white text-xs'>User Email</p>
                   <input
-                    className="form-input bg-transparent border-b-2 w-80"
-                    placeholder="Your email"
+                    className="form-input bg-transparent border-b-2 border-[#376D5B] w-full text-white focus:outline-none resize-none"
+                    placeholder="example@example.com"
                     name="email"
                     type="email"
                     value={formState.email}
@@ -95,9 +95,9 @@ const Signup = () => {
                 </div>
 
                 <div className='mb-3'>
-                  <p className='text-gray-400 text-xs'>Password</p>
+                  <p className='text-white text-xs'>Password</p>
                   <input
-                    className="form-input bg-transparent border-b-2 w-80"
+                    className="form-input bg-transparent border-b-2 border-[#376D5B] w-80 text-white focus:outline-none resize-none"
                     placeholder="******"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
@@ -111,17 +111,19 @@ const Signup = () => {
                     onChange={toggleShowPassword}
                     className="hidden"
                   />
-                  <label htmlFor="showPassword" className="icon-label text-xl" style={{ cursor: 'pointer' }}>
+                  <label htmlFor="showPassword" className="icon-label text-xl text-white " style={{ cursor: 'pointer' }}>
                     {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                   </label>
                 </div>
 
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit">
-                  Sign Up
-                </button>
+                <div className='flex justify-center'>
+                  <button
+                    className="btn-block bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 rounded-lg"
+                    style={{ cursor: 'pointer' }}
+                    type="submit">
+                    Sign Up
+                  </button>
+                </div>
 
               </form>
             </div>
