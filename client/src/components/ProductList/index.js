@@ -18,7 +18,7 @@ const ProductList = (props) => {
         <img src={props.images} alt={props.cardName} className='w-full hover:scale-150 mt-4' />
       </div>
       {/* card type */}
-      {/* <p className='text-center'>Card Type: {props.cardTypes}</p> */}
+      <p className='text-center'>Card Type: {props.cardTypes}</p>
 
       {/* card details */}
       <div className='card-details'>

@@ -14,7 +14,7 @@ const CategoryMenu = ({ onSearch, onSort }) => {
     }, []);
 
     const handleSearchClick = () => {
-        onSearch(cardName, selectedTypes, [], selectedColors);
+        onSearch(cardName, selectedTypes, selectedColors);
     };
 
     const handleInputChange = (event) => {

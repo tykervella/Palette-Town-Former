@@ -43,5 +43,14 @@
     "superType": "Trainer",
     "price": 5.99,
     "seller": "user5"
+  },
+  {
+    "cardId": "pop5-7",
+    "cardImage": "https://images.pokemontcg.io/pop5/7.png",
+    "cardName": "Rare Candy",
+    "cardType": "other",
+    "superType": "Trainer",
+    "price": 6.99,
+    "seller": "user6"
   }
 ]

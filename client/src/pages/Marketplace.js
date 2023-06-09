@@ -18,6 +18,10 @@ function Marketplace() {
 
   const list = data?.allListings || [];
 
+  if (loading) {
+    return <div>Loading...</div>
+  };
+
   const handleSearch = (query) => {
     setSearchQuery(query);
   };

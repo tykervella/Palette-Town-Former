@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Cart from '../components/Cart';
+import axios from 'axios';
 
 const stripePromise = loadStripe('pk_test_51NF2M3EAK05WJdkzfJ4xgfLTmi7c6bjbIxRh07crt6UXgwdhMSqfA7ixKMt18vdst7ZZQsd3Z1IsVlvGTHESiQLp00zrpgghKO');
 
@@ -15,7 +16,7 @@ const MarketItem = () => {
     const fetchItem = async () => {
       try {
         const itemData = await axios.get(`https://api.pokemontcg.io/v2/cards/${id}`);
-        const item = await itemData.json();
+        const item = itemData.data;
         setItem(item);
       } catch (error) {
         console.error('Error fetching item:', error);
@@ -53,7 +54,7 @@ const MarketItem = () => {
       <img src={item.images.small} alt={item.name} />
       <h2>{item.name}</h2>
       <p>Rarity: {item.rarity}</p>
-      <p>Description: {item.description}</p>
+      <p>Description: {item.flavorText}</p>
       <p>Price: ${item.price}</p>
       <p>Seller: {item.seller}</p>
 
