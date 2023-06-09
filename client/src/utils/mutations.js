@@ -30,15 +30,24 @@ export const ADD_ORDER = gql`
 `;
 
 export const ADD_POST = gql`
-  mutation AddPost(
-    $deckOwner: String!
+  mutation Mutation(
+    $deckOwner: String! 
     $deckName: String!
-  ) {
-  addPost(
-    deckOwner: $deckOwner
-    deckName: $deckName
-  ) {
+    $color1: String!
+    $color2: String!
+    $color3: String!
+    $color4: String!
+    $color5: String!
+    $postText: String) {
+  addPost(deckOwner: $deckOwner, deckName: $deckName, color1: $color1, color2: $color2, color3: $color3, color4: $color4, color5: $color5, postText: $postText) {
     _id
+    color1
+    color2
+    color3
+    color4
+    color5
+    deckName
+    deckOwner
   }
 }`
 

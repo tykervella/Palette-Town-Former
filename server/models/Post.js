@@ -22,30 +22,6 @@ const commentSchema = new Schema ({
 
 })
 
-const paletteSchema = new Schema ({
-
-    colorOne: {
-        type: String,
-        trim: true,
-    },
-    colorTwo: {
-        type: String,
-        trim: true,
-    },
-    colorThree: {
-        type: String,
-        trim: true,
-    },
-    colorFour: {
-        type: String,
-        trim: true,
-    },
-    colorFive: {
-        type: String,
-        trim: true,
-    }
-})
-
 
 const postSchema = new Schema({
     deckOwner: {
@@ -69,7 +45,31 @@ const postSchema = new Schema({
         get: (timestamp) => dateFormat(timestamp),
     },
     comments: [commentSchema],
-    colors: [paletteSchema]
+    color1: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    color2: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    color3: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    color4: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    color5: {
+        type: String,
+        trim: true,
+        required: true,
+    }
 });
 
 // Virtual for comment count

@@ -18,32 +18,32 @@ export const GET_DECK = gql`
 `
 
 export const GET_USER = gql`
-query Query($username: String!) {
+query User($username: String!) {
   user(username: $username) {
-    decks {
+    posts {
+      color1
+      color2
+      color3
+      color4
+      color5
+      deckName
       _id
+    }
+    bio
+    name
+    username
+    decks {
+      deckName
       cards {
         cardImage
       }
-      deckName
     }
-    email
-    posts {
+    listings {
       _id
-      colors {
-        colorFive
-        colorFour
-        colorOne
-        colorThree
-        colorTwo
-      }
-      deckName
+      cardImage
+      cardName
+      price
     }
-    profileIMG
-    username
-    name 
-    bio
-
   }
 }`
 

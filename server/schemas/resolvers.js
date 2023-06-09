@@ -18,12 +18,14 @@ const resolvers = {
   },
 
   Query: {
-    users: async () => {
-      return User.find().populate('decks');
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('decks');
-    },
+    
+      users: async () => {
+        return User.find().populate('decks').populate('listings').populate('posts');
+      },
+      user: async (parent, { username }) => {
+        return User.findOne({ username }).populate('decks').populate('listings').populate('posts');
+      },
+   
     decks: async (parent, { username }) => {
       const params = username ? { deckOwner: username } : {};
       return Deck.find(params).sort({ createdAt: -1 });
@@ -52,11 +54,13 @@ const resolvers = {
     },
     posts: async (parent, { username }) => {
       const params = username ? { deckOwner: username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 }).exec();
     },
+    
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId });
+      return Post.findOne({ _id: postId }).exec();
     },
+    
     // getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
     //   let filteredListings = await Listing.find();
 
@@ -150,20 +154,26 @@ const resolvers = {
 
       return newListing;
     },
-    addPost: async (parent, { deckOwner, deckName, postText }) => {
+    addPost: async (parent, { deckOwner, deckName, postText, color1, color2, color3, color4, color5 }) => {
       const newPost = await Post.create({
         deckOwner: deckOwner,
         deckName: deckName,
-        postText: postText
+        postText: postText,
+        color1: color1,
+        color2: color2,
+        color3: color3,
+        color4: color4,
+        color5: color5
       });
-
+    
       await User.findOneAndUpdate(
         { username: deckOwner },
         { $addToSet: { posts: newPost._id } }
       );
-
+    
       return newPost;
     },
+    
     addComment: async (parent, { deckId, commentInput }) => {
       const comment = {
         commentText: commentInput.commentText,

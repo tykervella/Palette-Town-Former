@@ -38,6 +38,7 @@ const deckSchema = new Schema({
     maxlength: 30,
     required: true,
     trim: true,
+    unique: true,
   },
   deckOwner: {
     type: String,
