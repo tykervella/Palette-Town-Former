@@ -117,9 +117,6 @@ const typeDefs = gql`
       deckName: String!
       postText: String
     ): Post
-    removeDeck(deckId: ID!): Deck
-    removeComment(deckId: ID!, commentId: ID!): Deck
-    removeCard(deckId: ID!, cardId: String!): Deck
     addCardToDeckList(
       deckId: ID!, 
       cardId: String!
@@ -128,10 +125,19 @@ const typeDefs = gql`
       cardType: String!
       superType: String!
     ): Deck
+    
+    removeDeck(deckId: ID!): Deck
+    removeComment(deckId: ID!, commentId: ID!): Deck
+    removeCard(deckId: ID!, cardId: String!): Deck
+    
     updateCardQuantity(
       deckId: ID! 
       cardId: ID! 
       quantity: Int!
+    ): Deck
+    updateDeckName(
+      deckId: ID! 
+      deckName: String!
     ): Deck
   
     }

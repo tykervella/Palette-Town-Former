@@ -240,6 +240,21 @@ const resolvers = {
 
       return deck;
     },
+
+    updateDeckName: async (parent, { deckId, deckName }) => {
+      const deck = await findDeckById(deckId);
+      if (!deck) {
+        throw new Error('Deck not found');
+      }
+
+      deck.deckName = deckName; // Update the deck name
+
+      // Save the updated deck in the database
+      await deck.save();
+
+  
+      return deck;
+    },
   },
 };
 
