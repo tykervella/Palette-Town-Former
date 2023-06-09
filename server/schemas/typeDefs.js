@@ -41,15 +41,6 @@ const typeDefs = gql`
     createdAt: String!
   }
 
-  type Palette {
-    _id: ID!
-    colorOne: String! 
-    colorTwo: String!
-    colorThree: String!
-    colorFour: String! 
-    colorFive: String! 
-  }
-
   type Post {
     _id: ID!
     deckOwner: String!
@@ -57,7 +48,11 @@ const typeDefs = gql`
     postText: String
     createdAt: String
     comments: [Comment!]
-    colors: [Palette!]
+    color1: String!
+    color2: String!
+    color3: String!
+    color4: String!
+    color5: String!
     commentCount: Int!
   }
 
@@ -118,6 +113,11 @@ const typeDefs = gql`
       deckOwner: String!
       deckName: String!
       postText: String
+      color1: String!
+      color2: String!
+      color3: String!
+      color4: String!
+      color5: String!
     ): Post
     addCardToDeckList(
       deckId: ID!, 
@@ -143,6 +143,7 @@ const typeDefs = gql`
     ): Deck
   
     }
+
 
 `;
 

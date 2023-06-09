@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, Deck, Listing } = require('../models');
+const { User, Deck, Listing, Post } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const deckSeeds = require('./deckSeeds.json');
 const listingSeeds = require('./listingSeeds.json');
@@ -8,6 +8,7 @@ db.once('open', async () => {
   try {
     await Deck.deleteMany({});
     await User.deleteMany({});
+    await Post.deleteMany({})
     await Listing.deleteMany({})
 
     await User.create(userSeeds);
