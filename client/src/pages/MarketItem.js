@@ -1,57 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import Cart from '../components/Cart';
-import axios from 'axios';
+// import React, { useState, useEffect } from 'react';
+// import { useParams } from 'react-router-dom';
+// import { Elements } from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
+// import Cart from '../components/Cart';
+// import axios from 'axios';
 
-const stripePromise = loadStripe('pk_test_51NF2M3EAK05WJdkzfJ4xgfLTmi7c6bjbIxRh07crt6UXgwdhMSqfA7ixKMt18vdst7ZZQsd3Z1IsVlvGTHESiQLp00zrpgghKO');
+// const stripePromise = loadStripe('pk_test_51NF2M3EAK05WJdkzfJ4xgfLTmi7c6bjbIxRh07crt6UXgwdhMSqfA7ixKMt18vdst7ZZQsd3Z1IsVlvGTHESiQLp00zrpgghKO');
 
 const MarketItem = () => {
 
-  const { id } = useParams();
-  const [item, setItem] = useState(null);
+  // const { id } = useParams();
+  // const [item, setItem] = useState(null);
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const itemData = await axios.get(`https://api.pokemontcg.io/v2/cards/${id}`);
-        const item = itemData.data;
-        setItem(item);
-      } catch (error) {
-        console.error('Error fetching item:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchItem = async () => {
+  //     try {
+  //       const itemData = await axios.get(`https://api.pokemontcg.io/v2/cards/${id}`);
+  //       const item = itemData.data;
+  //       setItem(item);
+  //     } catch (error) {
+  //       console.error('Error fetching item:', error);
+  //     }
+  //   };
 
-    fetchItem();
-  }, [id]);
+  //   fetchItem();
+  // }, [id]);
 
-  const handlePurchase = async () => {
+  // const handlePurchase = async () => {
 
-    try {
-      const response = await axios.post('/api/payment/simulate-payment', {
-        itemId: item.id,
-        price: item.price,
-        paymentMethod: 'stripe',
-      });
+  //   try {
+  //     const response = await axios.post('/api/payment/simulate-payment', {
+  //       itemId: item.id,
+  //       price: item.price,
+  //       paymentMethod: 'stripe',
+  //     });
 
-      if (response.data.success) {
-        console.log('Payment succeeded:', response.data.paymentIntent);
-      } else {
-        console.error('Payment failed:', response.data.error);
-      }
-    } catch (error) {
-      console.error('Error processing payment:', error);
-    }
-  };
+  //     if (response.data.success) {
+  //       console.log('Payment succeeded:', response.data.paymentIntent);
+  //     } else {
+  //       console.error('Payment failed:', response.data.error);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error processing payment:', error);
+  //   }
+  // };
 
-  if (!item) {
-    return <div>Loading...</div>;
-  }
+  // if (!item) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div className="market-item">
-      <img src={item.images.small} alt={item.name} />
+      {/* <img src={item.images.small} alt={item.name} />
       <h2>{item.name}</h2>
       <p>Rarity: {item.rarity}</p>
       <p>Description: {item.flavorText}</p>
@@ -60,7 +60,7 @@ const MarketItem = () => {
 
       <Elements stripe={stripePromise}>
         <Cart item={item} handlePurchase={handlePurchase} />
-      </Elements>
+      </Elements> */}
     </div>
   );
 };
