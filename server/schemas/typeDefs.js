@@ -89,8 +89,8 @@ const typeDefs = gql`
     allListings: [Listing]
     posts(username: String!): [Post]
     post(postId: ID!): Post
-    filteredListings(searchQuery: String, selectedTypes: [String!], selectedColors: [String!]): [Listing]
-    sortedListings(sortOption: String): [Listing]
+    # filteredListings(searchQuery: String, selectedTypes: [String!], selectedColors: [String!]): [Listing]
+    # sortedListings(sortOption: String): [Listing]
   }
 
   type Mutation {
