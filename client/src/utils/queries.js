@@ -131,3 +131,35 @@ export const GET_LISTINGS = gql`
   }
 }
 `;
+
+export const GET_FILTERED_LISTINGS = gql`
+  query getFilteredListings($searchQuery: String, $selectedTypes: [String!], $selectedColors: [String!]) {
+    filteredListings(searchQuery: $searchQuery, selectedTypes: $selectedTypes, selectedColors: $selectedColors) {
+      _id
+      cardId
+      cardName
+      cardImage
+      cardType
+      superType
+      price
+      seller
+      createdAt
+    }
+  }
+`;
+
+export const GET_SORTED_LISTINGS = gql`
+  query getSortedListings($sortOption: String) {
+    sortedListings(sortOption: $sortOption) {
+      _id
+      cardId
+      cardName
+      cardImage
+      cardType
+      superType
+      price
+      seller
+      createdAt
+    }
+  }
+`;
