@@ -39,9 +39,6 @@
     font-size: 20px;
   }
 
-  /* main button styling */
-
-
   .toggle label {
     background-color: #777;
     border: 2px solid #555;
@@ -79,10 +76,9 @@
   }
   
 .banner-section {
-  background-image: url('./pages/assets/banner-test.jpg') ;
+  background-image: url('./assets/banner-trial.jpg') ;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
 }
 
 .loginLogo {
@@ -92,3 +88,39 @@
   height: 50vh;
 }
 
+/* refresh icon on marketplace */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.refresh-icon.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* input effects  */
+
+input[type='checkbox']:checked:after {
+  content: '\2713';
+  color: var(--primary-color);
+}
+
+input[type='checkbox']{
+  border: white 1px solid;
+  text-align: center;
+  vertical-align: middle;
+  width: 20px !important;
+  height: 20px !important;
+  appearance:none;
+  border-radius:10%;
+  box-shadow: none;
+  font-size: 1em;
+}
+
+input[type='checkbox']:hover {
+  cursor: pointer;
+}

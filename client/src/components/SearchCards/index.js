@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 const SearchCards = ({ onSearch }) => {
   const [cardName, setCardName] = useState('');
   const [cardType, setCardType] = useState('0');
@@ -60,7 +64,7 @@ const SearchCards = ({ onSearch }) => {
   };
 
   return (
-    <div className="grid grid-cols-12 mt-3">
+    <Container className="grid grid-cols-12 mt-3">
       {/* Search Bar + Filters */}
       <div className="search-container col-span-6 w-full">
         <input
@@ -173,7 +177,7 @@ const SearchCards = ({ onSearch }) => {
           Reset Filters
         </button>
       </div>
-    </div>
+    </Container>
   );
 };
 

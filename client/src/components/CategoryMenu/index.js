@@ -1,4 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import { FiRefreshCcw } from 'react-icons/fi';
+
+// refresh icon spin effect
+const handleRefreshHover = (event) => {
+    event.currentTarget.querySelector('.refresh-icon').classList.toggle('spin');
+};
 
 const CategoryMenu = ({ onSearch, onSort }) => {
     const [cardName, setCardName] = useState('');
@@ -68,203 +78,247 @@ const CategoryMenu = ({ onSearch, onSort }) => {
     };
 
     return (
-        <div className="grid grid-cols-12 mt-3">
+        <Container className="bg-[#0B3C49] rounded-3xl shadow-xl">
             {/* Search Bar */}
-            <div className="search-container col-span-12 w-full">
-                <input
-                    id="searchbar"
-                    className="rounded"
-                    placeholder="Search for cards..."
-                    name="cardName"
-                    value={cardName}
-                    onChange={handleInputChange}
-                />
-                <button className="btn text-xs" id="searchbtn" onClick={handleSearchClick}>
-                    Search
-                </button>
-            </div>
+            <Row>
+                <Col className="search-container flex items-center">
+                    <input
+                        id="searchbar"
+                        className="m-4 bg-transparent border-b-2 w-full border-[#376D5B] text-white focus:outline-none resize-none"
+                        placeholder="Search for cards..."
+                        name="cardName"
+                        value={cardName}
+                        onChange={handleInputChange}
+                    />
+                    <button className="bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 rounded-lg" id="searchbtn" onClick={handleSearchClick}>
+                        Search
+                    </button>
+                </Col>
+            </Row>
+
+            {/* start of middle row */}
+            <Row>
+                {/* left column */}
+                {/* Select Type checkboxes */}
+                <Col className="text-white">
+
+                    <div>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="pokemon"
+                                checked={selectedTypes.includes('pokemon')}
+                                onChange={handleTypeChange}
+                                className='mr-2'
+                            />
+                            Pokemon
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="trainer"
+                                checked={selectedTypes.includes('trainer')}
+                                onChange={handleTypeChange}
+                                className='mr-2'
+                            />
+                            Trainer
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="energy"
+                                checked={selectedTypes.includes('energy')}
+                                onChange={handleTypeChange}
+                                className='mr-2'
+                            />
+                            Energy
+                        </label>
+                    </div>
+
+                    {/* Select Color checkboxes */}
+                    {selectedTypes.includes('pokemon') && (
+                        <div className="col-span-12 w-full">
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Colorless"
+                                        checked={selectedColors.includes('Colorless')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Colorless
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Darkness"
+                                        checked={selectedColors.includes('Darkness')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Darkness
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Dragon"
+                                        checked={selectedColors.includes('Dragon')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Dragon
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Fairy"
+                                        checked={selectedColors.includes('Fairy')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Fairy
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Fighting"
+                                        checked={selectedColors.includes('Fighting')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Fighting
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Fire"
+                                        checked={selectedColors.includes('Fire')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Fire
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Grass"
+                                        checked={selectedColors.includes('Grass')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Grass
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Lightning"
+                                        checked={selectedColors.includes('Lightning')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Lightning
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Metal"
+                                        checked={selectedColors.includes('Metal')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Metal
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Psychic"
+                                        checked={selectedColors.includes('Psychic')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Psychic
+                                </label>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="Water"
+                                        checked={selectedColors.includes('Water')}
+                                        onChange={handleColorChange}
+                                        className='mr-2'
+                                    />
+                                    Water
+                                </label>
+                            </div>
+                        </div>
+                    )}
+                </Col>
+                
+                {/* right column */}
+                <Col>
+                    {/* Sort options */}
+                    <select value={sortOption} onChange={handleSortChange} className='rounded-lg p-1 mt-2'>
+                        <option value="">Sort by...</option>
+                        <option value="nameAsc">Name (A-Z)</option>
+                        <option value="nameDesc">Name (Z-A)</option>
+                        <option value="priceAsc">Price (Low to High)</option>
+                        <option value="priceDesc">Price (High to Low)</option>
+                    </select>
+                </Col>
+
+            </Row>
 
             {/* Refresh Button */}
-            <div className="col-span-12 flex justify-end">
-                <button className="btn text-xs" onClick={handleRefresh}>
-                    Reset Filters
-                </button>
-            </div>
+            <Row>
+                <div className="col-span-12 flex justify-end">
+                    <button
+                        className="bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 mb-4 mt-2 rounded-lg flex items-center"
+                        onClick={handleRefresh}
+                        onMouseEnter={handleRefreshHover}
+                        onMouseLeave={handleRefreshHover}>
+                        <FiRefreshCcw className="mr-2 refresh-icon" />
+                        Reset Filters
+                    </button>
+                </div>
+            </Row>
 
-            {/* Select Type checkboxes */}
-            <div className="col-span-12 w-full">
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="pokemon"
-                            checked={selectedTypes.includes('pokemon')}
-                            onChange={handleTypeChange}
-                        />
-                        Pokemon
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="trainer"
-                            checked={selectedTypes.includes('trainer')}
-                            onChange={handleTypeChange}
-                        />
-                        Trainer
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="energy"
-                            checked={selectedTypes.includes('energy')}
-                            onChange={handleTypeChange}
-                        />
-                        Energy
-                    </label>
-                </div>
-            </div>
-
-            {/* Select Color checkboxes */}
-            {selectedTypes.includes('pokemon') && (
-                <div className="col-span-12 w-full">
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Colorless"
-                                checked={selectedColors.includes('Colorless')}
-                                onChange={handleColorChange}
-                            />
-                            Colorless
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Darkness"
-                                checked={selectedColors.includes('Darkness')}
-                                onChange={handleColorChange}
-                            />
-                            Darkness
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Dragon"
-                                checked={selectedColors.includes('Dragon')}
-                                onChange={handleColorChange}
-                            />
-                            Dragon
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Fairy"
-                                checked={selectedColors.includes('Fairy')}
-                                onChange={handleColorChange}
-                            />
-                            Fairy
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Fighting"
-                                checked={selectedColors.includes('Fighting')}
-                                onChange={handleColorChange}
-                            />
-                            Fighting
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Fire"
-                                checked={selectedColors.includes('Fire')}
-                                onChange={handleColorChange}
-                            />
-                            Fire
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Grass"
-                                checked={selectedColors.includes('Grass')}
-                                onChange={handleColorChange}
-                            />
-                            Grass
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Lightning"
-                                checked={selectedColors.includes('Lightning')}
-                                onChange={handleColorChange}
-                            />
-                            Lightning
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Metal"
-                                checked={selectedColors.includes('Metal')}
-                                onChange={handleColorChange}
-                            />
-                            Metal
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Psychic"
-                                checked={selectedColors.includes('Psychic')}
-                                onChange={handleColorChange}
-                            />
-                            Psychic
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Water"
-                                checked={selectedColors.includes('Water')}
-                                onChange={handleColorChange}
-                            />
-                            Water
-                        </label>
-                    </div>
-                </div>
-            )}
-            {/* Sort options */}
-            <div className="col-span-12 w-full">
-                <select value={sortOption} onChange={handleSortChange}>
-                    <option value="">Sort by...</option>
-                    <option value="nameAsc">Name (A-Z)</option>
-                    <option value="nameDesc">Name (Z-A)</option>
-                    <option value="priceAsc">Price (Low to High)</option>
-                    <option value="priceDesc">Price (High to Low)</option>
-                </select>
-            </div>
-        </div>
+        </Container>
     )
 };
 
