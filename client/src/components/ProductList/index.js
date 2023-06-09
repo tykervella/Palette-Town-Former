@@ -36,7 +36,7 @@ const ProductList = (props) => {
               </Col>
 
             </Row>
-            {/* <p>Seller: {props.seller}</p> */}
+            <p>Seller: {props.seller}</p>
           </div>
         </Link>
       </Col>
