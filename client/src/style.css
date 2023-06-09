@@ -121,6 +121,6 @@ input[type='checkbox']{
   font-size: 1em;
 }
 
-input:hover {
+input[type='checkbox']:hover {
   cursor: pointer;
 }

@@ -15,7 +15,7 @@ const ProductList = (props) => {
 
       {/* primary card image */}
       <div className='card-image text-center relative'>
-        <img src={props.images} alt={props.cardName} className='w-full hover:scale-150 mt-4' />
+        <img src={props.images} alt={props.cardName} className='w-full hover:scale-150 mt-4 rounded-xl' />
       </div>
       {/* card type */}
       <p className='text-center text-white mt-2'>Card Type: <span className='text-[#AFD7CA]'>{props.cardTypes}</span></p>
