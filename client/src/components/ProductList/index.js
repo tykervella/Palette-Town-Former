@@ -14,7 +14,7 @@ const ProductList = (props) => {
         <h3 className='text-lg text-center overflow-hidden whitespace-nowrap text-truncate'>{props.cardName}</h3>
 
         {/* primary card image */}
-        <div className='card-image text-center'>
+        <div className='card-image text-center relative'>
           <img src={props.images} alt={props.cardName} className='w-full hover:scale-150' />
         </div>
         {/* card type */}
@@ -22,17 +22,17 @@ const ProductList = (props) => {
 
         {/* card details */}
         <div className='card-details'>
-          <Row className='mt-4'>
+          <Row>
             <Col>
               {/* card price */}
-              <p className=''>Price: ${props.price}</p>
+              <p>Price: ${props.price}</p>
             </Col>
             <Col>
               {/* go to listing button */}
-              <button className='bg-gray-400 rounded-xl p-1'>Go To Listing</button>
+              <button className='bg-gray-400 rounded-xl' style={{ position: 'relative', zIndex: 1 }}>Go To Listing</button>
             </Col>
           </Row>
-          {/* <p>Seller: {props.seller}</p> */}
+          <p>Seller: {props.seller}</p>
         </div>
       </Link>
     </Col>

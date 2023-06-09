@@ -122,10 +122,7 @@ const resolvers = {
       return { token, user };
     },
     addDeck: async (parent, { deckOwner, deckName }) => {
-      const deck = await Deck.create({ 
-        deckOwner:deckOwner,
-        deckName: deckName
-      });
+      const deck = await Deck.create({ deckOwner: deckOwner, deckName: deckName });
 
       await User.findOneAndUpdate(
         { username: deckOwner },
@@ -238,21 +235,6 @@ const resolvers = {
       card.quantity = quantity;
       await deck.save();
 
-      return deck;
-    },
-
-    updateDeckName: async (parent, { deckId, deckName }) => {
-      const deck = await findDeckById(deckId);
-      if (!deck) {
-        throw new Error('Deck not found');
-      }
-
-      deck.deckName = deckName; // Update the deck name
-
-      // Save the updated deck in the database
-      await deck.save();
-
-  
       return deck;
     },
   },
