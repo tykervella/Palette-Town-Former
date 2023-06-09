@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
@@ -6,19 +7,21 @@ import axios from 'axios'; // Import axios for making API requests
 
 import CardElement from '../components/CardElement';
 import SearchCards from '../components/SearchCards';
+import BuilderInfo from "../components/BuilderInfo"
 import DeckElement from '../components/DeckElement';
 
 function DeckBuilder() {
-  const { _id } = useParams(); // Retrieve _id from URL params
+  const { _id } = useParams();
   const [cards, setCards] = useState([]);
   const [decklist, setDecklist] = useState([]);
-  const [totalQuantity, setTotalQuantity] = useState(0); // New state variable for total quantity
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [deckName, setDeckName] = useState(''); // New state variable for deckName
 
   const { loading, error, data } = useQuery(GET_DECK, {
     variables: { deckId: _id },
   });
 
-  console.log(data)
+  
 
   useEffect(() => {
     if (data && data.deck) {
@@ -35,8 +38,12 @@ function DeckBuilder() {
       // Calculate the total quantity
       const total = decklistFromData.reduce((acc, card) => acc + card.quantity, 0);
       setTotalQuantity(total);
+
+      // Set the deckName state
+      setDeckName(data.deck.deckName);
     }
   }, [data]);
+
 
   const getCards = (cardName, cardType, cardSubtype, cardColor, pageNumber) => {
     let queryString = '';
@@ -130,25 +137,11 @@ function DeckBuilder() {
 
       {/* Right Side. WIP Deck Element */}
       <div className="col-span-4 ml-4 border-2 border-red-700 min-h-screen">
-        {/* Deck Name */}
-        <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
-          <input
-            id="searchbar"
-            className="col-span-9 rounded text-center border-2 border-red-700"
-            placeholder="Deck Name"
-            value={data && data.deck ? data.deck.deckName : ''}
-          />
-          <h1 className="col-span-3 text-center">{totalQuantity}/60</h1>
-        </div>
-
-        <div className="grid grid-cols-12 flex-row items-center justify-items-center justify-between ml-2 mt-1">
-          <button className="btn text-xs col-span-4" id="savebtn">
-            Save as Draft
-          </button>
-          <button className="btn text-xs col-span-4 ml-4" id="searchbtn">
-            Publish Deck
-          </button>
-        </div>
+        < BuilderInfo 
+            deckId = {_id}
+            deckName={deckName}
+            quantity={totalQuantity}
+        />
 
         <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
           {/* Render the decklist */}

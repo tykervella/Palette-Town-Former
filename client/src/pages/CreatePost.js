@@ -4,9 +4,9 @@ import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { CREATE_DECK } from '../utils/mutations';
+import { ADD_POST } from '../utils/mutations';
 
-const CreateDeck = () => {
+const CreatePost = () => {
 
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
@@ -23,11 +23,11 @@ const CreateDeck = () => {
     }
   };
 
-  const [createDeck, { loading, error, data }] = useMutation(CREATE_DECK);
+  const [addPost, { loading, error, data }] = useMutation(ADD_POST);
 
-  const handleCreateDeck = async () => {
+  const handleAddPost = async () => {
     try {
-      const response = await createDeck({ variables: { deckOwner: user_name, deckName: name } });
+      const response = await addPost({ variables: { deckOwner: user_name, deckName: name } });
       const newDeck = response.data.addDeck._id
       navigate(`/deck/${newDeck}`)
       // Perform any additional actions after creating the deck
@@ -66,10 +66,10 @@ const CreateDeck = () => {
           <p className="text-muted mt-2">{name.length}/30</p>
         </Form.Group>
 
-        <Button onClick={handleCreateDeck}>Create Deck</Button>
+        <Button onClick={handleAddPost}>Create Deck</Button>
       </Form>
     </div>
   );
 }
 
-export default CreateDeck;
+export default CreatePost;

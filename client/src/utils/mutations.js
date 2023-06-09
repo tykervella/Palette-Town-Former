@@ -29,6 +29,19 @@ export const ADD_ORDER = gql`
   }
 `;
 
+export const ADD_POST = gql`
+  mutation AddPost(
+    $deckOwner: String!
+    $deckName: String!
+  ) {
+  addPost(
+    deckOwner: $deckOwner
+    deckName: $deckName
+  ) {
+    _id
+  }
+}`
+
 export const ADD_USER = gql`
   mutation addUser(
     $firstName: String!
@@ -51,8 +64,8 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_DECK = gql`
-  mutation Mutation($deckOwner: String!) {
-  addDeck(deckOwner: $deckOwner) {
+  mutation Mutation($deckOwner: String!, $deckName: String!) {
+  addDeck(deckOwner: $deckOwner, deckName: $deckName) {
     _id
   }
 }
@@ -105,5 +118,19 @@ export const UPDATE_CARD_QUANTITY = gql`
     cards {
       quantity
     }
+  }
+}`
+
+export const UPDATE_DECK_NAME = gql`
+  mutation Mutation(
+    $deckId: ID!, 
+    $deckName: String!
+    ) {
+    updateDeckName(
+      deckId: $deckId, 
+      deckName: $deckName) 
+    {
+    _id
+    deckName
   }
 }`

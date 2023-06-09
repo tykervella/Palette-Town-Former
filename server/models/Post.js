@@ -56,6 +56,7 @@ const postSchema = new Schema({
     deckName: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
     },
     postText: {
