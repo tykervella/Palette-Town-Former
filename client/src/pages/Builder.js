@@ -156,27 +156,28 @@ function DeckBuilder() {
                 quantity={totalQuantity}
               />
 
-              {/* right side of page section */}
-              <Row className="flex-row">
-                {/* Render the decklist */}
-                {decklist.map((card) => (
-                  <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
-                    <DeckElement
-                      key={card.cardId}
-                      deckId={_id}
-                      cardId={card.cardId}
-                      cardImage={card.image}
-                      cardName={card.cardName}
-                      superType={card.superType}
-                      quantity={card.quantity}
-                      onUpdateQuantity={(newQuantity) => {
-                        const updatedDecklist = decklist.map((c) => {
-                          if (c.cardId === card.cardId) {
-                            return { ...c, quantity: newQuantity };
-                          }
-                          return c;
-                        });
-                        setDecklist(updatedDecklist);
+            {/* right side of page section */}
+            <Row className="flex-row">
+              {/* Render the decklist */}
+              {decklist.map((card) => (
+                <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
+                  <DeckElement
+                    key={card.cardId}
+                    deckId={_id}
+                    cardId={card.cardId}
+                    cardImage={card.image}
+                    cardName={card.cardName}
+                    superType={card.superType}
+                    quantity={card.quantity}
+                    counter = {true}
+                    onUpdateQuantity={(newQuantity) => {
+                      const updatedDecklist = decklist.map((c) => {
+                        if (c.cardId === card.cardId) {
+                          return { ...c, quantity: newQuantity };
+                        }
+                        return c;
+                      });
+                      setDecklist(updatedDecklist);
 
                         // Calculate the total quantity
                         const total = updatedDecklist.reduce((acc, c) => acc + c.quantity, 0);

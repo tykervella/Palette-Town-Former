@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import likeButton from '../TrendingPalettes/assets/pokeball-like.png';
 
 
-function PaletteBox({ sectionData }) {
+function PaletteBox({ key, sectionData, deckName, deckOwner }) {
   console.log(sectionData);
 
   return (
@@ -20,9 +20,9 @@ function PaletteBox({ sectionData }) {
       <Col>
         <div className="border border-black p-4">
           <h4 className="mt-2 text-lg font-semibold text-center text-white sm:text-black">
-            Deck Name
+            {deckName}
           </h4>
-          <p className="text-sm text-center text-white sm:text-black">@username</p>
+          <p className="text-sm text-center text-white sm:text-black">@{deckOwner}</p>
           <div className="flex items-center justify-center flex-col sm:flex-row">
             <Button className="bg-blue-500 text-xs text-white py-1 px-2 mt-4 sm:mt-0 sm:ml-4 rounded">
               View Deck
