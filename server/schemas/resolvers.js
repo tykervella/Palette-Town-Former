@@ -13,76 +13,95 @@ async function findDeckById(deckId) {
 }
 
 const resolvers = {
+
   Post: {
-    commentCount: (parent) => parent.comments.length,
+    captureCount: (parent) => parent.captures.length,
   },
 
   Query: {
     
-      users: async () => {
-        return User.find().populate('decks').populate('listings').populate('posts');
-      },
-      user: async (parent, { username }) => {
-        return User.findOne({ username }).populate('decks').populate('listings').populate('posts');
-      },
+    users: async () => {
+      return User.find()
+        .populate('decks')
+        .populate('listings')
+        .populate('posts');
+    },
+
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+        .populate('decks')
+        .populate('listings')
+        .populate('posts');
+    },
    
     decks: async (parent, { username }) => {
       const params = username ? { deckOwner: username } : {};
-      return Deck.find(params).sort({ createdAt: -1 });
+      return Deck.find(params)
+        .sort({ createdAt: -1 });
     },
+
     deck: async (parent, { deckId }) => {
       return Deck.findOne({ _id: deckId });
     },
+
     listings: async (parent, { username }) => {
       const params = username ? { seller: username } : {};
-      return Listing.find(params).sort({ createdAt: -1 });
+      return Listing.find(params)
+        .sort({ createdAt: -1 });
     },
-    listing: async (_, { searchQuery, input: { selectedTypes, selectedColors, sortOption } }) => {
-      let filteredListings = await Listing.find();
+
+    // listing: async (_, { searchQuery, 
+    //   input: { selectedTypes, selectedColors, sortOption } }) => {
+    //   let filteredListings = await Listing.find();
         
-      if (searchQuery) {
-        const searchRegex = new RegExp(searchQuery, 'i');
-        filteredListings = filteredListings.filter((listing) =>
-          listing.cardName.match(searchRegex)
-        );
-      }
+    //   if (searchQuery) {
+    //     const searchRegex = new RegExp(searchQuery, 'i');
+    //     filteredListings = filteredListings.filter((listing) =>
+    //       listing.cardName.match(searchRegex)
+    //     );
+    //   }
 
-      if (selectedTypes.length > 0) {
-        filteredListings = filteredListings.filter((listing) =>
-          selectedTypes.includes(listing.cardType)
-        );
-      }
+    //   if (selectedTypes.length > 0) {
+    //     filteredListings = filteredListings.filter((listing) =>
+    //       selectedTypes.includes(listing.cardType)
+    //     );
+    //   }
 
-      if (selectedColors.length > 0) {
-        filteredListings = filteredListings.filter((listing) =>
-          selectedColors.includes(listing.cardColor)
-        );
-      }
+    //   if (selectedColors.length > 0) {
+    //     filteredListings = filteredListings.filter((listing) =>
+    //       selectedColors.includes(listing.cardColor)
+    //     );
+    //   }
 
-      if (sortOption) {
-        if (sortOption === 'nameAsc') {
-          filteredListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
-        } else if (sortOption === 'nameDesc') {
-          filteredListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
-        } else if (sortOption === 'priceAsc') {
-          filteredListings.sort((a, b) => a.price - b.price);
-        } else if (sortOption === 'priceDesc') {
-          filteredListings.sort((a, b) => b.price - a.price);
-        }
-      }
+    //   if (sortOption) {
+    //     if (sortOption === 'nameAsc') {
+    //       filteredListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
+    //     } else if (sortOption === 'nameDesc') {
+    //       filteredListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
+    //     } else if (sortOption === 'priceAsc') {
+    //       filteredListings.sort((a, b) => a.price - b.price);
+    //     } else if (sortOption === 'priceDesc') {
+    //       filteredListings.sort((a, b) => b.price - a.price);
+    //     }
+    //   }
 
-      return filteredListings;
-    },
+    //   return filteredListings;
+    // },
+
     allListings: async () => {
       return Listing.find();
     },
+
     posts: async (parent, { username }) => {
       const params = username ? { deckOwner: username } : {};
-      return Post.find(params).sort({ createdAt: -1 }).exec();
+      return Post.find(params)
+        .sort({ createdAt: -1 })
+        .exec();
     },
     
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId }).exec();
+      return Post.findOne({ _id: postId })
+        .exec();
     },
     
     // getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
@@ -127,12 +146,24 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+
+    addUser: async (parent, { 
+      username, 
+      email, 
+      password 
+    }) => {
+      const user = await User.create({ 
+        username, 
+        email, 
+        password });
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
+
+    login: async (parent, { 
+      email, 
+      password 
+    }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -149,8 +180,15 @@ const resolvers = {
 
       return { token, user };
     },
-    addDeck: async (parent, { deckOwner, deckName }) => {
-      const deck = await Deck.create({ deckOwner: deckOwner, deckName: deckName });
+
+    addDeck: async (parent, { 
+      deckOwner, 
+      deckName 
+    }) => {
+      const deck = await Deck.create({ 
+        deckOwner: deckOwner, 
+        deckName: deckName 
+      });
 
       await User.findOneAndUpdate(
         { username: deckOwner },
@@ -159,7 +197,16 @@ const resolvers = {
 
       return deck;
     },
-    addListing: async (parent, { cardId, cardName, cardImage, cardType, superType, price, seller }) => {
+
+    addListing: async (parent, { 
+      cardId, 
+      cardName, 
+      cardImage, 
+      cardType, 
+      superType, 
+      price, 
+      seller 
+    }) => {
       const newListing = await Listing.create({
         cardId: cardId,
         cardName: cardName,
@@ -168,7 +215,6 @@ const resolvers = {
         superType: superType,
         price: price,
         seller: seller,
-        // ... other card fields
       });
 
       await User.findOneAndUpdate(
@@ -178,10 +224,24 @@ const resolvers = {
 
       return newListing;
     },
-    addPost: async (parent, { deckOwner, deckName, postText, color1, color2, color3, color4, color5, image1, image2, image3, image4, image5 }) => {
+
+    addPost: async (parent, { 
+      postOwner, postName, 
+      postText, 
+      color1, 
+      color2, 
+      color3, 
+      color4, 
+      color5, 
+      image1, 
+      image2, 
+      image3, 
+      image4, 
+      image5 
+    }) => {
       const newPost = await Post.create({
-        deckOwner: deckOwner,
-        deckName: deckName,
+        postOwner: postOwner,
+        postName: postName,
         postText: postText,
         color1: color1,
         color2: color2,
@@ -203,31 +263,58 @@ const resolvers = {
       return newPost;
     },
     
-    addComment: async (parent, { deckId, commentInput }) => {
-      const comment = {
-        commentText: commentInput.commentText,
-        commentAuthor: commentInput.commentAuthor,
-      };
-
-      const updatedDeck = await Deck.findOneAndUpdate(
-        { _id: deckId },
-        { $push: { comments: comment } },
+    addCaughtDeck: async (parent, { 
+      userId, 
+      postId 
+    }) => {
+      
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        { $push: { captures: {postId: postId }  } },
         { new: true }
       );
 
-      return updatedDeck;
+      return updatedUser;
     },
-    removeDeck: async (parent, { deckId }) => {
-      return Deck.findOneAndDelete({ _id: deckId });
-    },
-    removeComment: async (parent, { deckId, commentId }) => {
-      return Deck.findOneAndUpdate(
-        { _id: deckId },
-        { $pull: { comments: { _id: commentId } } },
+
+    addCapture: async (parent, {  
+      postId,
+      userId 
+    }) => {
+      
+      const updatedPost = await Post.findOneAndUpdate(
+        { _id: postId },
+        { $push: { caughtUsers: {userId: userId }  } },
         { new: true }
       );
+
+      return updatedPost;
     },
-    addCardToDeckList: async (_, { deckId, cardId, cardName, cardImage, cardType, superType }) => {
+
+    removeDeck: async (parent, { 
+      deckId 
+    }) => {
+      return Deck.findOneAndDelete({ 
+        _id: deckId 
+      });
+    },
+
+    // removeComment: async (parent, { deckId, commentId }) => {
+    //   return Deck.findOneAndUpdate(
+    //     { _id: deckId },
+    //     { $pull: { comments: { _id: commentId } } },
+    //     { new: true }
+    //   );
+    // },
+    
+    addCardToDeckList: async (_, { 
+      deckId, 
+      cardId, 
+      cardName, 
+      cardImage, 
+      cardType, 
+      superType 
+    }) => {
       // Find the deck by deckId and add the card
       const deck = await findDeckById(deckId);
       if (!deck) {
@@ -240,7 +327,6 @@ const resolvers = {
         cardImage: cardImage,
         cardType: cardType,
         superType: superType,
-        // ... other card fields
       };
 
       deck.cards.push(newCard);
@@ -251,7 +337,10 @@ const resolvers = {
       return deck;
     },
 
-    removeCard: async (parent, { deckId, cardId }) => {
+    removeCard: async (parent, { 
+      deckId, 
+      cardId 
+    }) => {
       const updatedDeck = await Deck.findOneAndUpdate(
         { _id: deckId },
         { $pull: { cards: {cardId: cardId } } },
@@ -260,13 +349,19 @@ const resolvers = {
 
       return updatedDeck;
     },
-    updateCardQuantity: async (parent, { deckId, cardId, quantity }) => {
+
+    updateCardQuantity: async (parent, { 
+      deckId, 
+      cardId, 
+      quantity 
+    }) => {
       const deck = await findDeckById(deckId);
       if (!deck) {
         throw new Error('Deck not found');
       }
 
-      const card = deck.cards.find((card) => card.cardId.toString() === cardId);
+      const card = deck.cards.find((card) =>
+        card.cardId === cardId);
       if (!card) {
         throw new Error('Card not found in the deck');
       }

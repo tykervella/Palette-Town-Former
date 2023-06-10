@@ -1,15 +1,9 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const commentSchema = new Schema ({
+const caughtSchema = new Schema ({
 
-  commentText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
-  },
-  commentAuthor: {
+  catchingUser: {
     type: String,
     required: true,
     trim: true,
@@ -24,15 +18,20 @@ const commentSchema = new Schema ({
 
 
 const postSchema = new Schema({
-    deckOwner: {
+    postOwner: {
         type: String,
         required: true,
         trim: true,
     },
-    deckName: {
+    postName: {
         type: String,
         required: true,
         trim: true,
+    },
+    deckId: {
+      type: String,
+      required: true,
+      trim: true,
     },
     postText: {
         type: String,
@@ -43,7 +42,7 @@ const postSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
-    comments: [commentSchema],
+    caughtUsers: [caughtSchema],
     color1: {
         type: String,
         trim: true,
@@ -104,8 +103,8 @@ const postSchema = new Schema({
 });
 
 // Virtual for comment count
-postSchema.virtual('commentCount').get(function () {
-    return this.comments.length;
+postSchema.virtual('captureCount').get(function () {
+    return this.captures.length;
   });
 
 const Post = model('Post', postSchema);

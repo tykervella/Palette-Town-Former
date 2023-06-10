@@ -1,6 +1,21 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const caughtSchema = new Schema ({
+
+  postId: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+  },
+})
+
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -49,7 +64,8 @@ const userSchema = new Schema({
   bio: {
     type: String,
     maxlength: 280,
-},
+  },
+  captures: [caughtScheama]
 });
 
 userSchema.pre('save', async function (next) {

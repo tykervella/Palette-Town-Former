@@ -6,6 +6,7 @@ const cardSchema = new Schema({
       type: String,
       required: true,
       trim: true,
+      unique: true,
   },
   cardName: {
       type: String,

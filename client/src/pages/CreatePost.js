@@ -88,15 +88,6 @@ const CreatePost = () => {
     return rgbToHex(clampedR, clampedG, clampedB);
   }
 
-  const handleNameChange = (e) => {
-    const inputName = e.target.value;
-    if (inputName.length <= 30) {
-      setName(inputName);
-    } else {
-      alert("Deck Names must be 30 characters or shorter!");
-    }
-  };
-
   const handleTextChange = (e) => {
     const inputText = e.target.value;
     if (inputText.length <= 280) {
