@@ -118,6 +118,7 @@ const CreatePost = () => {
       setDecklist(cardList)
       console.log(cardList)
 
+    
   
       const cardTypeArray = deckData.deck.cards.map((card) => card.cardType);
       const uniqueCardTypes = [...new Set(cardTypeArray)].filter(
@@ -190,6 +191,7 @@ const CreatePost = () => {
 
   const [addPost, { loading: postLoading, error: postError, data: postData }] = useMutation(ADD_POST);
 
+
   const handleAddPost = async () => {
     try {
       // console.log(sortedImages[0])
@@ -217,8 +219,8 @@ const CreatePost = () => {
 
       const response = await addPost({ 
         variables: { 
-          deckOwner: user_name,
-          deckName: name, 
+          postOwner: user_name,
+          postName: name, 
           color1: modifiedCardTypes.color1,
           color2: modifiedCardTypes.color2,
           color3: modifiedCardTypes.color3,

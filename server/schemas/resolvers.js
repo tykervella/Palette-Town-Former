@@ -15,7 +15,7 @@ async function findDeckById(deckId) {
 const resolvers = {
 
   Post: {
-    captureCount: (parent) => parent.captures.length,
+    captureCount: (parent) => parent.caughtUsers.length,
   },
 
   Query: {
@@ -92,13 +92,14 @@ const resolvers = {
       return Listing.find();
     },
 
-    posts: async (parent, { username }) => {
-      const params = username ? { deckOwner: username } : {};
-      return Post.find(params)
-        .sort({ createdAt: -1 })
+    posts: async () => {
+      const posts = await Post
+        .find()
         .exec();
+      
+        return posts
+          .sort((a, b) => b.captureCount - a.captureCount);
     },
-    
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId })
         .exec();
@@ -225,19 +226,20 @@ const resolvers = {
       return newListing;
     },
 
-    addPost: async (parent, { 
-      postOwner, postName, 
-      postText, 
-      color1, 
-      color2, 
-      color3, 
-      color4, 
-      color5, 
-      image1, 
-      image2, 
-      image3, 
-      image4, 
-      image5 
+    addPost: async (parent, {
+      postOwner,
+      postName,
+      postText,
+      color1,
+      color2,
+      color3,
+      color4,
+      color5,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5
     }) => {
       const newPost = await Post.create({
         postOwner: postOwner,
@@ -256,57 +258,41 @@ const resolvers = {
       });
     
       await User.findOneAndUpdate(
-        { username: deckOwner },
+        { username: postOwner },
         { $addToSet: { posts: newPost._id } }
       );
     
       return newPost;
     },
     
-    addCaughtDeck: async (parent, { 
+    addCaughtPost: async (parent, { 
       userId, 
-      postId 
+      caughtPostName
     }) => {
       
       const updatedUser = await User.findOneAndUpdate(
         { _id: userId },
-        { $push: { captures: {postId: postId }  } },
+        { $push: { caughtPosts: {caughtPostName: caughtPostName }  } },
         { new: true }
       );
 
       return updatedUser;
     },
 
-    addCapture: async (parent, {  
+    addCaughtUser: async (parent, {  
       postId,
-      userId 
+      caughtUser
     }) => {
       
       const updatedPost = await Post.findOneAndUpdate(
         { _id: postId },
-        { $push: { caughtUsers: {userId: userId }  } },
+        { $push: { caughtUsers: {caughtUser, caughtUser }  } },
         { new: true }
       );
 
       return updatedPost;
     },
 
-    removeDeck: async (parent, { 
-      deckId 
-    }) => {
-      return Deck.findOneAndDelete({ 
-        _id: deckId 
-      });
-    },
-
-    // removeComment: async (parent, { deckId, commentId }) => {
-    //   return Deck.findOneAndUpdate(
-    //     { _id: deckId },
-    //     { $pull: { comments: { _id: commentId } } },
-    //     { new: true }
-    //   );
-    // },
-    
     addCardToDeckList: async (_, { 
       deckId, 
       cardId, 
@@ -315,6 +301,7 @@ const resolvers = {
       cardType, 
       superType 
     }) => {
+
       // Find the deck by deckId and add the card
       const deck = await findDeckById(deckId);
       if (!deck) {
@@ -328,12 +315,10 @@ const resolvers = {
         cardType: cardType,
         superType: superType,
       };
-
       deck.cards.push(newCard);
 
       // Save the updated deck to the database or any storage
       await deck.save();
-
       return deck;
     },
 

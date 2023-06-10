@@ -1,15 +1,25 @@
-import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { UPDATE_CARD_QUANTITY, REMOVE_CARD } from "../../utils/mutations";
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { UPDATE_CARD_QUANTITY, REMOVE_CARD } from '../../utils/mutations';
 
-function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity, counter }) {
+function DeckElement({
+  deckId,
+  cardId,
+  cardImage,
+  cardName,
+  superType,
+  quantity,
+  counter,
+  onUpdateQuantity,
+  updateTotalQuantity, // Receive the function from DeckBuilder
+}) {
   const [value, setValue] = useState(quantity);
 
   const [updateCardQuantity] = useMutation(UPDATE_CARD_QUANTITY);
   const [removeCard] = useMutation(REMOVE_CARD);
 
   const handleIncrement = async () => {
-    if (value < 4 || superType === "Energy") {
+    if (value < 4 || superType === 'Energy') {
       const newValue = value + 1;
       setValue(newValue);
       try {
@@ -20,8 +30,10 @@ function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity,
             quantity: newValue,
           },
         });
+        onUpdateQuantity(newValue, cardId); // Call onUpdateQuantity with the new quantity
+        updateTotalQuantity(); // Call updateTotalQuantity to update the total quantity in DeckBuilder
       } catch (error) {
-        console.log("Failed to update card quantity:", error);
+        console.log('Failed to update card quantity:', error);
       }
     }
   };
@@ -45,9 +57,11 @@ function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity,
             quantity: newValue,
           },
         });
+        onUpdateQuantity(newValue, cardId); // Call onUpdateQuantity with the new quantity
+        updateTotalQuantity(); // Call updateTotalQuantity to update the total quantity in DeckBuilder
       }
     } catch (error) {
-      console.log("Failed to update card quantity:", error);
+      console.log('Failed to update card quantity:', error);
     }
   };
 
@@ -70,7 +84,7 @@ function DeckElement({ deckId, cardId, cardImage, cardName, superType, quantity,
           <button
             className="btn w-2 text-xs p-2 h-2"
             onClick={handleIncrement}
-            disabled={value === 4 && superType !== "Energy" && quantity === 60}
+            disabled={value === 4 && superType !== 'Energy' && quantity === 60}
           >
             +
           </button>

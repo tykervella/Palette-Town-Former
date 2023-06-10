@@ -2,8 +2,8 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-  type Capture {
-    postId: String!
+  type CaughtPost {
+    caughtPostName: String!
   }
 
   type User {
@@ -17,7 +17,7 @@ const typeDefs = gql`
     listings: [Listing!]
     posts: [Post!]
     bio: String
-    captures: [Capture!]
+    caughtPosts: [CaughtPost!]
   }
 
   type Deck {
@@ -38,7 +38,7 @@ const typeDefs = gql`
   }
 
   type CaughtUser {
-    cardId: String!
+    caughtUserName: String!
   }
 
   type Post {
@@ -87,7 +87,7 @@ const typeDefs = gql`
     listings(username: String!): [Listing]
     listing(listingId: ID!): Listing
     allListings: [Listing]
-    posts(username: String!): [Post]
+    posts: [Post]
     post(postId: ID!): Post
     # filteredListings(searchQuery: String, selectedTypes: [String!], selectedColors: [String!]): [Listing]
     # sortedListings(sortOption: String): [Listing]
@@ -110,14 +110,14 @@ const typeDefs = gql`
       deckName: String!
     ): Deck
 
-    addCaughtDeck(
+    addCaughtPost(
       userId: ID!
-      postId: ID!
+      caughtPostName: String!
     ): User
 
-    addCapture(
+    addCaughtUser(
       postId: ID!
-      userId: ID!
+      caughtUserName: String!
     ):Post
 
     addListing(
@@ -131,8 +131,8 @@ const typeDefs = gql`
     ): Listing
 
     addPost(
-      deckOwner: String!
-      deckName: String!
+      postOwner: String!
+      postName: String!
       postText: String
       color1: String!
       color2: String!
@@ -166,10 +166,7 @@ const typeDefs = gql`
       quantity: Int!
     ): Deck
 
-    updateDeckName(
-      deckId: ID! 
-      deckName: String!
-    ): Deck
+    
   
     }
 
