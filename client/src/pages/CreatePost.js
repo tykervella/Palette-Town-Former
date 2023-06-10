@@ -7,14 +7,20 @@ import { ADD_POST } from '../utils/mutations';
 import { GET_DECK } from "../utils/queries";
 
 const CreatePost = () => {
+  //get username from logged in token, intitalizes 
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
+
+  // initializing of various states we will use throughout code. 
   const { _id } = useParams();
-  const [decklist, setDecklist] = useState([]);
   const [deckName, setDeckName] = useState('');
   const [sortedCardTypes, setSortedCardTypes] = useState([]);
+  const [sortedImages, setSortedImages] = useState([]);
 
+
+  // function that takes in rgb values in and returns a 6 character hexcode
   function rgbToHex(r, g, b) {
     const red = r.toString(16).padStart(2, '0');
     const green = g.toString(16).padStart(2, '0');
@@ -22,23 +28,27 @@ const CreatePost = () => {
     return `#${red}${green}${blue}`;
   }
 
-  const colors = [
-    { name: "Colorless", rgb: "255, 255, 255" },
-    { name: "Darkness", rgb: "0, 0, 0" },
-    { name: "Dragon", rgb: "120, 81, 169" },
-    { name: "Fairy", rgb: "255, 192, 203" },
-    { name: "Fighting", rgb: "255, 165, 0" },
-    { name: "Fire", rgb: "255, 0, 0" },
-    { name: "Grass", rgb: "0, 128, 0" },
-    { name: "Lightning", rgb: "255, 255, 0" },
-    { name: "Metal", rgb: "192, 192, 192" },
-    { name: "Psychic", rgb: "128, 0, 128" },
-    { name: "Water", rgb: "0, 0, 255" }
-  ];
 
+  //takes in a colorName and returns associated rgb values
   function deconstructColor(colorName) {
+    // base colors for each pokemon cardType to start at and then randomize.
+      const colors = [
+        { name: "Colorless", rgb: "229, 242, 200" },
+        { name: "Darkness", rgb: "37, 31, 41" },
+        { name: "Dragon", rgb: "147, 129, 255" },
+        { name: "Fairy", rgb: "255, 200, 221" },
+        { name: "Fighting", rgb: "247, 127, 0" },
+        { name: "Fire", rgb: "230, 57, 70" },
+        { name: "Grass", rgb: "128, 237, 153" },
+        { name: "Lightning", rgb: "252, 246, 139" },
+        { name: "Metal", rgb: "43, 45, 66" },
+        { name: "Psychic", rgb: "205, 180, 219" },
+        { name: "Water", rgb: "162, 210, 255" }
+    ];
+    //finds color equal to what is passed as a parameter
     const color = colors.find(obj => obj.name === colorName);
 
+    // deconstructs passed parameter and splits it into rgb values 
     if (color) {
       const [r, g, b] = color.rgb.split(", ").map(Number);
       return { r, g, b };
@@ -47,61 +57,60 @@ const CreatePost = () => {
     return null; // Color not found
   }
 
+
+  // takes in rgb values and changes them by up to 50 in either direction to randomly generate a color. 
   function generateColor(r, g, b) {
-    // Generate random values between -10 and -50 or 10 and 50
-    const randomR = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 41) + 10);
-    const randomG = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 41) + 10);
-    const randomB = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 41) + 10);
-  
-    // Check if any of the original RGB values is equal to 255
-    // If so, generate a random number between 0 and -40 for that component
-    const newR = (r === 255 ? r + (Math.random() * -40) : r + randomR);
-    const newG = (g === 255 ? g + (Math.random() * -40) : g + randomG);
-    const newB = (b === 255 ? b + (Math.random() * -40) : b + randomB);
-  
+    // Generate random values between -50 and 50
+    const randomR = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 101) - 50);
+    const randomG = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 101) - 50);
+    const randomB = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 101) - 50);
+
+    // new value is old value plus randomly generated number 
+    const newR = r + randomR
+    const newG = g + randomG
+    const newB = b + randomB
 
     // Ensure the values are within the valid range (0-255)
     const clampedR = Math.min(Math.max(newR, 0), 255);
     const clampedG = Math.min(Math.max(newG, 0), 255);
     const clampedB = Math.min(Math.max(newB, 0), 255);
 
+    //returns new rgb value (that can be passed and used in rgbtoHex function)
     return rgbToHex(clampedR, clampedG, clampedB);
   }
 
+
+  // getting deck information for the deck with the _id equal to the params
   const { loading: deckLoading, error: deckError, data: deckData } = useQuery(GET_DECK, { variables: { deckId: _id } });
+
 
   useEffect(() => {
     if (deckData && deckData.deck) {
-      const decklistFromData = deckData.deck.cards.map((card) => ({
-        cardId: card.cardId,
-        image: card.cardImage,
-        cardName: card.cardName,
-        quantity: card.quantity,
-        superType: card.superType,
-      }));
-      setDecklist(decklistFromData);
-
+      // console.log(deckData.deck);
+  
       const deckName = deckData.deck.deckName;
       setDeckName(deckName);
-
+  
+      const cardList = deckData.deck.cards.map((card) => ({
+        cardName: card.cardName,
+        cardIMG: card.cardImage,
+        cardType: card.cardType,
+        quantity: card.quantity,
+        cardId: card.cardId
+      }));
+  
       const cardTypeArray = deckData.deck.cards.map((card) => card.cardType);
-      const uniqueCardTypes = [...new Set(cardTypeArray)].filter(type => type !== "other");
+      const uniqueCardTypes = [...new Set(cardTypeArray)].filter(
+        (type) => type !== "other"
+      );
       const sortedCardTypes = uniqueCardTypes.sort((a, b) => {
-        const countA = cardTypeArray.filter(type => type === a).length;
-        const countB = cardTypeArray.filter(type => type === b).length;
+        const countA = cardTypeArray.filter((type) => type === a).length;
+        const countB = cardTypeArray.filter((type) => type === b).length;
         return countB - countA;
       });
       setSortedCardTypes(sortedCardTypes);
 
-      console.log(sortedCardTypes);
-      console.log(deckName);
-    }
-  }, [deckData, _id]);
 
-  const [addPost, { loading: postLoading, error: postError, data: postData }] = useMutation(ADD_POST);
-
-  const handleAddPost = async () => {
-    try {
       // Check the length of modifiedCardTypes
       const length = sortedCardTypes.length;
       if (length === 1) {
@@ -127,6 +136,43 @@ const CreatePost = () => {
         const value0 = sortedCardTypes[0];
         sortedCardTypes.push(value0)
       } 
+      
+      const generateSortedImages = () => {
+        const images = [];
+        sortedCardTypes.forEach((cardType) => {
+          if (cardType !== "other") { // Exclude "other" type
+            const card = cardList.find(
+              (card) => card.cardType === cardType
+            );
+      
+            if (card) {
+              const cardImage = card.cardIMG
+              images.push(cardImage);
+              
+              const index = cardList.findIndex((card) => card.cardIMG === cardImage);
+        
+            // Remove the element at the found index from cardList
+            if (index !== -1) {
+            cardList.splice(index, 1);
+        }
+          
+            }
+          }
+        });
+      
+        setSortedImages(images);
+      };
+      
+      generateSortedImages();
+
+    }
+  }, [deckData, _id]);
+
+  const [addPost, { loading: postLoading, error: postError, data: postData }] = useMutation(ADD_POST);
+
+  const handleAddPost = async () => {
+    try {
+      // console.log(sortedImages[0])
 
       const modifiedCardTypes = {};
 
@@ -142,7 +188,12 @@ const CreatePost = () => {
 
       }
 
-     
+      const image1 = sortedImages[0];
+      const image2 = sortedImages[1];
+      const image3 = sortedImages[2];
+      const image4 = sortedImages[3];
+      const image5 = sortedImages[4];
+      console.log(image1, image2, image3, image4, image5)
 
       const response = await addPost({ 
         variables: { 
@@ -152,11 +203,19 @@ const CreatePost = () => {
           color2: modifiedCardTypes.color2,
           color3: modifiedCardTypes.color3,
           color4: modifiedCardTypes.color4,
-          color5: modifiedCardTypes.color5
+          color5: modifiedCardTypes.color5,
+          image1: image1,
+          image2: image2,
+          image3: image3,
+          image4: image4,
+          image5: image5
         } });
+
       const newPost = response.data.addPost._id
-      const color1 = response.data.addPost.color1
-      console.log(newPost, modifiedCardTypes, color1)
+      console.log(newPost)
+      navigate("/profile")
+      // const color1 = response.data.addPost.color1
+      // console.log(newPost, modifiedCardTypes, color1)
     } catch (error) {
       console.log(error);
     }
@@ -176,6 +235,7 @@ const CreatePost = () => {
     console.log(deckError);
     return <div>Error loading deck</div>;
   }
+
 
   return (
     <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-red-700 bg-white">

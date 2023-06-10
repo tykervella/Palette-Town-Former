@@ -32,7 +32,6 @@ const postSchema = new Schema({
     deckName: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
     },
     postText: {
@@ -49,27 +48,59 @@ const postSchema = new Schema({
         type: String,
         trim: true,
         required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
     },
     color2: {
         type: String,
         trim: true,
         required: true,
-    },
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+      },
+      
     color3: {
         type: String,
         trim: true,
         required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
     },
     color4: {
         type: String,
         trim: true,
         required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
     },
     color5: {
         type: String,
         trim: true,
         required: true,
-    }
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+    },
+    image1: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image2: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image3: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image4: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image5: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  
 });
 
 // Virtual for comment count
