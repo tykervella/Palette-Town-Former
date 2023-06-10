@@ -15,7 +15,7 @@ const CaughtDecks = () => {
     },
     {
       title: 'BugL0v3r',
-      image: 'https://www.codewithmike.com/wp-content/uploads/2022/10/the-best-investment-pokemon-cards-in-2022.jpg',
+      image: 'https://assets.pokemon.com/assets/cms2/img/cards/web/XY1/XY1_EN_42.png',
     },
   ];
 
