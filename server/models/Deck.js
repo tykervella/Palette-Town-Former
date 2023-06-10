@@ -35,9 +35,10 @@ const deckSchema = new Schema({
   deckName: {
     type: String,
     minlength: 1,
-    maxlength: 20,
+    maxlength: 30,
+    required: true,
     trim: true,
-    unique: true, 
+    unique: true,
   },
   deckOwner: {
     type: String,
@@ -48,10 +49,6 @@ const deckSchema = new Schema({
     type: Date,
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
-  },
-  published: {
-    type: Boolean,
-    default: false, // Set to be a draft unless otherwise specified 
   },
   cards: [cardSchema]
 });

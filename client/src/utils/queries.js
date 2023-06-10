@@ -1,20 +1,57 @@
 import { gql } from '@apollo/client';
 
 export const GET_DECK = gql`
-  query Deck($deckId: ID!) {
+  query Decks($deckId: ID!) {
   deck(deckId: $deckId) {
-    cardCount
+    _id
+    deckName
     cards {
       cardId
       cardImage
       cardName
-      cardType
-      superType
       quantity
+      superType
+      cardType
     }
   }
 }
 `
+
+export const GET_USER = gql`
+query User($username: String!) {
+  user(username: $username) {
+    posts {
+      color1
+      color2
+      color3
+      color4
+      color5
+      image1
+      image2
+      image3
+      image4
+      image5
+      postName
+      postOwner
+      _id
+    }
+    bio
+    name
+    username
+    decks {
+      deckName
+      cards {
+        cardImage
+      }
+    }
+    listings {
+      _id
+      cardImage
+      cardName
+      price
+    }
+  }
+}`
 
 export const QUERY_PRODUCTS = gql`
   query getProducts($category: ID) {
@@ -99,4 +136,55 @@ export const GET_LISTINGS = gql`
     createdAt
   }
 }
+`;
+
+export const GET_TOP_POSTS = gql`
+query Query {
+  posts {
+    captureCount
+    postName
+    color1
+    color2
+    color3
+    color4
+    color5
+    image1
+    image3
+    image2
+    image4
+    image5
+    postOwner
+  }
+}`
+
+export const GET_FILTERED_LISTINGS = gql`
+  query getFilteredListings($searchQuery: String, $selectedTypes: [String!], $selectedColors: [String!]) {
+    filteredListings(searchQuery: $searchQuery, selectedTypes: $selectedTypes, selectedColors: $selectedColors) {
+      _id
+      cardId
+      cardName
+      cardImage
+      cardType
+      superType
+      price
+      seller
+      createdAt
+    }
+  }
+`;
+
+export const GET_SORTED_LISTINGS = gql`
+  query getSortedListings($sortOption: String) {
+    sortedListings(sortOption: $sortOption) {
+      _id
+      cardId
+      cardName
+      cardImage
+      cardType
+      superType
+      price
+      seller
+      createdAt
+    }
+  }
 `;

@@ -1,19 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const commentSchema = new Schema ({
+const caughtUserSchema = new Schema ({
 
-  commentText: {
+  caughtUserName: {
     type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
+        required: true,
+        trim: true,
   },
-  commentAuthor: {
-    type: String,
-    required: true,
-    trim: true,
-  }, 
   createdAt: {
     type: Date,
     default: Date.now,
@@ -22,41 +16,18 @@ const commentSchema = new Schema ({
 
 })
 
-const paletteSchema = new Schema ({
-
-    colorOne: {
-        type: String,
-        trim: true,
-    },
-    colorTwo: {
-        type: String,
-        trim: true,
-    },
-    colorThree: {
-        type: String,
-        trim: true,
-    },
-    colorFour: {
-        type: String,
-        trim: true,
-    },
-    colorFive: {
-        type: String,
-        trim: true,
-    }
-})
-
 
 const postSchema = new Schema({
-    deckOwner: {
+    postOwner: {
         type: String,
         required: true,
         trim: true,
     },
-    deckName: {
+    postName: {
         type: String,
         required: true,
         trim: true,
+        minlength: 2,
     },
     postText: {
         type: String,
@@ -67,13 +38,69 @@ const postSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
-    comments: [commentSchema],
-    colors: [paletteSchema]
+    color1: {
+        type: String,
+        trim: true,
+        required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+    },
+    color2: {
+        type: String,
+        trim: true,
+        required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+      },
+      
+    color3: {
+        type: String,
+        trim: true,
+        required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+    },
+    color4: {
+        type: String,
+        trim: true,
+        required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+    },
+    color5: {
+        type: String,
+        trim: true,
+        required: true,
+        match: [/^#([A-Fa-f0-9]{6})$/, 'Must match a hex code!'],
+    },
+    image1: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image2: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image3: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image4: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image5: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    caughtUsers: [caughtUserSchema],
+  
 });
 
 // Virtual for comment count
-postSchema.virtual('commentCount').get(function () {
-    return this.comments.length;
+postSchema.virtual('captureCount').get(function () {
+    return this.caughtUsers.length;
   });
 
 const Post = model('Post', postSchema);

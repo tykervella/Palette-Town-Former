@@ -1,15 +1,91 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
+import { GET_TOP_POSTS } from "../utils/queries";
+import Auth from "../utils/auth";
 
-import TrendingPalettes from "../components/TrendingPalettes";
+
+import PaletteBox from "../components/PaletteBox";
+// import TrendingPalettes from "../components/TrendingPalettes";
 import CaughtDecks from "../components/CaughtDecks";
 import TopListing from "../components/TopListing";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const Home = () => {
+
+  const [postsArr, setPostsArr] = useState([]);
+  const token = Auth.getToken();
+  const user_name = token ? Auth.getProfile().data.username : null;
+
+  const { loading, error, data } = useQuery(GET_TOP_POSTS);
+
+  useEffect(() => {
+    if (data) {
+      console.log(data)
+      const postsLength = data.posts.length;
+
+      const updatePostsArr = () => {
+        const newPostsArr = [];
+        for (let i = 0; i < postsLength; i++) {
+          const colors = data.posts[i];
+          const images = data.posts[i];
+          const postName = data.posts[i].postName; // Add postName
+          const postOwner = data.posts[i].postOwner; // Add postkOwner
+
+          const newPost = [
+            {
+              title: colors.color1,
+              image: images.image1,
+              postName: postName, // Pass postName
+              postOwner: postOwner, // Pass postOwner
+            },
+            {
+              title: colors.color2,
+              image: images.image2,
+            },
+            {
+              title: colors.color3,
+              image: images.image3,
+            },
+            {
+              title: colors.color4,
+              image: images.image4,
+            },
+            {
+              title: colors.color5,
+              image: images.image5,
+            },
+          ];
+          newPostsArr.push(newPost);
+        }
+        setPostsArr(newPostsArr);
+      };
+
+      updatePostsArr();
+    }
+  }, [data]);
+
+  if (loading)  {
+    return (
+      <Container>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
+
+  if (error) {
+    console.log(error);
+    return <div>Error loading profile</div>;
+  }
+
+  // const userId = data.user._id;
+  // const name = data.user.name;
+  // const bio = data.user.bio;
+  // const user = data.user;
+
+
   return (
     <div className="">
       <Container>
@@ -42,7 +118,14 @@ const Home = () => {
         <Row>
           <Col>
             <div>
-              <TrendingPalettes />
+            {postsArr.map((sectionData, index) => (
+              <PaletteBox
+                key={index}
+                sectionData={sectionData}
+                postName={sectionData[0].postName} // Pass postName to PaletteBox
+                postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
+        />
+      ))}
             </div>
           </Col>
         </Row>
