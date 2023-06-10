@@ -7,6 +7,8 @@ import { Container } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const CustomNavbar = () => {
   const logout = (event) => {
@@ -18,12 +20,11 @@ const CustomNavbar = () => {
   const username = token ? Auth.getProfile().data.username : null;
 
 
-  // checks if user is logged in and if not, sends them to login page. 
-  // if user is logged in, then it sends them to the endpoint passed as a parameter to the function  
+  // checks if user is logged in and if not, sends them to login page.
+  // if user is logged in, then it sends them to the endpoint passed as a parameter to the function
   const checkStatus = (endpoint) => {
     return token ? `${endpoint}` : "/login";
   }
-
 
   return (
     <Navbar variant="dark" expand="lg" className="text-white mb-4 py-3 custom-navbar" style={{ backgroundColor: '#AFD7CA' }}>
@@ -64,7 +65,6 @@ const CustomNavbar = () => {
             <Nav.Link className="text-white d-flex align-items-center me-4">
               {token && (
                 <>
-                  
                   {/* {profileIMG && (
                     <div
                       className="profile-picture"
@@ -79,8 +79,8 @@ const CustomNavbar = () => {
                     ></div>
                   )} */}
                   <span className="me-2">Signed in as:</span>
-                  <Link className="text-white"  to="/profile">
-                  {username}
+                  <Link className="text-white" to="/profile">
+                    {username}
                   </Link>
                 </>
               )}

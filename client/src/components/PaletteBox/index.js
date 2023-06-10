@@ -7,7 +7,7 @@ function PaletteBox({ key, sectionData, postName, postOwner }) {
   console.log(sectionData);
 
   return (
-    <Row className="flex-wrap border border-black rounded-lg bg-[#376D5B] ">
+    <Row className="flex-wrap border border-black rounded-lg bg-[#0B3C49] ">
       {sectionData.map((item, index) => (
         <Col key={index} xs={6} sm={4} md={2} className="mb-4">
           <div className="border border-black p-4" style={{ backgroundColor: item.title }}>
