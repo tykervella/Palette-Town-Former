@@ -13,7 +13,7 @@ function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId 
         cardName: cardName,
         cardImage: cardImage,
         cardType: cardType,
-        superType: superType, 
+        superType: superType,
       },
     })
       .then((response) => {
@@ -28,13 +28,16 @@ function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId 
   };
 
   return (
-    <div key={cardId} className="col-span-4">
-      <img src={cardImage} alt={cardName}  />
-      <h3>{cardName}</h3>
-      <button className="addcardbtn" onClick={handleAddToDeck}>
-        Add to Deck
-      </button>
+    <div key={cardId} className="shadow-lg rounded">
+      <img src={cardImage} alt={cardName} className="hover:scale-150 mt-4" />
+      <h3 className="truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-1 text-sm">{cardName}</h3>
+      <div className="text-center cursor-pointer">
+        <button className="bg-[#AFD7CA] hover:bg-[#FFEC99] text-black p-2 m-2 rounded" onClick={handleAddToDeck}>
+          Add to Deck
+        </button>
+      </div>
     </div>
+
   );
 }
 
