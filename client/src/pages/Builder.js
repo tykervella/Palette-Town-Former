@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import {GET_DECK} from '../utils/queries';
+import { GET_DECK } from '../utils/queries';
 import axios from 'axios'; // Import axios for making API requests
 
 import CardElement from '../components/CardElement';
@@ -25,7 +25,7 @@ function DeckBuilder() {
     variables: { deckId: _id },
   });
 
-  
+
 
   useEffect(() => {
     if (data && data.deck) {
@@ -119,64 +119,78 @@ function DeckBuilder() {
   }, []);
 
   return (
-    <div className="grid grid-cols-12 gap-4 ml-auto mr-auto flex-row mt-4 px-4">
-      {/* Left side. Search Element */}
-      <div className="col-span-8 border-2 border-red-700 min-h-screen">
-        <SearchCards onSearch={handleSearch} onRefresh={handleRefresh} />
-        <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
-          {/* Render the card list */}
-          {cards.map((card) => (
-            <CardElement
-              key={card.id}
-              cardId={card.id}
-              cardImage={card.images.small}
-              cardName={card.name}
-              cardType={card.types[0]}
-              superType={card.supertype}
+    <Container className='mb-4'>
+      <Row>
+
+        {/* Left side. Search Element */}
+        <Col md={7}>
+          <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
+            <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
+              <SearchCards onSearch={handleSearch} onRefresh={handleRefresh} />
+              <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
+                {/* Render the card list */}
+                {cards.map((card) => (
+                  <CardElement
+                    key={card.id}
+                    cardId={card.id}
+                    cardImage={card.images.small}
+                    cardName={card.name}
+                    cardType={card.types[0]}
+                    superType={card.supertype}
+                    deckId={_id}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </Col>
+
+        {/* Right side of page section */}
+        <Col md={5}>
+          <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
+          <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
+            < BuilderInfo
               deckId={_id}
+              deckName={deckName}
+              quantity={totalQuantity}
             />
-          ))}
-        </div>
-      </div>
 
-      {/* Right Side. WIP Deck Element */}
-      <Container className="col-span-4 ml-4 border-2 border-red-700 min-h-screen">
-        < BuilderInfo 
-            deckId = {_id}
-            deckName={deckName}
-            quantity={totalQuantity}
-        />
+            {/* right side of page section */}
+            <Row className="flex-row">
+              {/* Render the decklist */}
+              {decklist.map((card) => (
+                <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
+                  <DeckElement
+                    key={card.cardId}
+                    deckId={_id}
+                    cardId={card.cardId}
+                    cardImage={card.image}
+                    cardName={card.cardName}
+                    superType={card.superType}
+                    quantity={card.quantity}
+                    onUpdateQuantity={(newQuantity) => {
+                      const updatedDecklist = decklist.map((c) => {
+                        if (c.cardId === card.cardId) {
+                          return { ...c, quantity: newQuantity };
+                        }
+                        return c;
+                      });
+                      setDecklist(updatedDecklist);
 
-        {/* right side of page section */}
-        <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
-          {/* Render the decklist */}
-          {decklist.map((card) => (
-            <DeckElement
-              key={card.cardId}
-              deckId={_id}
-              cardId={card.cardId}
-              cardImage={card.image}
-              cardName={card.cardName}
-              superType={card.superType}
-              quantity={card.quantity}
-              onUpdateQuantity={(newQuantity) => {
-                const updatedDecklist = decklist.map((c) => {
-                  if (c.cardId === card.cardId) {
-                    return { ...c, quantity: newQuantity };
-                  }
-                  return c;
-                });
-                setDecklist(updatedDecklist);
+                      // Calculate the total quantity
+                      const total = updatedDecklist.reduce((acc, c) => acc + c.quantity, 0);
+                      setTotalQuantity(total);
+                    }}
+                  />
+                </Col>
+              ))}
+            </Row>
+            </div>
+          </div>
+        </Col>
 
-                // Calculate the total quantity
-                const total = updatedDecklist.reduce((acc, c) => acc + c.quantity, 0);
-                setTotalQuantity(total);
-              }}
-            />
-          ))}
-        </div>
-      </Container>
-    </div>
+      </Row>
+    </Container>
   );
 }
 

@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
-
+import { Container, Row, Col, Form, Spinner } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_DECK } from '../utils/mutations';
 
 const CreateDeck = () => {
-
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   const handleNameChange = (e) => {
     const inputName = e.target.value;
     if (inputName.length <= 30) {
       setName(inputName);
     } else {
-      alert("Deck Names must be 30 characters or shorter!")
+      alert('Deck Names must be 30 characters or shorter!');
     }
   };
 
@@ -28,8 +26,8 @@ const CreateDeck = () => {
   const handleCreateDeck = async () => {
     try {
       const response = await createDeck({ variables: { deckOwner: user_name, deckName: name } });
-      const newDeck = response.data.addDeck._id
-      navigate(`/deck/${newDeck}`)
+      const newDeck = response.data.addDeck._id;
+      navigate(`/deck/${newDeck}`);
       // Perform any additional actions after creating the deck
     } catch (error) {
       console.log(error);
@@ -52,24 +50,37 @@ const CreateDeck = () => {
   }
 
   return (
-    <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-red-700 bg-white">
-      <Form className="text-black mx-auto">
-        <Form.Group className="mb-3 mt-3 mx-auto">
-          <Form.Control
-            type="text"
-            id="name"
-            placeholder="Deck Name"
-            value={name}
-            onChange={handleNameChange}
-            style={{ width: '300px' }} // Set the width to your desired value
-          />
-          <p className="text-muted mt-2">{name.length}/30</p>
-        </Form.Group>
+    <Container className="flex justify-center m-10">
+      <Row>
+        <Col className="max-w-3xl w-full p-8 bg-[#4B957E] text-white rounded-lg shadow-lg">
+          <div className='border-2 border-[#FFEC99] p-2 rounded-lg'>
+          <h2 className="text-4xl font-bold m-6 underline">Create your Pokemon Deck</h2>
+          <div className="text-center">
+            <Form className="text-black mx-auto">
+              <div className="w-80 mx-auto">
+                <Form.Group className="box-shadow-xl p-4 rounded-lg">
+                  <Form.Control
+                    type="text"
+                    id="name"
+                    placeholder="Deck Name"
+                    value={name}
+                    onChange={handleNameChange}
+                    className="bg-transparent border-b-2 border-[#376D5B] p-2 text-white leading-tight focus:outline-none"
+                  />
+                  <p className="mt-2 text-white">{name.length}/30</p>
+                </Form.Group>
+              </div>
 
-        <Button onClick={handleCreateDeck}>Create Deck</Button>
-      </Form>
-    </div>
+              <button onClick={handleCreateDeck} className="bg-[#FFEC99] hover:bg-[#AFD7CA] text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Create Deck
+              </button>
+            </Form>
+          </div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
-}
+};
 
 export default CreateDeck;
