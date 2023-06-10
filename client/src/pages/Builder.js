@@ -168,6 +168,7 @@ function DeckBuilder() {
                     cardName={card.cardName}
                     superType={card.superType}
                     quantity={card.quantity}
+                    counter = {true}
                     onUpdateQuantity={(newQuantity) => {
                       const updatedDecklist = decklist.map((c) => {
                         if (c.cardId === card.cardId) {
