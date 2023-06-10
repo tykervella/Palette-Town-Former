@@ -5,6 +5,9 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_DECK_NAME  } from '../../utils/mutations';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function BuilderInfo({ deckId, deckName, quantity }) {
   const { _id } = useParams();
@@ -45,11 +48,12 @@ function BuilderInfo({ deckId, deckName, quantity }) {
   }
 
   return (
-    <div>
-      <div className="grid grid-cols-12 w-11/12 flex-row ml-2 mt-3 border-2 border-transparent">
+    <Container>
+      
+      <div className="">
         {editing ? (
           // Render the form when in editing mode
-          <Form className="col-span-6 mx-auto">
+          <Form className="">
             <Form.Group className="mb-3 mt-3">
               <Form.Control
                 type="text"
@@ -69,7 +73,7 @@ function BuilderInfo({ deckId, deckName, quantity }) {
         <h3 className="col-span-6 text-center">{quantity}/60</h3>
       </div>
 
-      <div className="grid grid-cols-12 flex-row items-center justify-items-center justify-between ml-2 mt-1">
+      <div className="">
         {editing ? (
           // Render the update button when in editing mode
           <button className="btn text-xs col-span-4" onClick={handleUpdate}>
@@ -85,7 +89,8 @@ function BuilderInfo({ deckId, deckName, quantity }) {
           Publish Deck
         </button>
       </div>
-    </div>
+
+    </Container>
   );
 }
 

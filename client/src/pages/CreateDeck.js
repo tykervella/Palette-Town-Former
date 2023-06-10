@@ -53,6 +53,7 @@ const CreateDeck = () => {
     <Container className="flex justify-center m-10">
       <Row>
         <Col className="max-w-3xl w-full p-8 bg-[#4B957E] text-white rounded-lg shadow-lg">
+          <div className='border-2 border-[#FFEC99] p-2 rounded-lg'>
           <h2 className="text-4xl font-bold m-6 underline">Create your Pokemon Deck</h2>
           <div className="text-center">
             <Form className="text-black mx-auto">
@@ -66,7 +67,7 @@ const CreateDeck = () => {
                     onChange={handleNameChange}
                     className="bg-transparent border-b-2 border-[#376D5B] p-2 text-white leading-tight focus:outline-none"
                   />
-                  <p className="mt-2">{name.length}/30</p>
+                  <p className="mt-2 text-white">{name.length}/30</p>
                 </Form.Group>
               </div>
 
@@ -74,6 +75,7 @@ const CreateDeck = () => {
                 Create Deck
               </button>
             </Form>
+          </div>
           </div>
         </Col>
       </Row>
