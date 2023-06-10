@@ -127,20 +127,21 @@ function DeckBuilder() {
           <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
             <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
               <SearchCards onSearch={handleSearch} onRefresh={handleRefresh} />
-              <div className="grid grid-cols-12 mt-3 border-2 border-transparent">
+              <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
                 {/* Render the card list */}
                 {cards.map((card) => (
-                  <CardElement
-                    key={card.id}
-                    cardId={card.id}
-                    cardImage={card.images.small}
-                    cardName={card.name}
-                    cardType={card.types[0]}
-                    superType={card.supertype}
-                    deckId={_id}
-                  />
+                  <Col key={card.id}>
+                    <CardElement
+                      cardId={card.id}
+                      cardImage={card.images.small}
+                      cardName={card.name}
+                      cardType={card.types[0]}
+                      superType={card.supertype}
+                      deckId={_id}
+                    />
+                  </Col>
                 ))}
-              </div>
+              </Row>
             </div>
           </div>
         </Col>
@@ -148,43 +149,43 @@ function DeckBuilder() {
         {/* Right side of page section */}
         <Col md={5}>
           <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
-          <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
-            < BuilderInfo
-              deckId={_id}
-              deckName={deckName}
-              quantity={totalQuantity}
-            />
+            <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
+              < BuilderInfo
+                deckId={_id}
+                deckName={deckName}
+                quantity={totalQuantity}
+              />
 
-            {/* right side of page section */}
-            <Row className="flex-row">
-              {/* Render the decklist */}
-              {decklist.map((card) => (
-                <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
-                  <DeckElement
-                    key={card.cardId}
-                    deckId={_id}
-                    cardId={card.cardId}
-                    cardImage={card.image}
-                    cardName={card.cardName}
-                    superType={card.superType}
-                    quantity={card.quantity}
-                    onUpdateQuantity={(newQuantity) => {
-                      const updatedDecklist = decklist.map((c) => {
-                        if (c.cardId === card.cardId) {
-                          return { ...c, quantity: newQuantity };
-                        }
-                        return c;
-                      });
-                      setDecklist(updatedDecklist);
+              {/* right side of page section */}
+              <Row className="flex-row">
+                {/* Render the decklist */}
+                {decklist.map((card) => (
+                  <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
+                    <DeckElement
+                      key={card.cardId}
+                      deckId={_id}
+                      cardId={card.cardId}
+                      cardImage={card.image}
+                      cardName={card.cardName}
+                      superType={card.superType}
+                      quantity={card.quantity}
+                      onUpdateQuantity={(newQuantity) => {
+                        const updatedDecklist = decklist.map((c) => {
+                          if (c.cardId === card.cardId) {
+                            return { ...c, quantity: newQuantity };
+                          }
+                          return c;
+                        });
+                        setDecklist(updatedDecklist);
 
-                      // Calculate the total quantity
-                      const total = updatedDecklist.reduce((acc, c) => acc + c.quantity, 0);
-                      setTotalQuantity(total);
-                    }}
-                  />
-                </Col>
-              ))}
-            </Row>
+                        // Calculate the total quantity
+                        const total = updatedDecklist.reduce((acc, c) => acc + c.quantity, 0);
+                        setTotalQuantity(total);
+                      }}
+                    />
+                  </Col>
+                ))}
+              </Row>
             </div>
           </div>
         </Col>

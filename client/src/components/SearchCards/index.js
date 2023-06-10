@@ -3,6 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { FiRefreshCcw } from 'react-icons/fi';
+
+const handleRefreshHover = (event) => {
+  event.currentTarget.querySelector('.refresh-icon').classList.toggle('spin');
+};
 
 const SearchCards = ({ onSearch }) => {
   const [cardName, setCardName] = useState('');
@@ -64,31 +69,43 @@ const SearchCards = ({ onSearch }) => {
   };
 
   return (
-    <Container className="grid grid-cols-12 mt-3">
+    <Container className="col-span-2 flex flex-wrap items-center mb-4">
       {/* Search Bar + Filters */}
-      <div className="search-container col-span-6 w-full">
+      <div className="search-container col-span-6 w-full flex items-center">
         <input
           id="searchbar"
-          className="rounded"
+          className="appearance-none bg-transparent border-b-2 border-[#376D5B] py-2 px-3 text-white focus:outline-none"
           placeholder="Search for cards..."
           name="cardName"
           value={cardName}
           onChange={handleInputChange}
         />
-        <button className="btn text-xs" id="searchbtn" onClick={handleSearchClick}>
-          Search
-        </button>
+        <div className="flex items-center">
+          <button className="bg-[#FFEC99] hover:bg-[#AFD7CA] text-black font-bold p-2 m-2 rounded focus:outline-none focus:shadow-outline" id="searchbtn" onClick={handleSearchClick}>
+            Search
+          </button>
+          {/* Refresh Button */}
+          <button
+            className="bg-[#FFEC99] hover:bg-[#AFD7CA] font-bold py-2 px-4 mb-4 mt-2 rounded-lg flex items-center ml-2"
+            onClick={handleRefresh}
+            onMouseEnter={handleRefreshHover}
+            onMouseLeave={handleRefreshHover}
+          >
+            <FiRefreshCcw className="mr-2 refresh-icon" />
+            Reset Filters
+          </button>
+        </div>
       </div>
 
       {/* Select Type dropdown */}
       <div className="col-span-2" id="selectType">
         <select
-          className="w-full text-xs"
+          className="rounded-l appearance-none py-2 px-2 border border-gray-300 bg-white text-gray-700 leading-tight focus:outline-none focus:border-gray-500"
           name="cardType"
           value={cardType}
           onChange={handleInputChange}
         >
-          <option value="0" className=""></option>
+          <option value="0" className="">N/A</option>
           <option value="pokemon" className="">
             Pokemon
           </option>
@@ -104,14 +121,14 @@ const SearchCards = ({ onSearch }) => {
       {/* Select subtype dropdown */}
       {/* Only shows dropdown menu if type is trainer or pokemon */}
       {["trainer", "pokemon"].includes(cardType) && (
-        <div className="col-span-2 w-full" id="selectSubtype">
+        <div className="ml-2 flex items-center" id="selectSubtype">
           <select
-            className="w-full text-xs"
+            className="rounded-l appearance-none py-2 px-2 border border-gray-300 bg-white text-gray-700 leading-tight focus:outline-none focus:border-gray-500"
             name="cardSubtype"
             value={cardSubtype}
             onChange={handleInputChange}
           >
-            <option value="0" className=""></option>
+            <option value="0" className="">N/A</option>
 
             {/* Render subtype options based on selected card type */}
             {cardType === 'pokemon' && (
@@ -148,14 +165,14 @@ const SearchCards = ({ onSearch }) => {
 
       {/* Select color dropdown */}
       {cardType === 'pokemon' && (
-        <div className="col-span-2 w-full" id="selectColor">
+        <div className="ml-2 flex items-center" id="selectColor">
           <select
-            className="w-full text-xs"
+            className="rounded-l appearance-none py-2 px-2 border border-gray-300 bg-white text-gray-700 leading-tight focus:outline-none focus:border-gray-500"
             name="cardColor"
             value={cardColor}
             onChange={handleInputChange}
           >
-            <option value="0" className=""></option>
+            <option value="0" className="">N/A</option>
             <option value="Colorless" className="">Colorless</option>
             <option value="Darkness" className="">Darkness</option>
             <option value="Dragon" className="">Dragon</option>
@@ -171,12 +188,6 @@ const SearchCards = ({ onSearch }) => {
         </div>
       )}
 
-      {/* Refresh Button */}
-      <div className="col-span-12 flex justify-end">
-        <button className="btn text-xs" onClick={handleRefresh}>
-          Reset Filters
-        </button>
-      </div>
     </Container>
   );
 };
