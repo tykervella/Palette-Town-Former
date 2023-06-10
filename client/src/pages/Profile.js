@@ -25,46 +25,35 @@ const Profile = () => {
       const user = data.user;
       const postsLength = user.posts.length;
 
-      function findDeckByDeckName(deckName) {
-        const decks = user.decks;
-        for (let i = 0; i < decks.length; i++) {
-          if (decks[i].deckName === deckName) {
-            return decks[i].cards;
-          }
-        }
-        return null; // Return null if no matching deck is found
-      }
-
-      const postDeckCards = user.posts.map((post) =>
-        findDeckByDeckName(post.deckName)
-      );
 
       const updatePostsArr = () => {
         const newPostsArr = [];
         for (let i = 0; i < postsLength; i++) {
           const colors = user.posts[i];
-          const images = postDeckCards[i];
+          const images = user.posts[i]
+          // const length = images
+
 
           const newPost = [
             {
-              title: colors.color1.substring(0, 7),
-              image: images[0].cardImage || "#",
+              title: colors.color1,
+              image: images.image1,
             },
             {
-              title: colors.color2.substring(0, 7),
-              image: images[1].cardImage || "#",
+              title: colors.color2,
+              image: images.image2,
             },
             {
-              title: colors.color3.substring(0, 7),
-              image: images[2].cardImage || "#",
+              title: colors.color3,
+              image: images.image3,
             },
             {
-              title: colors.color4.substring(0, 7),
-              image: images[3].cardImage || "#",
+              title: colors.color4,
+              image: images.image4,
             },
             {
-              title: colors.color1.substring(0, 7),
-              image: images[4].cardImage || "#",
+              title: colors.color5,
+              image: images.image5,
             },
           ];
           newPostsArr.push(newPost);
@@ -133,7 +122,7 @@ const Profile = () => {
       {postsArr.map((sectionData, index) => (
         <PaletteBox key={index} sectionData={sectionData} />
       ))}
-      
+
       <div className="border border-black rounded-lg p-4 bg-[#AFD7CA] mb-4"></div>
 
       <div className="mt-4" style={{ paddingBottom: "50px" }}></div>

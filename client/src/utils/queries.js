@@ -26,6 +26,11 @@ query User($username: String!) {
       color3
       color4
       color5
+      image1
+      image2
+      image3
+      image4
+      image5
       deckName
       _id
     }

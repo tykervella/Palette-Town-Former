@@ -178,7 +178,7 @@ const resolvers = {
 
       return newListing;
     },
-    addPost: async (parent, { deckOwner, deckName, postText, color1, color2, color3, color4, color5 }) => {
+    addPost: async (parent, { deckOwner, deckName, postText, color1, color2, color3, color4, color5, image1, image2, image3, image4, image5 }) => {
       const newPost = await Post.create({
         deckOwner: deckOwner,
         deckName: deckName,
@@ -187,7 +187,12 @@ const resolvers = {
         color2: color2,
         color3: color3,
         color4: color4,
-        color5: color5
+        color5: color5,
+        image1: image1,
+        image2: image2,
+        image3: image3,
+        image4: image4,
+        image5: image5
       });
     
       await User.findOneAndUpdate(
