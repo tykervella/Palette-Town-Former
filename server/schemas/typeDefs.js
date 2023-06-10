@@ -53,6 +53,11 @@ const typeDefs = gql`
     color3: String!
     color4: String!
     color5: String!
+    image1: String!
+    image2: String!
+    image3: String!
+    image4: String!
+    image5: String!
     commentCount: Int!
   }
 
@@ -118,6 +123,11 @@ const typeDefs = gql`
       color3: String!
       color4: String!
       color5: String!
+      image1: String!
+      image2: String!
+      image3: String!
+      image4: String!
+      image5: String!
     ): Post
     addCardToDeckList(
       deckId: ID!, 
