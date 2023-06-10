@@ -261,55 +261,51 @@ const CreatePost = () => {
   console.log(decklist)
 
   return (
-    <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-red-700 bg-white">
+    <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-green-700 bg-white">
       <Form className="text-black mx-auto">
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  id="name"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Form.Group>
-
-            <div>
-              {/* Render the decklist */}
-              
-              {decklist.map((card) => (
-                
-                  <DeckElement
-                    key={card.cardId}
-                    deckId={_id}
-                    cardId={card.cardId}
-                    cardImage={card.cardIMG}
-                    cardName={card.cardName}
-                    superType={card.superType}
-                    quantity={card.quantity}
-                    counter = {false}
-              
-                  />
-             
-              ))}
-          </div>
-
-          <Form.Group className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  id="bio"
-                  rows={4}
-                  placeholder="Bio"
-                  value={text}
-                  onChange={handleTextChange}
-                />
-                <p className="text-muted mt-2">{text.length}/280</p>
-              </Form.Group>
-            
-
+        <Form.Group className="mb-3">
+          <Form.Control
+            type="text"
+            id="name"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
+  
+        <div className="grid grid-cols-5 gap-4">
+          {/* Render the decklist */}
+          {decklist.map((card) => (
+            <DeckElement
+              key={card.cardId}
+              deckId={_id}
+              cardId={card.cardId}
+              cardImage={card.cardIMG}
+              cardName={card.cardName}
+              superType={card.superType}
+              quantity={card.quantity}
+              counter={false}
+            />
+          ))}
+        </div>
+  
+        <Form.Group className="mb-3">
+          <Form.Control
+            as="textarea"
+            id="bio"
+            rows={4}
+            placeholder="Bio"
+            value={text}
+            onChange={handleTextChange}
+          />
+          <p className="text-muted mt-2">{text.length}/280</p>
+        </Form.Group>
+  
         <Button onClick={handleAddPost}>Create Deck</Button>
       </Form>
     </div>
   );
+  
 };
 
 export default CreatePost;

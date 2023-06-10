@@ -8,6 +8,8 @@ import Auth from "../utils/auth";
 import CircleImage from "./assets/profile-pic.webp";
 import ProfileInfo from "../components/ProfileInfo";
 import PaletteBox from "../components/PaletteBox";
+import DeckPreview from "../components/DeckPreview";
+import FeaturedListing from "../components/FeaturedListing";
 // import UpdateProfile from "../components/UpdateForm";
 
 const Profile = () => {
@@ -89,9 +91,9 @@ const Profile = () => {
 
   return (
     <Container>
-      <h2 className="mb-4 mt-4">Your Profile</h2>
+      <h2 className="mb-4 mt-4 text-[#0B3C49]">Your Profile</h2>
 
-      <div className="border border-[black] rounded-lg p-4 mb-8 bg-[#AFD7CA]">
+      <div className="border border-[black] rounded-lg p-4 mb-8 bg-[#0B3C49]">
         <Row>
           <Col md={6} className="border-right border-black pr-4">
             <ProfileInfo
@@ -99,6 +101,7 @@ const Profile = () => {
               name={name}
               username={user_name}
               bio={bio}
+              className="text-white"
             />
           </Col>
           <Col md={6} className="text-center">
@@ -118,7 +121,7 @@ const Profile = () => {
         </Row>
       </div>
 
-      <h2 className="mt-14 mb-4">Your Palettes</h2>
+      <h2 className="mt-14 mb-4 text-[#0B3C49]">Your Palettes</h2>
 
       {postsArr.map((sectionData, index) => (
         <PaletteBox
@@ -129,7 +132,31 @@ const Profile = () => {
         />
       ))}
 
-      <div className="border border-black rounded-lg p-4 bg-[#AFD7CA] mb-4"></div>
+<Row>
+  <Col md={6}>
+    <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
+    {postsArr.map((sectionData, index) => (
+        <DeckPreview
+          key={index}
+          sectionData={sectionData}
+          postName={sectionData[0].postName} // Pass postName to DeckPreview
+          postOwner={sectionData[0].postOwner} // Pass postOwner to DeckPreview
+        />
+      ))}
+  </Col>
+  <Col md={6}>
+    <h2 className="text-[#0B3C49] mt-4 mb-4">Your Listings</h2>
+    {postsArr.map((sectionData, index) => (
+        <FeaturedListing
+          key={index}
+          sectionData={sectionData}
+          postName={sectionData[0].postName} // Pass postName to FeaturedListing
+          postOwner={sectionData[0].postOwner} // Pass postOwner to FeaturedListing
+        />
+      ))}
+  </Col>
+</Row>
+
 
       <div className="mt-4" style={{ paddingBottom: "50px" }}></div>
     </Container>

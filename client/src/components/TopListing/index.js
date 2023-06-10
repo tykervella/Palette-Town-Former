@@ -11,14 +11,17 @@ const TopListings = () => {
       {/* <h2 className="text-black mb-4 mt-4">Today's Top Listings</h2> */}
       <Row className="justify-content-center">
         <Col xs={12} sm={10} md={8}>
-          <ImageSlider slides={SliderData} />
+          <div className="top-listing-card">
+            <ImageSlider slides={SliderData} />
+          </div>
         </Col>
       </Row>
     </Container>
   );
-}
+};
 
 export default TopListings;
+
 
 {/* <section>
   <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
