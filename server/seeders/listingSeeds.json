@@ -9,9 +9,9 @@
     "seller": "user1"
   },
   {
-    "cardId": "ex3-77",
-    "cardImage": "https://images.pokemontcg.io/ex3/77.png",
-    "cardName": "Bulbasaur",
+    "cardId": "xy1-1",
+    "cardImage": "https://images.pokemontcg.io/xy1/1.png",
+    "cardName": "Venusaur-EX",
     "cardType": "Grass",
     "superType": "Pokémon",
     "price": 3.99,
