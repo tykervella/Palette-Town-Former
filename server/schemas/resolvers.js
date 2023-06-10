@@ -229,6 +229,7 @@ const resolvers = {
     addPost: async (parent, {
       postOwner,
       postName,
+      deckName,
       postText,
       color1,
       color2,
@@ -244,6 +245,7 @@ const resolvers = {
       const newPost = await Post.create({
         postOwner: postOwner,
         postName: postName,
+        deckName: deckName,
         postText: postText,
         color1: color1,
         color2: color2,

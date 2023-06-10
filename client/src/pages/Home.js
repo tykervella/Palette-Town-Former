@@ -118,6 +118,8 @@ const Home = () => {
         <Row>
           <Col>
             <div>
+            <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2>
+
             {postsArr.map((sectionData, index) => (
               <PaletteBox
                 key={index}

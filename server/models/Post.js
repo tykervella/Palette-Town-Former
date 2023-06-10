@@ -26,9 +26,15 @@ const postSchema = new Schema({
     postName: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
-        minlength: 2,
+        minlength: 1,
     },
+    deckName: {
+      type: String,
+      required: true,
+      trim: true,
+  },
     postText: {
         type: String,
         maxlength: 280,

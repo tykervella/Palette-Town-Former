@@ -45,6 +45,7 @@ const typeDefs = gql`
     _id: ID!
     postOwner: String!
     postName: String!
+    deckName: String!
     postText: String
     createdAt: String
     caughtUsers: [CaughtUser!]
@@ -134,6 +135,7 @@ const typeDefs = gql`
       postOwner: String!
       postName: String!
       postText: String
+      deckName: String!
       color1: String!
       color2: String!
       color3: String!
