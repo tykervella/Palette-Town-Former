@@ -322,6 +322,7 @@ const CreatePost = () => {
 </Container>
 
   );
+  
 };
 
 export default CreatePost;

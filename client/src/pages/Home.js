@@ -115,7 +115,8 @@ const Home = () => {
         </Row>
 
         {/* trending palettes */}
-        <Row>
+        <h2 className="text-[#0B3C49] mb-6">Your Pallets</h2>
+                <Row>
           <Col>
             <div>
             <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2>
@@ -133,7 +134,7 @@ const Home = () => {
         </Row>
 
         {/* bottom row */}
-        <div className="d-flex flex-wrap"> {/* Added flex-wrap */}
+        <div className="mt-8 d-flex flex-wrap"> {/* Added flex-wrap */}
           {/* caught decks */}
           <Col md={7} className="mb-4">
             <h2 className="text-[#0B3C49] mb-6">Caught Decks</h2>
@@ -144,7 +145,7 @@ const Home = () => {
           <Col md={5}>
             {/* top listings decks */}
             <h2 className="text-[#0B3C49] mb-6">Highest Value Listing</h2>
-            <div className="border border-black rounded-xl bg-[#0B3C49] p-16 m-2">
+            <div className="border border-black rounded-xl bg-[#0B3C49] p-12 m-4">
               <TopListing />
             </div>
           </Col>
