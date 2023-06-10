@@ -67,8 +67,8 @@ function DeckElement({
 
   return (
     <div className="col-span-4 my-2 flex flex-col items-center">
-      <img src={cardImage} alt={cardName} data={cardId} />
-      <h1 className="text-xs mt-1 text-center">{cardName}</h1>
+      <img src={cardImage} alt={cardName} data={cardId} className='hover:scale-150'/>
+      <h1 className="truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-2 text-xs">{cardName}</h1>
       <div className="flex items-center mt-1">
         {counter && (
           <button

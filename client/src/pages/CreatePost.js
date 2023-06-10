@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import Auth from '../utils/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
@@ -7,8 +7,6 @@ import { ADD_POST } from '../utils/mutations';
 import { GET_DECK } from "../utils/queries";
 
 import DeckElement from '../components/DeckElement';
-
-
 
 
 
@@ -42,18 +40,18 @@ const CreatePost = () => {
   //takes in a colorName and returns associated rgb values
   function deconstructColor(colorName) {
     // base colors for each pokemon cardType to start at and then randomize.
-      const colors = [
-        { name: "Colorless", rgb: "229, 242, 200" },
-        { name: "Darkness", rgb: "37, 31, 41" },
-        { name: "Dragon", rgb: "147, 129, 255" },
-        { name: "Fairy", rgb: "255, 200, 221" },
-        { name: "Fighting", rgb: "247, 127, 0" },
-        { name: "Fire", rgb: "230, 57, 70" },
-        { name: "Grass", rgb: "128, 237, 153" },
-        { name: "Lightning", rgb: "252, 246, 139" },
-        { name: "Metal", rgb: "43, 45, 66" },
-        { name: "Psychic", rgb: "205, 180, 219" },
-        { name: "Water", rgb: "162, 210, 255" }
+    const colors = [
+      { name: "Colorless", rgb: "229, 242, 200" },
+      { name: "Darkness", rgb: "37, 31, 41" },
+      { name: "Dragon", rgb: "147, 129, 255" },
+      { name: "Fairy", rgb: "255, 200, 221" },
+      { name: "Fighting", rgb: "247, 127, 0" },
+      { name: "Fire", rgb: "230, 57, 70" },
+      { name: "Grass", rgb: "128, 237, 153" },
+      { name: "Lightning", rgb: "252, 246, 139" },
+      { name: "Metal", rgb: "43, 45, 66" },
+      { name: "Psychic", rgb: "205, 180, 219" },
+      { name: "Water", rgb: "162, 210, 255" }
     ];
     //finds color equal to what is passed as a parameter
     const color = colors.find(obj => obj.name === colorName);
@@ -118,8 +116,8 @@ const CreatePost = () => {
       setDeckName(deckData.deck.deckName)
       console.log(cardList)
 
-    
-  
+
+
       const cardTypeArray = deckData.deck.cards.map((card) => card.cardType);
       const uniqueCardTypes = [...new Set(cardTypeArray)].filter(
         (type) => type !== "other"
@@ -156,8 +154,8 @@ const CreatePost = () => {
       } else if (length === 4) {
         const value0 = sortedCardTypes[0];
         sortedCardTypes.push(value0)
-      } 
-      
+      }
+
       const generateSortedImages = () => {
         const images = [];
         sortedCardTypes.forEach((cardType) => {
@@ -165,25 +163,25 @@ const CreatePost = () => {
             const card = cardList.find(
               (card) => card.cardType === cardType
             );
-      
+
             if (card) {
               const cardImage = card.cardIMG
               images.push(cardImage);
-              
+
               const index = cardList.findIndex((card) => card.cardIMG === cardImage);
-        
-            // Remove the element at the found index from cardList
-            if (index !== -1) {
-            cardList.splice(index, 1);
-        }
-          
+
+              // Remove the element at the found index from cardList
+              if (index !== -1) {
+                cardList.splice(index, 1);
+              }
+
             }
           }
         });
-      
+
         setSortedImages(images);
       };
-      
+
       generateSortedImages();
 
     }
@@ -217,8 +215,8 @@ const CreatePost = () => {
       const image5 = sortedImages[4];
       console.log(image1, image2, image3, image4, image5)
 
-      const response = await addPost({ 
-        variables: { 
+      const response = await addPost({
+        variables: {
           postOwner: user_name,
           postName: name, 
           deckName: deckName,
@@ -233,7 +231,8 @@ const CreatePost = () => {
           image4: image4,
           image5: image5,
           postText: text
-        } });
+        }
+      });
 
       const newPost = response.data.addPost._id
       console.log(newPost)
@@ -262,54 +261,66 @@ const CreatePost = () => {
   console.log(decklist)
 
   return (
-    <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-red-700 bg-white">
-      <Form className="text-black mx-auto">
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  id="name"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Form.Group>
+<Container className="d-flex flex-column justify-content-center align-items-center rounded-lg bg-[#AFD7CA] p-4 mb-4">
+  <div className="border-2 border-[#FFEC99] rounded-lg p-4 d-flex flex-column align-items-center">
+    <Form className="text-center">
 
-            <div>
-              {/* Render the decklist */}
-              
-              {decklist.map((card) => (
-                
-                  <DeckElement
-                    key={card.cardId}
-                    deckId={_id}
-                    cardId={card.cardId}
-                    cardImage={card.cardIMG}
-                    cardName={card.cardName}
-                    superType={card.superType}
-                    quantity={card.quantity}
-                    counter = {false}
-              
-                  />
-             
-              ))}
-          </div>
+      {/* post title input */}
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          id="name"
+          placeholder="Post Title"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="text-center w-50 mx-auto"
+          style={{ maxWidth: '400px' }}
+        />
+      </Form.Group>
 
-          <Form.Group className="mb-3">
-                <Form.Control
-                  as="textarea"
-                  id="bio"
-                  rows={4}
-                  placeholder="Bio"
-                  value={text}
-                  onChange={handleTextChange}
-                />
-                <p className="text-muted mt-2">{text.length}/280</p>
-              </Form.Group>
-            
+      {/* deck listing */}
+      <Row className="justify-content-center">
+        {decklist.map((card) => (
+          <Col key={card.cardId} xs={6} md={4} lg={2} className="">
+            <DeckElement
+              deckId={_id}
+              cardId={card.cardId}
+              cardImage={card.cardIMG}
+              cardName={card.cardName}
+              superType={card.superType}
+              quantity={card.quantity}
+              counter={false}
+            />
+          </Col>
+        ))}
+      </Row>
 
-        <Button onClick={handleAddPost}>Create Deck</Button>
-      </Form>
-    </div>
+      {/* bio input  */}
+      <Form.Group className="mb-3">
+        <Form.Control
+          as="textarea"
+          id="bio"
+          rows={4}
+          placeholder="Post Text..."
+          value={text}
+          onChange={handleTextChange}
+          className="w-50 mx-auto"
+          style={{ maxWidth: '400px' }}
+        />
+        <p className="text-muted mt-2 float-right">{text.length}/280</p>
+      </Form.Group>
+
+      {/* publish button */}
+      <div className="text-center">
+        <button className="bg-[#FFEC99] hover:bg-[#4B957E] text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleAddPost}>
+          Publish
+        </button>
+      </div>
+
+    </Form>
+  </div>
+</Container>
+
   );
 };
 
