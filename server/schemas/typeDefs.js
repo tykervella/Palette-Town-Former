@@ -1,6 +1,11 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
+  type CaughtPost {
+    caughtPostName: String!
+  }
+
   type User {
     _id: ID!
     username: String!
@@ -12,7 +17,7 @@ const typeDefs = gql`
     listings: [Listing!]
     posts: [Post!]
     bio: String
-
+    caughtPosts: [CaughtPost!]
   }
 
   type Deck {
@@ -30,24 +35,19 @@ const typeDefs = gql`
     cardType: String!
     superType: String!
     quantity: Int!
-    # ... other card fields
   }
 
-
-  type Comment {
-    _id: ID!
-    commentText: String!
-    commentAuthor: String!
-    createdAt: String!
+  type CaughtUser {
+    caughtUserName: String!
   }
 
   type Post {
     _id: ID!
-    deckOwner: String!
-    deckName: String!
+    postOwner: String!
+    postName: String!
     postText: String
     createdAt: String
-    comments: [Comment!]
+    caughtUsers: [CaughtUser!]
     color1: String!
     color2: String!
     color3: String!
@@ -58,7 +58,7 @@ const typeDefs = gql`
     image3: String!
     image4: String!
     image5: String!
-    commentCount: Int!
+    captureCount: Int!
   }
 
   type Listing {
@@ -87,24 +87,39 @@ const typeDefs = gql`
     listings(username: String!): [Listing]
     listing(listingId: ID!): Listing
     allListings: [Listing]
-    posts(username: String!): [Post]
+    posts: [Post]
     post(postId: ID!): Post
     # filteredListings(searchQuery: String, selectedTypes: [String!], selectedColors: [String!]): [Listing]
     # sortedListings(sortOption: String): [Listing]
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
+    login(
+      email: String! 
+      password: String!
+    ): Auth
+
+    addUser(
+      username: String! 
+      email: String!
+      password: String!
+    ): Auth
+    
     addDeck(
       deckOwner: String!
       deckName: String!
-      ): Deck
-    addComment(
-      deckId: ID!, 
-      commentText: String!
-      commentAuthor: String!
     ): Deck
+
+    addCaughtPost(
+      userId: ID!
+      caughtPostName: String!
+    ): User
+
+    addCaughtUser(
+      postId: ID!
+      caughtUserName: String!
+    ):Post
+
     addListing(
       cardId: String!
       cardName: String!
@@ -114,9 +129,10 @@ const typeDefs = gql`
       price: Float!
       seller: String! 
     ): Listing
+
     addPost(
-      deckOwner: String!
-      deckName: String!
+      postOwner: String!
+      postName: String!
       postText: String
       color1: String!
       color2: String!
@@ -129,6 +145,7 @@ const typeDefs = gql`
       image4: String!
       image5: String!
     ): Post
+
     addCardToDeckList(
       deckId: ID!, 
       cardId: String!
@@ -138,19 +155,18 @@ const typeDefs = gql`
       superType: String!
     ): Deck
     
-    removeDeck(deckId: ID!): Deck
-    removeComment(deckId: ID!, commentId: ID!): Deck
-    removeCard(deckId: ID!, cardId: String!): Deck
+    removeCard(
+      deckId: ID!
+      cardId: String!
+    ): Deck
     
     updateCardQuantity(
       deckId: ID! 
       cardId: ID! 
       quantity: Int!
     ): Deck
-    updateDeckName(
-      deckId: ID! 
-      deckName: String!
-    ): Deck
+
+    
   
     }
 

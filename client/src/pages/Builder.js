@@ -1,13 +1,12 @@
-
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { GET_DECK } from '../utils/queries';
-import axios from 'axios'; // Import axios for making API requests
+import axios from 'axios';
 
 import CardElement from '../components/CardElement';
 import SearchCards from '../components/SearchCards';
-import BuilderInfo from "../components/BuilderInfo"
+import BuilderInfo from '../components/BuilderInfo';
 import DeckElement from '../components/DeckElement';
 
 import Container from 'react-bootstrap/Container';
@@ -19,17 +18,14 @@ function DeckBuilder() {
   const [cards, setCards] = useState([]);
   const [decklist, setDecklist] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [deckName, setDeckName] = useState(''); // New state variable for deckName
+  const [deckName, setDeckName] = useState('');
 
   const { loading, error, data } = useQuery(GET_DECK, {
     variables: { deckId: _id },
   });
 
-
-
   useEffect(() => {
     if (data && data.deck) {
-      // Retrieve the decklist from the GraphQL response data and update the state
       const decklistFromData = data.deck.cards.map((card) => ({
         cardId: card.cardId,
         image: card.cardImage,
@@ -39,15 +35,12 @@ function DeckBuilder() {
       }));
       setDecklist(decklistFromData);
 
-      // Calculate the total quantity
       const total = decklistFromData.reduce((acc, card) => acc + card.quantity, 0);
       setTotalQuantity(total);
 
-      // Set the deckName state
       setDeckName(data.deck.deckName);
     }
   }, [data]);
-
 
   const getCards = (cardName, cardType, cardSubtype, cardColor, pageNumber) => {
     let queryString = '';
@@ -118,17 +111,31 @@ function DeckBuilder() {
     handleRefresh();
   }, []);
 
-  return (
-    <Container className='mb-4'>
-      <Row>
+  const updateTotalQuantity = (updatedDecklist) => {
+    const total = updatedDecklist.reduce((acc, card) => acc + card.quantity, 0);
+    setTotalQuantity(total);
+  };
 
-        {/* Left side. Search Element */}
+  const onUpdateQuantity = (newQuantity, cardId) => {
+    const updatedDecklist = decklist.map((card) => {
+      if (card.cardId === cardId) {
+        return { ...card, quantity: newQuantity };
+      }
+      return card;
+    });
+    setDecklist(updatedDecklist);
+  
+    updateTotalQuantity(updatedDecklist);
+  };
+  
+  return (
+    <Container className="mb-4">
+      <Row>
         <Col md={7}>
           <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
-            <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
+            <div className="border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg">
               <SearchCards onSearch={handleSearch} onRefresh={handleRefresh} />
               <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                {/* Render the card list */}
                 {cards.map((card) => (
                   <Col key={card.id}>
                     <CardElement
@@ -145,44 +152,24 @@ function DeckBuilder() {
             </div>
           </div>
         </Col>
-
-        {/* Right side of page section */}
         <Col md={5}>
           <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
-            <div className='border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg'>
-              < BuilderInfo
-                deckId={_id}
-                deckName={deckName}
-                quantity={totalQuantity}
-              />
-
-            {/* right side of page section */}
-            <Row className="flex-row">
-              {/* Render the decklist */}
-              {decklist.map((card) => (
-                <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
-                  <DeckElement
-                    key={card.cardId}
-                    deckId={_id}
-                    cardId={card.cardId}
-                    cardImage={card.image}
-                    cardName={card.cardName}
-                    superType={card.superType}
-                    quantity={card.quantity}
-                    counter = {true}
-                    onUpdateQuantity={(newQuantity) => {
-                      const updatedDecklist = decklist.map((c) => {
-                        if (c.cardId === card.cardId) {
-                          return { ...c, quantity: newQuantity };
-                        }
-                        return c;
-                      });
-                      setDecklist(updatedDecklist);
-
-                        // Calculate the total quantity
-                        const total = updatedDecklist.reduce((acc, c) => acc + c.quantity, 0);
-                        setTotalQuantity(total);
-                      }}
+            <div className="border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg">
+              <BuilderInfo deckId={_id} deckName={deckName} quantity={totalQuantity} />
+              <Row className="flex-row">
+                {decklist.map((card) => (
+                  <Col key={card.cardId} xs={12} sm={6} md={4} lg={3}>
+                    <DeckElement
+                      key={card.cardId}
+                      deckId={_id}
+                      cardId={card.cardId}
+                      cardImage={card.image}
+                      cardName={card.cardName}
+                      superType={card.superType}
+                      quantity={card.quantity}
+                      counter={true}
+                      onUpdateQuantity={onUpdateQuantity}
+                      updateTotalQuantity={updateTotalQuantity} 
                     />
                   </Col>
                 ))}
@@ -190,7 +177,6 @@ function DeckBuilder() {
             </div>
           </div>
         </Col>
-
       </Row>
     </Container>
   );

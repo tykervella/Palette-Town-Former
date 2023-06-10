@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../utils/queries";
+import Auth from "../utils/auth";
 
-import likeButton from "./assets/pokeball-like.png";
+
 import CircleImage from "./assets/profile-pic.webp";
 import ProfileInfo from "../components/ProfileInfo";
 import PaletteBox from "../components/PaletteBox";
-import UpdateProfile from "../components/UpdateForm";
-import Auth from "../utils/auth";
+// import UpdateProfile from "../components/UpdateForm";
 
 const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,15 +30,15 @@ const Profile = () => {
         for (let i = 0; i < postsLength; i++) {
           const colors = user.posts[i];
           const images = user.posts[i];
-          const deckName = user.posts[i].deckName; // Add deckName
-          const deckOwner = user.posts[i].deckOwner; // Add deckOwner
+          const postName = user.posts[i].postName; // Add postName
+          const postOwner = user.posts[i].postOwner; // Add postkOwner
 
           const newPost = [
             {
               title: colors.color1,
               image: images.image1,
-              deckName: deckName, // Pass deckName
-              deckOwner: user_name, // Pass deckOwner
+              postName: postName, // Pass postName
+              postOwner: postOwner, // Pass postOwner
             },
             {
               title: colors.color2,
@@ -124,8 +124,8 @@ const Profile = () => {
         <PaletteBox
           key={index}
           sectionData={sectionData}
-          deckName={sectionData[0].deckName} // Pass deckName to PaletteBox
-          deckOwner={sectionData[0].deckOwner} // Pass deckOwner to PaletteBox
+          postName={sectionData[0].postName} // Pass postName to PaletteBox
+          postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
         />
       ))}
 

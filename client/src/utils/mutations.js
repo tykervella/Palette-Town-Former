@@ -30,12 +30,40 @@ export const ADD_ORDER = gql`
 `;
 
 export const ADD_POST = gql`
-  mutation Mutation(
-    $deckOwner: String!, $deckName: String!, $color1: String!, $color2: String!, $color3: String!, $color4: String!, $color5: String!, $image1: String!, $image2: String!, $image3: String!, $image4: String!, $image5: String!, $postText: String) {
-  addPost(deckOwner: $deckOwner, deckName: $deckName, color1: $color1, color2: $color2, color3: $color3, color4: $color4, color5: $color5, image1: $image1, image2: $image2, image3: $image3, image4: $image4, image5: $image5, postText: $postText) {
-    _id
+  mutation AddPost(
+    $postOwner: String!
+    $postName: String!
+    $color1: String!
+    $color2: String!
+    $color3: String!
+    $color4: String!
+    $color5: String!
+    $image1: String!
+    $image2: String!
+    $image3: String!
+    $image4: String!
+    $image5: String!
+    $postText: String
+  ) {
+    addPost(
+      postOwner: $postOwner
+      postName: $postName
+      color1: $color1
+      color2: $color2
+      color3: $color3
+      color4: $color4
+      color5: $color5
+      image1: $image1
+      image2: $image2
+      image3: $image3
+      image4: $image4
+      image5: $image5
+      postText: $postText
+    ) {
+      _id
+    }
   }
-}`
+`;
 
 export const ADD_USER = gql`
   mutation addUser(
@@ -116,16 +144,4 @@ export const UPDATE_CARD_QUANTITY = gql`
   }
 }`
 
-export const UPDATE_DECK_NAME = gql`
-  mutation Mutation(
-    $deckId: ID!, 
-    $deckName: String!
-    ) {
-    updateDeckName(
-      deckId: $deckId, 
-      deckName: $deckName) 
-    {
-    _id
-    deckName
-  }
-}`
+

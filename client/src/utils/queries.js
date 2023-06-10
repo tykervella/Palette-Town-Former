@@ -31,7 +31,8 @@ query User($username: String!) {
       image3
       image4
       image5
-      deckName
+      postName
+      postOwner
       _id
     }
     bio
@@ -136,6 +137,25 @@ export const GET_LISTINGS = gql`
   }
 }
 `;
+
+export const GET_TOP_POSTS = gql`
+query Query {
+  posts {
+    captureCount
+    postName
+    color1
+    color2
+    color3
+    color4
+    color5
+    image1
+    image3
+    image2
+    image4
+    image5
+    postOwner
+  }
+}`
 
 export const GET_FILTERED_LISTINGS = gql`
   query getFilteredListings($searchQuery: String, $selectedTypes: [String!], $selectedColors: [String!]) {
