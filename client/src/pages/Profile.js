@@ -25,19 +25,20 @@ const Profile = () => {
       const user = data.user;
       const postsLength = user.posts.length;
 
-
       const updatePostsArr = () => {
         const newPostsArr = [];
         for (let i = 0; i < postsLength; i++) {
           const colors = user.posts[i];
-          const images = user.posts[i]
-          // const length = images
-
+          const images = user.posts[i];
+          const deckName = user.posts[i].deckName; // Add deckName
+          const deckOwner = user.posts[i].deckOwner; // Add deckOwner
 
           const newPost = [
             {
               title: colors.color1,
               image: images.image1,
+              deckName: deckName, // Pass deckName
+              deckOwner: user_name, // Pass deckOwner
             },
             {
               title: colors.color2,
@@ -117,10 +118,15 @@ const Profile = () => {
         </Row>
       </div>
 
-      <h2 className="mt-14 mb-4">Your Pallets</h2>
+      <h2 className="mt-14 mb-4">Your Palettes</h2>
 
       {postsArr.map((sectionData, index) => (
-        <PaletteBox key={index} sectionData={sectionData} />
+        <PaletteBox
+          key={index}
+          sectionData={sectionData}
+          deckName={sectionData[0].deckName} // Pass deckName to PaletteBox
+          deckOwner={sectionData[0].deckOwner} // Pass deckOwner to PaletteBox
+        />
       ))}
 
       <div className="border border-black rounded-lg p-4 bg-[#AFD7CA] mb-4"></div>
@@ -131,3 +137,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

@@ -6,6 +6,12 @@ import { useMutation, useQuery } from '@apollo/client';
 import { ADD_POST } from '../utils/mutations';
 import { GET_DECK } from "../utils/queries";
 
+import DeckElement from '../components/DeckElement';
+
+
+
+
+
 const CreatePost = () => {
   //get username from logged in token, intitalizes 
   const token = Auth.getToken();
@@ -15,9 +21,12 @@ const CreatePost = () => {
 
   // initializing of various states we will use throughout code. 
   const { _id } = useParams();
-  const [deckName, setDeckName] = useState('');
   const [sortedCardTypes, setSortedCardTypes] = useState([]);
   const [sortedImages, setSortedImages] = useState([]);
+  const [decklist, setDecklist] = useState([]);  // Define decklist state variable
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
+
 
 
   // function that takes in rgb values in and returns a 6 character hexcode
@@ -79,6 +88,23 @@ const CreatePost = () => {
     return rgbToHex(clampedR, clampedG, clampedB);
   }
 
+  const handleNameChange = (e) => {
+    const inputName = e.target.value;
+    if (inputName.length <= 30) {
+      setName(inputName);
+    } else {
+      alert("Deck Names must be 30 characters or shorter!");
+    }
+  };
+
+  const handleTextChange = (e) => {
+    const inputText = e.target.value;
+    if (inputText.length <= 280) {
+      setText(inputText);
+    } else {
+      alert("Post text must be 280 characters or shorter!")
+    }
+  };
 
   // getting deck information for the deck with the _id equal to the params
   const { loading: deckLoading, error: deckError, data: deckData } = useQuery(GET_DECK, { variables: { deckId: _id } });
@@ -88,8 +114,7 @@ const CreatePost = () => {
     if (deckData && deckData.deck) {
       // console.log(deckData.deck);
   
-      const deckName = deckData.deck.deckName;
-      setDeckName(deckName);
+  
   
       const cardList = deckData.deck.cards.map((card) => ({
         cardName: card.cardName,
@@ -98,6 +123,10 @@ const CreatePost = () => {
         quantity: card.quantity,
         cardId: card.cardId
       }));
+
+      setDecklist(cardList)
+      console.log(cardList)
+
   
       const cardTypeArray = deckData.deck.cards.map((card) => card.cardType);
       const uniqueCardTypes = [...new Set(cardTypeArray)].filter(
@@ -198,7 +227,7 @@ const CreatePost = () => {
       const response = await addPost({ 
         variables: { 
           deckOwner: user_name,
-          deckName: deckName, 
+          deckName: name, 
           color1: modifiedCardTypes.color1,
           color2: modifiedCardTypes.color2,
           color3: modifiedCardTypes.color3,
@@ -208,7 +237,8 @@ const CreatePost = () => {
           image2: image2,
           image3: image3,
           image4: image4,
-          image5: image5
+          image5: image5,
+          postText: text
         } });
 
       const newPost = response.data.addPost._id
@@ -235,14 +265,54 @@ const CreatePost = () => {
     console.log(deckError);
     return <div>Error loading deck</div>;
   }
-
+  console.log(decklist)
 
   return (
     <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-red-700 bg-white">
       <Form className="text-black mx-auto">
-        <Form.Group className="mb-3 mt-3 mx-auto">
-          <h3 className="col-span-6 text-center">{deckName}</h3>
-        </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Form.Group>
+
+            <div>
+              {/* Render the decklist */}
+              
+              {decklist.map((card) => (
+                
+                  <DeckElement
+                    key={card.cardId}
+                    deckId={_id}
+                    cardId={card.cardId}
+                    cardImage={card.cardIMG}
+                    cardName={card.cardName}
+                    superType={card.superType}
+                    quantity={card.quantity}
+                    counter = {false}
+              
+                  />
+             
+              ))}
+          </div>
+
+          <Form.Group className="mb-3">
+                <Form.Control
+                  as="textarea"
+                  id="bio"
+                  rows={4}
+                  placeholder="Bio"
+                  value={text}
+                  onChange={handleTextChange}
+                />
+                <p className="text-muted mt-2">{text.length}/280</p>
+              </Form.Group>
+            
+
         <Button onClick={handleAddPost}>Create Deck</Button>
       </Form>
     </div>
