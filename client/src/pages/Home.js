@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { GET_TOP_POSTS } from "../utils/queries";
 import Auth from "../utils/auth";
