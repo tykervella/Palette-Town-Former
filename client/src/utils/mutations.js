@@ -33,6 +33,7 @@ export const ADD_POST = gql`
   mutation AddPost(
     $postOwner: String!
     $postName: String!
+    $deckName: String!
     $color1: String!
     $color2: String!
     $color3: String!
@@ -48,6 +49,7 @@ export const ADD_POST = gql`
     addPost(
       postOwner: $postOwner
       postName: $postName
+      deckName: $deckName
       color1: $color1
       color2: $color2
       color3: $color3

@@ -23,6 +23,7 @@ const CreatePost = () => {
   const [sortedImages, setSortedImages] = useState([]);
   const [decklist, setDecklist] = useState([]);  // Define decklist state variable
   const [name, setName] = useState("");
+  const [deckName, setDeckName] = useState("");
   const [text, setText] = useState("");
 
 
@@ -102,9 +103,7 @@ const CreatePost = () => {
   useEffect(() => {
     if (deckData && deckData.deck) {
       // console.log(deckData.deck);
-
-
-
+  
       const cardList = deckData.deck.cards.map((card) => ({
         cardName: card.cardName,
         cardIMG: card.cardImage,
@@ -114,6 +113,7 @@ const CreatePost = () => {
       }));
 
       setDecklist(cardList)
+      setDeckName(deckData.deck.deckName)
       console.log(cardList)
 
 
@@ -192,7 +192,7 @@ const CreatePost = () => {
 
   const handleAddPost = async () => {
     try {
-      // console.log(sortedImages[0])
+      console.log(deckName)
 
       const modifiedCardTypes = {};
 
@@ -218,7 +218,8 @@ const CreatePost = () => {
       const response = await addPost({
         variables: {
           postOwner: user_name,
-          postName: name,
+          postName: name, 
+          deckName: deckName,
           color1: modifiedCardTypes.color1,
           color2: modifiedCardTypes.color2,
           color3: modifiedCardTypes.color3,
