@@ -85,8 +85,8 @@ const Post = () => {
   return (
     <Container className="">
       <Row>
-        <Col xs={12}>
-          <h1>{postName}</h1>
+        <Col xs={12} className='bg-[#AFD7CA] text-center rounded'>
+          <h1 className=''>{postName}</h1>
           <p>{postText}fasfsafsafsafsafsafasafsa</p>
         </Col>
       </Row>
@@ -96,7 +96,7 @@ const Post = () => {
           {/* Deck listings */}
           <Row className="flex-row justify-content-center">
             {decklist.map((card) => (
-              <Col key={card.cardId} xs={6} md={4} lg={2} className="">
+              <Col key={card.cardId} xs={6} md={4} lg={2} className="bg-[#0B3C49] rounded shadow-lg m-2 mb-4 mt-4 text-white">
                 <DeckElement
                   deckId={_id}
                   cardId={card.cardId}
@@ -113,7 +113,7 @@ const Post = () => {
 
         <Col xs={4}>
           {/* Color Palettes */}
-          <Row className="rounded-lg ">
+          <Row className="rounded-lg">
             {colors.map((color, index) => (
               <Col
                 key={index}
@@ -121,18 +121,18 @@ const Post = () => {
                 sm={6}
                 md={4}
                 lg={2}
-                className={`mb-4 ${index !== colors.length - 1 ? 'pr-0' : ''} ${index !== 0 ? '-ml-6' : ''}`}>
+                className=''>
 
                 <div className="mt-4 p-4 card" style={{ backgroundColor: color }}>
-                  <h3 className="text-white text-center sm:text-black">{color}</h3>
+                  <h3 className="text-center sm:text-black">{color}</h3>
                 </div>
 
               </Col>
             ))}
           </Row>
 
-          <Row className="flex-row justify-content-center">
-            <ul>Users who caught this post</ul>
+          <Row className="flex-row justify-content-center rounded bg-[#AFD7CA] p-2 mt-4">
+            <ul className='text-2xl'>Users who caught this post</ul>
             <li>asjkldglajwedg</li>
             <li>asjkldglajwedg</li>
             <li>asjkldglajwedg</li>
