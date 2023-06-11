@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import Auth from '../utils/auth';
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery, useApolloClient } from '@apollo/client';
 import { GET_POST, GET_DECK_FOR_POST } from "../utils/queries";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { MdCatchingPokemon } from 'react-icons/md';
 
 import DeckElement from '../components/DeckElement';
 
 
-
 const Post = () => {
+
+  // copy hexcode to clipboard
+  const handleCopyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    toast('Copied to clipboard', { position: 'bottom-right', autoClose: 2000 });
+  };
+
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
 
@@ -84,9 +93,11 @@ const Post = () => {
   return (
     <Container className="">
       <Row>
-        <Col xs={12} className='bg-[#AFD7CA] text-center rounded'>
-          <h1 className=''>{postName}</h1>
-          <p>{postText}fasfsafsafsafsafsafasafsa</p>
+        <Col xs={12} className='bg-[#AFD7CA] text-center rounded p-2 shadow-lg'>
+          <div className='border-3 rounded border-[#0B3C49]'>
+            <h1 className=''>{postName}</h1>
+            <p className='text-gray-500'>{postText}</p>
+          </div>
         </Col>
       </Row>
 
@@ -95,49 +106,60 @@ const Post = () => {
           {/* Deck listings */}
           <Row className="flex-row justify-content-center">
             {decklist.map((card) => (
-              <Col key={card.cardId} xs={6} md={4} lg={2} className="bg-[#0B3C49] rounded shadow-lg m-2 mb-4 mt-4 text-white">
-                <DeckElement
-                  deckId={_id}
-                  cardId={card.cardId}
-                  cardImage={card.cardIMG}
-                  cardName={card.cardName}
-                  superType={card.superType}
-                  quantity={card.quantity}
-                  counter={false}
-                />
+              <Col key={card.cardId} xs={6} md={4} lg={2} className="bg-[#0B3C49] rounded shadow-lg m-2 mb-4 mt-4 p-2">
+                <div className='border-2 border-[#FFEC99] p-1 rounded'>
+                  <DeckElement
+                    deckId={_id}
+                    cardId={card.cardId}
+                    cardImage={card.cardIMG}
+                    cardName={card.cardName}
+                    superType={card.superType}
+                    quantity={card.quantity}
+                    counter={false}
+                  />
+                </div>
               </Col>
             ))}
           </Row>
         </Col>
 
         <Col xs={4}>
+          <ToastContainer />
           {/* Color Palettes */}
-          <Row className="rounded-lg">
+          <Row className="rounded-lg text-center mt-4 pb-4 shadow-lg" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
+            <h1 className='p-2'>Steal a Hexcode!</h1>
             {colors.map((color, index) => (
-              <Col
-                key={index}
-                xs={12}
-                sm={6}
-                md={4}
-                lg={2}
-                className=''>
-
-                <div className="mt-4 p-4 card" style={{ backgroundColor: color }}>
-                  <h3 className="text-center sm:text-black">{color}</h3>
+              <Col key={index} className="">
+                <div className="mt-4 p-4 card cursor-pointer border border-black" style={{ backgroundColor: color }} onClick={() => handleCopyToClipboard(color)}>
+                  <h3 className="text-center sm:text-gray-500">
+                    {color}
+                  </h3>
                 </div>
-
               </Col>
             ))}
           </Row>
 
           <Row className="flex-row justify-content-center rounded bg-[#AFD7CA] p-2 mt-4">
-            <ul className='text-2xl'>Users who caught this post</ul>
-            <li className="ml-10">asjkldglajwedg</li>
-            <li className="ml-10">asjkldglajwedg</li>
-            <li className="ml-10">asjkldglajwedg</li>
-          </Row>
+            <div className='border-3 rounded border-[#0B3C49] p-2'>
+              <ul className='text-2xl font-bold'>Users who caught this post:</ul>
+              <div className='ml-10 text-gray-500'>
+                {/* username list renders here */}
+                <li className="list-none flex items-center">
+                  <span className="mr-2"><MdCatchingPokemon /></span>asjkldglajwedg
+                </li>
+                <li className="list-none flex items-center">
+                  <span className="mr-2"><MdCatchingPokemon /></span>asjkldglajwedg
+                </li>
+                <li className="list-none flex items-center">
+                  <span className="mr-2"><MdCatchingPokemon /></span>asjkldglajwedg
+                </li>
 
+              </div>
+
+            </div>
+          </Row>
         </Col>
+
       </Row>
     </Container>
 
