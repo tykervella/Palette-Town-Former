@@ -44,6 +44,10 @@ const resolvers = {
       return Deck.findOne({ _id: deckId });
     },
 
+    deckForPost: async (parent, { deckName }) => {
+      return Deck.findOne({ deckName: deckName });
+    },
+
     listings: async (parent, { username }) => {
       const params = username ? { seller: username } : {};
       return Listing.find(params)
