@@ -124,7 +124,7 @@ const Login = () => {
                     />
                     <label
                       htmlFor="showPassword"
-                      className="icon-label text-xl text-white"
+                      className="ml-2 icon-label text-xl text-white"
                       style={{ cursor: "pointer" }}
                     >
                       {showPassword ? (

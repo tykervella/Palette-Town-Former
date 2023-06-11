@@ -111,14 +111,14 @@ const Signup = () => {
                     onChange={toggleShowPassword}
                     className="hidden"
                   />
-                  <label htmlFor="showPassword" className="icon-label text-xl text-white " style={{ cursor: 'pointer' }}>
+                  <label htmlFor="showPassword" className="ml-2 icon-label text-xl text-white " style={{ cursor: 'pointer' }}>
                     {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                   </label>
                 </div>
 
                 <div className='flex justify-center'>
                   <button
-                    className="btn-block bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 rounded-lg"
+                    className="mb-4 btn-block bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-2 px-4 rounded-lg"
                     style={{ cursor: 'pointer' }}
                     type="submit">
                     Sign Up
