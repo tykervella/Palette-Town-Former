@@ -75,7 +75,7 @@ const CreateDeck = () => {
 
                 {/* bottom portion of create page */}
                 <div className='flex flex-row align-items-center justify-center pb-4'>
-                  <button onClick={handleCreateDeck} className="bg-[#FFEC99] hover:bg-[#AFD7CA] text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                  <button onClick={handleCreateDeck} className="bg-[#FFEC99] hover:bg-[#AFD7CA] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Create Deck
                   </button>
                   <span className='ml-2 mr-2'>OR</span>
