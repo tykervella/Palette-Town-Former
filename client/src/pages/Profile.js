@@ -34,6 +34,7 @@ const Profile = () => {
           const images = user.posts[i];
           const postName = user.posts[i].postName; // Add postName
           const postOwner = user.posts[i].postOwner; // Add postkOwner
+          const postId = user.posts[i]._id
 
           const newPost = [
             {
@@ -41,6 +42,7 @@ const Profile = () => {
               image: images.image1,
               postName: postName, // Pass postName
               postOwner: postOwner, // Pass postOwner
+              postId: postId
             },
             {
               title: colors.color2,
@@ -129,6 +131,7 @@ const Profile = () => {
           sectionData={sectionData}
           postName={sectionData[0].postName} // Pass postName to PaletteBox
           postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
+          postId={sectionData[0].postId} // Pass postOwner to PaletteBox
         />
       ))}
 

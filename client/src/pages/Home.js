@@ -3,6 +3,8 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { GET_TOP_POSTS } from "../utils/queries";
 import Auth from "../utils/auth";
+import { useNavigate } from 'react-router-dom';
+
 
 
 import PaletteBox from "../components/PaletteBox";
@@ -12,10 +14,17 @@ import TopListing from "../components/TopListing";
 
 
 const Home = () => {
-
   const [postsArr, setPostsArr] = useState([]);
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/marketplace`);
+  };
+
+
+  
 
   const { loading, error, data } = useQuery(GET_TOP_POSTS);
 
@@ -31,6 +40,8 @@ const Home = () => {
           const images = data.posts[i];
           const postName = data.posts[i].postName; // Add postName
           const postOwner = data.posts[i].postOwner; // Add postkOwner
+          const postId = data.posts[i]._id
+
 
           const newPost = [
             {
@@ -38,6 +49,7 @@ const Home = () => {
               image: images.image1,
               postName: postName, // Pass postName
               postOwner: postOwner, // Pass postOwner
+              postId: postId
             },
             {
               title: colors.color2,
@@ -103,7 +115,7 @@ const Home = () => {
             <Row className="float-right">
               {/* banner marketplace button */}
               <div id="container">
-                <button className="learn-more">
+                <button className="learn-more" onClick={handleClick}>
                   <span className="circle" aria-hidden="true">
                     <span className="icon arrow"></span>
                   </span>
@@ -115,8 +127,8 @@ const Home = () => {
         </Row>
 
         {/* trending palettes */}
-        <h2 className="text-[#0B3C49] mb-6">Your Pallets</h2>
-                <Row>
+       
+          <Row>
           <Col>
             <div>
             {/* <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2> */}
@@ -127,6 +139,8 @@ const Home = () => {
                 sectionData={sectionData}
                 postName={sectionData[0].postName} // Pass postName to PaletteBox
                 postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
+                postId={sectionData[0].postId} // Pass postOwner to PaletteBox
+
         />
       ))}
             </div>
