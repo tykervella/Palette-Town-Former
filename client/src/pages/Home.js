@@ -78,7 +78,16 @@ const Home = () => {
   }, [data]);
 
   // scroll to top button
-  const handleScrollToTop = () => { window.scrollTo({ top: 0, behavior: "smooth" }); }; const [showScrollToTop, setShowScrollToTop] = useState(false); useEffect(() => { const handleScroll = () => { if (window.pageYOffset > 100) { setShowScrollToTop(true); } else { setShowScrollToTop(false); } }; window.addEventListener("scroll", handleScroll); return () => { window.removeEventListener("scroll", handleScroll); }; }, []);
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const [showScrollToTop, setShowScrollToTop] = useState(false); useEffect(() => {
+    const handleScroll = () => { if (window.pageYOffset > 100) { setShowScrollToTop(true); } else { setShowScrollToTop(false); } }; window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  },
+    []);
 
   if (loading) {
     return (
@@ -167,8 +176,8 @@ const Home = () => {
             </div>
           </Col>
         </div>
-        
-        {/* Scroll to top button */} 
+
+        {/* Scroll to top button */}
         {showScrollToTop && (<div className="scroll-to-top animate-bounce" onClick={handleScrollToTop} role="button" tabIndex={0} > <AiOutlineArrowUp /> </div>)}
 
       </Container>
