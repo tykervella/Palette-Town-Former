@@ -67,29 +67,33 @@ function DeckElement({
 
   return (
     <div className="col-span-4 my-2 flex flex-col items-center">
-      <img src={cardImage} alt={cardName} data={cardId} className='hover:scale-150'/>
-      <h1 className="truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-2 text-xs">{cardName}</h1>
-      <div className="flex items-center mt-1">
-        {counter && (
-          <button
-            className="btn text-xs text-center p-2 w-2 h-2"
-            onClick={handleDecrement}
-            disabled={value === 0}
-          >
-            -
-          </button>
-        )}
-        <h1 className="text-xs mx-2">{value}</h1>
-        {counter && (
-          <button
-            className="btn w-2 text-xs p-2 h-2"
-            onClick={handleIncrement}
-            disabled={value === 4 && superType !== 'Energy' && quantity === 60}
-          >
-            +
-          </button>
-        )}
-      </div>
+      <img src={cardImage} alt={cardName} data={cardId} className='hover:scale-150 rounded' />
+
+      <h1 className="truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-2 text-xs h1-truncate" style={{ maxWidth: '100%' }}>{cardName}</h1>
+
+      <div className="flex items-center mb-4 mt-2">
+  {counter && (
+    <button
+      className="font-bold rounded-md border-2 border-[#0B3C49] hover:bg-[#AFD7CA] text-xs p-2 focus:ring-2 focus:ring-[#FFEC99]"
+      onClick={handleDecrement}
+      disabled={value === 0}
+    >
+      -
+    </button>
+  )}
+  <h1 className="text-sm font-bold text-[#AFD7CA] mx-3">{value}</h1>
+  
+  {counter && (
+    <button
+      className="font-bold rounded-md border-2 border-[#0B3C49] hover:bg-[#AFD7CA] text-xs p-2 focus:ring-2 focus:ring-[#FFEC99]"
+      onClick={handleIncrement}
+      disabled={value === 4 && superType !== 'Energy' && quantity === 60}
+    >
+      +
+    </button>
+  )}
+</div>
+
     </div>
   );
 }
