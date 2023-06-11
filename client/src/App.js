@@ -18,6 +18,7 @@ import Profile from './pages/Profile'
 import Contact from './pages/Contact';
 import CreateDeck from './pages/CreateDeck'
 import CreatePost from './pages/CreatePost'
+import Post from './pages/Post'
 import MarketItem from './pages/MarketItem';
 
 // Construct our main GraphQL API endpoint
@@ -62,9 +63,10 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/deck/:_id" element={<DeckBuilder />} />
             <Route path="/publish/:_id" element={<CreatePost />} />
-            <Route path="/Profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/post/:_id" element={<Post />} />
             <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/listing/:id" element={<MarketItem />} />
+            {/* <Route path="/listing/:id" element={<MarketItem />} /> */}
             <Route path="/create" element={<CreateDeck />}
             />
               <Route
