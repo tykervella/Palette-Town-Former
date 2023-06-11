@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_TOP_POSTS } from "../utils/queries";
 import Auth from "../utils/auth";
 import { useNavigate } from 'react-router-dom';
-
+import { AiOutlineArrowUp } from "react-icons/ai";
 
 
 import PaletteBox from "../components/PaletteBox";
@@ -24,7 +24,7 @@ const Home = () => {
   };
 
 
-  
+
 
   const { loading, error, data } = useQuery(GET_TOP_POSTS);
 
@@ -77,7 +77,19 @@ const Home = () => {
     }
   }, [data]);
 
-  if (loading)  {
+  // scroll to top button
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const [showScrollToTop, setShowScrollToTop] = useState(false); useEffect(() => {
+    const handleScroll = () => { if (window.pageYOffset > 100) { setShowScrollToTop(true); } else { setShowScrollToTop(false); } }; window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  },
+    []);
+
+  if (loading) {
     return (
       <Container>
         <Spinner animation="border" role="status">
@@ -127,22 +139,22 @@ const Home = () => {
         </Row>
 
         {/* trending palettes */}
-       
-          <Row>
+
+        <Row>
           <Col>
             <div>
             {/* <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2> */}
 
-            {postsArr.map((sectionData, index) => (
-              <PaletteBox
-                key={index}
-                sectionData={sectionData}
-                postName={sectionData[0].postName} // Pass postName to PaletteBox
-                postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
-                postId={sectionData[0].postId} // Pass postOwner to PaletteBox
+              {postsArr.map((sectionData, index) => (
+                <PaletteBox
+                  key={index}
+                  sectionData={sectionData}
+                  postName={sectionData[0].postName} // Pass postName to PaletteBox
+                  postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
+                  postId={sectionData[0].postId} // Pass postOwner to PaletteBox
 
-        />
-      ))}
+                />
+              ))}
             </div>
           </Col>
         </Row>
@@ -164,6 +176,10 @@ const Home = () => {
             </div>
           </Col>
         </div>
+
+        {/* Scroll to top button */}
+        {showScrollToTop && (<div className="scroll-to-top animate-bounce" onClick={handleScrollToTop} role="button" tabIndex={0} > <AiOutlineArrowUp /> </div>)}
+
       </Container>
     </div>
   );

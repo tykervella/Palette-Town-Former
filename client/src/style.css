@@ -135,3 +135,37 @@ input[type='checkbox']:hover {
   transform: translateY(-10px);
   z-index: 2;
 }
+
+.card:hover {
+  box-shadow: 0 0 15px rgba(75, 171, 255, 0.8);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
