@@ -87,7 +87,7 @@ const Post = () => {
       <Row>
         <Col xs={12}>
           <h1>{postName}</h1>
-          <p>{postText}</p>
+          <p>{postText}fasfsafsafsafsafsafasafsa</p>
         </Col>
       </Row>
 
@@ -121,13 +121,11 @@ const Post = () => {
                 sm={6}
                 md={4}
                 lg={2}
-                className={`mb-4 ${index !== colors.length - 1 ? 'pr-0' : ''} ${index !== 0 ? '-ml-6' : ''}`}
-              >
+                className={`mb-4 ${index !== colors.length - 1 ? 'pr-0' : ''} ${index !== 0 ? '-ml-6' : ''}`}>
+
                 <div className="mt-4 p-4 card" style={{ backgroundColor: color }}>
                   <h3 className="text-white text-center sm:text-black">{color}</h3>
                 </div>
-
-
 
               </Col>
             ))}

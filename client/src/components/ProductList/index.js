@@ -9,9 +9,10 @@ const ProductList = (props) => {
 
   return (
     <Col className='rounded-xl bg-[#0B3C49] shadow-lg p-2'>
+      <div className='border-2 border-[#FFEC99] rounded p-2'>
 
       {/* card name/title */}
-      <h1 className='text-lg text-center text-truncate text-decoration-none bg-[#FFEC99] rounded-lg'>{props.cardName}</h1>
+      <h1 className='text-lg text-center text-white text-truncate text-decoration-none bg-[#4B957E] rounded-lg'>{props.cardName}</h1>
 
       {/* primary card image */}
       <div className='card-image text-center relative'>
@@ -30,13 +31,13 @@ const ProductList = (props) => {
           <Col>
             {/* go to listing button */}
             <button className='bg-[#FFEC99] hover:bg-[#4B957E] p-2 rounded-lg'>
-              <Link to={`/listing/${props.id}`} className='text-decoration-none text-black'>Listing </Link>
+              <Link to={`/listing/${props.id}`} className='text-decoration-none text-black'>View Listing </Link>
             </button>
           </Col>
         </Row>
         <p className='text-white'>Seller: {props.seller}</p>
       </div>
-
+      </div>
     </Col>
   );
 };
