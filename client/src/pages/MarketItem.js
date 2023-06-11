@@ -8,6 +8,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import Cart from '../components/Cart';
 import axios from 'axios';
 
+import { Container, Row, Col } from 'react-bootstrap';
+
 // const stripePromise = loadStripe('pk_test_51NF2M3EAK05WJdkzfJ4xgfLTmi7c6bjbIxRh07crt6UXgwdhMSqfA7ixKMt18vdst7ZZQsd3Z1IsVlvGTHESiQLp00zrpgghKO');
 
 const MarketItem = () => {
@@ -76,20 +78,45 @@ const MarketItem = () => {
   }
 
   return (
-    <div>
-      <h2>{listing.cardName}</h2>
-      <img src={listing.cardImage} alt={listing.cardName} />
-      <p>Card ID: {listing.cardId}</p>
-      <p>Card Type: {listing.cardType}</p>
-      <p>SuperType: {listing.superType}</p>
-      <p>Price: ${listing.price}</p>
-      <p>Seller: {listing.seller}</p>
-      {listing.averageSellingPrice && (
-        <p>Average Selling Price: ${listing.averageSellingPrice}</p>
-      )}
-
+    <Container className="d-flex justify-content-center mb-4">
+    <Row className="rounded-xl bg-[#0B3C49] shadow-lg p-2">
+      {/* left column-card name and img */}
+      <div className="d-flex border-2 border-[#FFEC99] rounded p-4">
+        <div>
+          <h2 className="text-center text-truncate text-decoration-none bg-[#FFEC99] rounded-lg">
+            {listing.cardName}
+          </h2>
+          <img src={listing.cardImage} alt={listing.cardName} className="hover:scale-150" />
+        </div>
+        <div className="ml-10 mt-20 text-white">
+          <p className="text-2xl">
+            Card ID: <span className="text-[#AFD7CA] text-xl">{listing.cardId}</span>
+          </p>
+          <p className="text-2xl">
+            Card Type: <span className="text-[#AFD7CA]">{listing.cardType}</span>
+          </p>
+          <p className="text-2xl">
+            SuperType: <span className="text-[#AFD7CA]">{listing.superType}</span>
+          </p>
+          <p className="text-2xl">
+            Price: <span className="text-[#AFD7CA]">${listing.price}</span>
+          </p>
+          <p className="text-2xl">
+            Seller: <span className="text-[#AFD7CA]">{listing.seller}</span>
+          </p>
+          {listing.averageSellingPrice && (
+            <p>
+              Average Selling Price: <span className="text-[#AFD7CA]">${listing.averageSellingPrice}</span>
+            </p>
+          )}
+        </div>
+      </div>
       {/* <button onClick={handleAddToCart}>Add to Card</button> */}
-    </div>
+    </Row>
+  </Container>
+  
+
+
   );
 };
 
