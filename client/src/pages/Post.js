@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import Auth from '../utils/auth';
 import { useNavigate, useParams } from 'react-router-dom';
-import {  useQuery, useApolloClient } from '@apollo/client';
+import { useQuery, useApolloClient } from '@apollo/client';
 import { GET_POST, GET_DECK_FOR_POST } from "../utils/queries";
 
 import DeckElement from '../components/DeckElement';
@@ -83,59 +83,69 @@ const Post = () => {
   }
 
   return (
-    <div className="grid grid-cols-12 gap-4 mx-auto flex-row mt-4 px-4 mb-4 border-2 border-red-700 bg-white">
-      <h1>{postName}</h1>
-  
-      {/* Color Palettes  */}
-      <Row className="flex-wrap border border-black rounded-lg bg-[#FFFFF7]">
-        {colors.map((color, index) => (
-          <Col
-            key={index}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={2}
-            className={`mb-4 ${index !== colors.length - 1 ? 'pr-0' : ''} ${index !== 0 ? '-ml-6' : ''}`}
-          >
-            <div className="mt-4 p-4" style={{ backgroundColor: color }}>
-              <h3 className="mt-4 mb-0 text-white text-center sm:text-black">{color}</h3>
-            </div>
-          </Col>
-        ))}
-      </Row>
-  
-      {/* deck listings */}
-      <Row className="flex-row justify-content-center">
-        {decklist.map((card) => (
-          <Col key={card.cardId} xs={6} md={4} lg={2} className="">
-            <DeckElement
-              deckId={_id}
-              cardId={card.cardId}
-              cardImage={card.cardIMG}
-              cardName={card.cardName}
-              superType={card.superType}
-              quantity={card.quantity}
-              counter={false}
-            />
-          </Col>
-        ))}
+    <Container className="">
+      <Row>
+        <Col xs={12}>
+          <h1>{postName}</h1>
+          <p>{postText}</p>
+        </Col>
       </Row>
 
-      <Row className="flex-row justify-content-center">
-        Post Text: 
-        {postText}
-      </ Row>
+      <Row>
+        <Col xs={8}>
+          {/* Deck listings */}
+          <Row className="flex-row justify-content-center">
+            {decklist.map((card) => (
+              <Col key={card.cardId} xs={6} md={4} lg={2} className="">
+                <DeckElement
+                  deckId={_id}
+                  cardId={card.cardId}
+                  cardImage={card.cardIMG}
+                  cardName={card.cardName}
+                  superType={card.superType}
+                  quantity={card.quantity}
+                  counter={false}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Col>
 
-      <Row className="flex-row justify-content-center">
-        <ul>Users who caught this post</ul>
-          <li>asjkldglajwedg</li>
-          <li>asjkldglajwedg</li>
-          <li>asjkldglajwedg</li>
+        <Col xs={4}>
+          {/* Color Palettes */}
+          <Row className="rounded-lg ">
+            {colors.map((color, index) => (
+              <Col
+                key={index}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={2}
+                className={`mb-4 ${index !== colors.length - 1 ? 'pr-0' : ''} ${index !== 0 ? '-ml-6' : ''}`}
+              >
+                <div className="mt-4 p-4 card" style={{ backgroundColor: color }}>
+                  <h3 className="text-white text-center sm:text-black">{color}</h3>
+                </div>
+
+
+
+              </Col>
+            ))}
+          </Row>
+
+          <Row className="flex-row justify-content-center">
+            <ul>Users who caught this post</ul>
+            <li>asjkldglajwedg</li>
+            <li>asjkldglajwedg</li>
+            <li>asjkldglajwedg</li>
+          </Row>
+
+        </Col>
       </Row>
+    </Container>
 
-    </div>
   );
-  
+
 };
 
 export default Post;

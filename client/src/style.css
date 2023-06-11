@@ -124,3 +124,14 @@ input[type='checkbox']:hover {
   cursor: pointer;
 }
 
+.card {
+  position: relative;
+  transition: transform 0.2s ease;
+  z-index: 1;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  z-index: 2;
+}
