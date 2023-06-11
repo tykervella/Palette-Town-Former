@@ -84,36 +84,30 @@ function DeckBuilder() {
   }, []);
 
 
-  
   return (
-    <Container className="mb-4">
-      <Row>
-        <Col md={9}>
-          <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
-            <div className="border-2 border-[#FFEC99] rounded-lg p-2 shadow-lg">
-              <SearchCards onSearch={handleSearch} onRefresh={handleRefresh} />
-              <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                {cards.map((card) => (
-                  <Col key={card.id}>
-                    <CardElement
-                      cardId={card.id}
-                      cardImage={card.images.small}
-                      cardName={card.name}
-                      cardType={card.types[0]}
-                      superType={card.supertype}
-                      deckId={_id}
-                      createListing={true}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          </div>
-        </Col>
-
-      </Row>
+    <Container className="my-4 d-flex justify-content-center">
+      <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
+        <div className="border-2 border-[#FFEC99] rounded-lg p-3 shadow-lg">
+          <SearchCards onSearch={handleSearch} onRefresh={handleRefresh} />
+          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            {cards.map((card) => (
+              <Col key={card.id}>
+                <CardElement
+                  cardId={card.id}
+                  cardImage={card.images.small}
+                  cardName={card.name}
+                  cardType={card.types[0]}
+                  superType={card.supertype}
+                  deckId={_id}
+                  createListing={true}
+                />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
     </Container>
-  );
+  );   
 }
 
 export default DeckBuilder;
