@@ -192,6 +192,7 @@ query Query {
     image4
     image5
     postOwner
+    _id
   }
 }`
 
