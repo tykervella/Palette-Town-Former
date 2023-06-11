@@ -66,7 +66,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/post/:_id" element={<Post />} />
             <Route path="/marketplace" element={<Marketplace />} />
-            {/* <Route path="/listing/:id" element={<MarketItem />} /> */}
+            <Route path="/listing/:id" element={<MarketItem />} />
             <Route path="/create" element={<CreateDeck />}
             />
               <Route
