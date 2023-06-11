@@ -120,6 +120,28 @@ export const ADD_TO_DECK = gql`
 }
 `
 
+export const ADD_LISTING = gql`
+  mutation AddListing(
+    $cardId: String!, 
+    $cardName: String!, 
+    $cardImage: String!, 
+    $cardType: String!, 
+    $superType: String!, 
+    $price: Float!, 
+    $seller: String!
+  ) {
+    addListing(
+      cardId: $cardId, 
+      cardName: $cardName, 
+      cardImage: $cardImage, 
+      cardType: $cardType, 
+      superType: $superType, 
+      price: $price, 
+      seller: $seller) {
+    _id
+  }
+}`
+
 export const REMOVE_CARD = gql`
   mutation Mutation($deckId: ID!, $cardId: String!) {
     removeCard(deckId: $deckId, cardId: $cardId) {

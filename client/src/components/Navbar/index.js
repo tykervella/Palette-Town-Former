@@ -48,17 +48,19 @@ const CustomNavbar = () => {
               <Link className="nav-link text-white me-4" to="/">
                 Home
               </Link>
-              <Link to={checkStatus("create")} style={{ textDecoration: "none" }}>
-                <span className="nav-link text-white me-4">Create</span>
-              </Link>
 
-              <NavDropdown title="Marketplace" id="basic-nav-dropdown" className="text-white me-4">
-                <NavDropdown.Item href={checkStatus("marketplace")}>Top Listings</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href={checkStatus("#")} onClick={handleCartModalShow}>
-                  Your Cart
+              <NavDropdown title="Create" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to={checkStatus("deck/create")}>
+                  Create Deck
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={checkStatus("listing/create")}>
+                  Create Listing
                 </NavDropdown.Item>
               </NavDropdown>
+              
+              <Link to={checkStatus("marketplace")} style={{ textDecoration: "none" }}>
+                <span className="nav-link text-white me-4">Marketplace</span>
+              </Link>
             </Nav>
 
             <Navbar.Brand className="text-center flex-grow-1">

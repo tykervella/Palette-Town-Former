@@ -11,7 +11,7 @@ function BuilderInfo({ deckId, deckName, quantity }) {
   
   const handlePublish = async () => {
     if (quantity === 60) {
-      navigate(`/publish/${_id}`);
+      navigate(`/post/publish/${_id}`);
     } else {
       alert('Your deck must be exactly 60 cards!');
     }

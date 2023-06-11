@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import Auth from '../utils/auth';
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useQuery, useApolloClient } from '@apollo/client';
 import { GET_POST, GET_DECK_FOR_POST } from "../utils/queries";
 
@@ -12,7 +12,6 @@ import DeckElement from '../components/DeckElement';
 const Post = () => {
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
-  const navigate = useNavigate();
 
   const { _id } = useParams();
   const [decklist, setDecklist] = useState([]);
@@ -133,9 +132,9 @@ const Post = () => {
 
           <Row className="flex-row justify-content-center rounded bg-[#AFD7CA] p-2 mt-4">
             <ul className='text-2xl'>Users who caught this post</ul>
-            <li>asjkldglajwedg</li>
-            <li>asjkldglajwedg</li>
-            <li>asjkldglajwedg</li>
+            <li className="ml-10">asjkldglajwedg</li>
+            <li className="ml-10">asjkldglajwedg</li>
+            <li className="ml-10">asjkldglajwedg</li>
           </Row>
 
         </Col>
