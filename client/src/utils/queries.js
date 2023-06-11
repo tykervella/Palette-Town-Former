@@ -17,6 +17,44 @@ export const GET_DECK = gql`
 }
 `
 
+export const GET_POST = gql`
+  query Post($postId: ID!) {
+    post(postId: $postId) {
+      captureCount
+      color1
+      color2
+      color3
+      color4
+      color5
+      deckName
+      image1
+      image2
+      image3
+      image4
+      image5
+      postName
+      postOwner
+      postText
+      caughtUsers {
+        caughtUserName
+    }
+  }
+}`
+
+export const GET_DECK_FOR_POST = gql`
+  query Post($deckName: String!) {
+  deckForPost(deckName: $deckName) {
+    _id
+    createdAt
+    cards {
+      cardId
+      cardImage
+      cardName
+      quantity
+    }
+  }
+}`
+
 export const GET_USER = gql`
 query User($username: String!) {
   user(username: $username) {
