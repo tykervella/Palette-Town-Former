@@ -158,7 +158,7 @@ const Signup = () => {
                   </label>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-2">
                 <p className="text-white text-xs">Bio</p>
                 <textarea
                   className="form-input bg-transparent border-b-2 border-[#376D5B] w-full text-white focus:outline-none resize-none"
