@@ -120,6 +120,7 @@ export const ADD_TO_DECK = gql`
 }
 `
 
+
 export const ADD_LISTING = gql`
   mutation AddListing(
     $cardId: String!, 
@@ -141,6 +142,23 @@ export const ADD_LISTING = gql`
     _id
   }
 }`
+
+export const ADD_TO_CART = gql`
+  mutation AddToCart(
+    $username: String!, 
+    $listingId: ID!
+  ) {
+    addToCart(
+      username: $username, 
+      listingId: $listingId
+    ) {
+    _id
+    listings {
+      _id
+    }
+  }
+}
+`
 
 export const REMOVE_CARD = gql`
   mutation Mutation($deckId: ID!, $cardId: String!) {

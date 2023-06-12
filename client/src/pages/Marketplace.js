@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { GET_LISTINGS } from '../utils/queries';
 import axios from 'axios';
-import ProductList from '../components/ProductList/index';
+import ProductList from '../components/Listing/index';
 import Cart from '../components/Cart';
 import CategoryMenu from '../components/CategoryMenu';
 import { Container, Row, Col } from 'react-bootstrap';
