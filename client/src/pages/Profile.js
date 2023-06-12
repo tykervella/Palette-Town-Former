@@ -4,17 +4,19 @@ import { useQuery } from "@apollo/client";
 import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
 
-
 import CircleImage from "./assets/profile-pic.webp";
+
 import ProfileInfo from "../components/ProfileInfo";
 import PaletteBox from "../components/PaletteBox";
 import DeckPreview from "../components/DeckPreview";
 import FeaturedListing from "../components/FeaturedListing";
-// import UpdateProfile from "../components/UpdateForm";
 
 const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [postsArr, setPostsArr] = useState([]);
+  const [decks, setDecks] = useState([]);
+  const [listings, setListings] = useState([]);
+
   const token = Auth.getToken();
   const user_name = token ? Auth.getProfile().data.username : null;
 
@@ -32,17 +34,17 @@ const Profile = () => {
         for (let i = 0; i < postsLength; i++) {
           const colors = user.posts[i];
           const images = user.posts[i];
-          const postName = user.posts[i].postName; // Add postName
-          const postOwner = user.posts[i].postOwner; // Add postkOwner
-          const postId = user.posts[i]._id
+          const postName = user.posts[i].postName;
+          const postOwner = user.posts[i].postOwner;
+          const postId = user.posts[i]._id;
 
           const newPost = [
             {
               title: colors.color1,
               image: images.image1,
-              postName: postName, // Pass postName
-              postOwner: postOwner, // Pass postOwner
-              postId: postId
+              postName: postName,
+              postOwner: postOwner,
+              postId: postId,
             },
             {
               title: colors.color2,
@@ -64,10 +66,12 @@ const Profile = () => {
           newPostsArr.push(newPost);
         }
         setPostsArr(newPostsArr);
-        setIsLoading(false); // Set isLoading to false once data is fetched
+        setIsLoading(false);
       };
 
       updatePostsArr();
+      setListings(user.listings);
+      setDecks(user.decks)     
     }
   }, [data]);
 
@@ -90,7 +94,7 @@ const Profile = () => {
   const name = data.user.name;
   const bio = data.user.bio;
   const user = data.user;
-
+  
   return (
     <Container>
       <h2 className="mb-4 mt-4 text-[#0B3C49]">Your Profile</h2>
@@ -102,7 +106,7 @@ const Profile = () => {
         <Row>
           <Col md={6} className="border-right border-black pr-4">
             <ProfileInfo
-              key={userId}
+            
               name={name}
               username={user_name}
               bio={bio}
@@ -143,26 +147,39 @@ const Profile = () => {
 
       <Row>
         <Col md={6}>
-          <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
-          {postsArr.map((sectionData, index) => (
-            <DeckPreview
-              key={index}
-              sectionData={sectionData}
-              postName={sectionData[0].postName} // Pass postName to DeckPreview
-              postOwner={sectionData[0].postOwner} // Pass postOwner to DeckPreview
-            />
-          ))}
+          <Container className="border border-black rounded-lg bg-white text-black">
+            <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
+            <Row>
+              {decks.map((deck, index) => (
+                <DeckPreview
+                  key={index}
+                  deckId={deck._id} 
+                  deckName={deck.deckName}
+                  cardImage={deck.cards[0]?.cardImage || false} // Use optional chaining operator to check for undefined
+                />
+              ))}
+            </Row>
+
+          </Container>
+          
+          
         </Col>
         <Col md={6}>
-          <h2 className="text-[#0B3C49] mt-4 mb-4">Your Listings</h2>
-          {postsArr.map((sectionData, index) => (
+        <Container className="border border-black rounded-lg bg-white text-black">
+            <h2 className="text-[#0B3C49] mb-4 mt-4">Your Listings</h2>
+            <Row>
+          {listings.map((listing, index) => (
             <FeaturedListing
               key={index}
-              sectionData={sectionData}
-              postName={sectionData[0].postName} // Pass postName to FeaturedListing
-              postOwner={sectionData[0].postOwner} // Pass postOwner to FeaturedListing
+              listingId={listing._id} 
+              cardName={listing.cardName}
+              cardImage={listing.cardImage}
+              price={listing.price}
             />
           ))}
+          </Row>
+
+        </Container>
         </Col>
       </Row>
 

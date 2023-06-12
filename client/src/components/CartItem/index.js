@@ -1,9 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Auth from '../../utils/auth';
+
 import { Row, Col } from "react-bootstrap";
 import { FaTrashAlt } from 'react-icons/fa'
+import { useMutation } from '@apollo/client';
+
+import { REMOVE_FROM_CART } from '../../utils/mutations';
+
 
 
 function CartItem({ key, listingId, cardImage, cardName, price }) {
+  const token = Auth.getToken();
+  const username = token ? Auth.getProfile().data.username : null;
+
+  const [removeFromCart] = useMutation(REMOVE_FROM_CART);
+
+  const handleRemoveFromCart = async () => {
+    try {
+      await removeFromCart({
+        variables: {
+          username: username,
+          listingId: listingId
+        },
+      });
+      // Refresh the window location
+      window.location.reload();
+    } catch (error) {
+      console.error("Error removing item from cart", error);
+    }
+  };
+  
 
 
     return (
@@ -16,7 +42,7 @@ function CartItem({ key, listingId, cardImage, cardName, price }) {
             <div>${price}</div>
           </Col>
 
-          <FaTrashAlt/>
+          <FaTrashAlt onClick={handleRemoveFromCart} style={{cursor: 'pointer'}}/>
         </Row>
       );
     }
