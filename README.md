@@ -1,4 +1,5 @@
 # Palette Town
+![Logo](client/src/components/Navbar/assets/pallet-town-logo.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
