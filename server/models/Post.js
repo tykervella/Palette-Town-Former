@@ -1,22 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const caughtUserSchema = new Schema ({
-
-  caughtUserName: {
-    type: String,
-        required: true,
-        trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-
-})
-
-
 const postSchema = new Schema({
     postOwner: {
         type: String,
@@ -100,7 +84,10 @@ const postSchema = new Schema({
       trim: true,
       required: true,
     },
-    caughtUsers: [caughtUserSchema],
+    caughtUsers: [{
+      type: String,
+      ref: 'User',
+    }],
   
 });
 

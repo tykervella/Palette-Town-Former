@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function DeckBuilder() {
+function CreateListing() {
   const { _id } = useParams();
   const [cards, setCards] = useState([]);
   const [decklist, setDecklist] = useState([]);
@@ -116,4 +116,4 @@ function DeckBuilder() {
   );
 }
 
-export default DeckBuilder;
+export default CreateListing;

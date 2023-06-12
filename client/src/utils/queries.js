@@ -160,6 +160,19 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const GET_CART = gql`
+query Query($username: String!) {
+  user(username: $username) {
+    cart {
+      _id
+      cardImage
+      cardName
+      price
+    }
+  }
+}
+`
+
 export const GET_LISTINGS = gql`
   query allListings {
   allListings {

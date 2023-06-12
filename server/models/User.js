@@ -1,21 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const caughtPostSchema = new Schema ({
-
-  caughtPostName: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-})
-
-
 const userSchema = new Schema({
   username: {
     type: String,
@@ -65,7 +50,14 @@ const userSchema = new Schema({
     type: String,
     maxlength: 280,
   },
-  caughtPosts: [caughtPostSchema]
+  caughtPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+  }],
+  cart: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Listing',
+  }],
 });
 
 userSchema.pre('save', async function (next) {

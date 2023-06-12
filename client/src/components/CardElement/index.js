@@ -5,7 +5,7 @@ import Auth from "../../utils/auth";
 import { useNavigate } from 'react-router-dom';
 
 
-function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId, createListing, seller }) {
+function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId, createListing}) {
   const [addToDeck] = useMutation(ADD_TO_DECK);
   const [addListing] = useMutation(ADD_LISTING);
   const [price, setPrice] = useState('');
@@ -43,17 +43,18 @@ function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId,
           cardImage: cardImage,
           cardType: cardType,
           superType: superType,
-          price: parseFloat(price),
+          price: parseFloat(parseFloat(price).toFixed(2)),
           seller: user_name,
         },
       });
       console.log(response);
       navigate(`/marketplace`);
-
+  
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   const renderButtons = () => {
     if (createListing) {
