@@ -10,7 +10,6 @@ const userSchema = new Schema({
   },
   name: {
     type: String,
-    required: true,
     maxlength: 30,
 },
   profileIMG: {

@@ -19,11 +19,14 @@ const Home = () => {
   const user_name = token ? Auth.getProfile().data.username : null;
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/marketplace`);
+  const checkStatus = (endpoint) => {
+    return token ? `${endpoint}` : "/login";
   };
-
-
+  
+  const handleClick = () => {
+    const endpoint = checkStatus("/marketplace");
+    navigate(endpoint);
+  };
 
 
   const { loading, error, data } = useQuery(GET_TOP_POSTS);

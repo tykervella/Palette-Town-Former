@@ -6,7 +6,7 @@
     "cardType": "Fire",
     "superType": "Pokémon",
     "price": 2.99,
-    "seller": "user1"
+    "seller": "purplewooper"
   },
   {
     "cardId": "xy1-1",
@@ -14,8 +14,8 @@
     "cardName": "Venusaur-EX",
     "cardType": "Grass",
     "superType": "Pokémon",
-    "price": 3.99,
-    "seller": "user2"
+    "price": 10.49,
+    "seller": "purplewooper"
   },
   {
     "cardId": "xy0-16",
@@ -23,8 +23,8 @@
     "cardName": "Poochyena",
     "cardType": "Darkness",
     "superType": "Pokémon",
-    "price": 4.99,
-    "seller": "user3"
+    "price": 0.99,
+    "seller": "PokeLover"
   },
   {
     "cardId": "ex9-86",
@@ -32,8 +32,8 @@
     "cardName": "Darkness Energy",
     "cardType": "other",
     "superType": "Energy",
-    "price": 2.99,
-    "seller": "user4"
+    "price": 0.39,
+    "seller": "purplewooper"
   },
   {
     "cardId": "pop4-9",
@@ -41,8 +41,8 @@
     "cardName": "Pokémon Fan Club",
     "cardType": "other",
     "superType": "Trainer",
-    "price": 5.99,
-    "seller": "user5"
+    "price": 1.99,
+    "seller": "Torchic^2"
   },
   {
     "cardId": "pop5-7",
@@ -51,6 +51,6 @@
     "cardType": "other",
     "superType": "Trainer",
     "price": 6.99,
-    "seller": "user6"
+    "seller": "pikachufan_3000"
   }
 ]

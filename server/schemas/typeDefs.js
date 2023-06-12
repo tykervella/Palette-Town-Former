@@ -5,7 +5,7 @@ const typeDefs = gql`
   type User {
   _id: ID!
   username: String!
-  name: String!
+  name: String
   profileIMG: String
   email: String!
   password: String
@@ -52,7 +52,7 @@ const typeDefs = gql`
     image3: String!
     image4: String!
     image5: String!
-    caughtPosts: [User!]
+    caughtUsers: [User!]
     captureCount: Int!
   }
 
@@ -99,6 +99,9 @@ const typeDefs = gql`
       username: String! 
       email: String!
       password: String!
+      name: String 
+      bio: String   
+      profileIMG: String  
     ): Auth
     
     addDeck(
@@ -145,7 +148,7 @@ const typeDefs = gql`
     
     addToCaughtUsers(
       postId: ID!
-      username: String!
+      userId: ID!
     ): Post
 
     addToCaughtPosts(
@@ -162,6 +165,21 @@ const typeDefs = gql`
       deckId: ID!
       cardId: String!
     ): Deck
+
+    removeFromCart(
+      username: String!
+      listingId: ID!
+    ): User
+
+    removeFromCaughtPosts(
+      username: String!
+      postId: ID!
+    ): User
+
+    removeFromCaughtUsers(
+      postId: ID!
+      username: String!
+    ): Post
     
     updateCardQuantity(
       deckId: ID! 

@@ -85,9 +85,9 @@ const postSchema = new Schema({
       required: true,
     },
     caughtUsers: [{
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: 'User',
-    }],
+    }]
   
 });
 

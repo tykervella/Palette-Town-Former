@@ -1,13 +1,31 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import Auth from '../../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
 import likeButton from '../TrendingPalettes/assets/pokeball-like.png';
 
+import { ADD_TO_CAUGHT_POSTS, ADD_TO_CAUGHT_USERS } from '../../utils/mutations';
+
 function PaletteBox({ sectionData, postName, postOwner, postId }) {
+  const token = Auth.getToken();
+  const username = token ? Auth.getProfile().data.username : null;
+  const userId = token ? Auth.getProfile().data._id : null;
+
   const navigate = useNavigate();
+  const [addToCaughtPosts] = useMutation(ADD_TO_CAUGHT_POSTS);
+  const [addToCaughtUsers] = useMutation(ADD_TO_CAUGHT_USERS);
 
   const handleClick = () => {
+    navigate(`/post/${postId}`);
+  };
+
+  const handleLike = async () => {
+    // Call the mutations when the like button is clicked
+    await addToCaughtPosts({ variables: { username: username, postId } });
+    await addToCaughtUsers({ variables: { postId, userId }});
+
     navigate(`/post/${postId}`);
   };
 

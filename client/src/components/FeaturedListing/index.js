@@ -1,20 +1,36 @@
 import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
-function FeaturedListing({ sectionData }) {
+
+function FeaturedListing({ key, listingId, cardName, cardImage, price }) {
+  const navigate = useNavigate();
+
+  const handleClick = async () => {
+    try {
+      navigate(`/listing/${listingId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
     return (
-        <Container className="border border-black rounded-lg bg-white">
-          <Row className="flex-wrap">
-            {sectionData.slice(0, 3).map((item, index) => (
-              <Col key={index} xs={12} sm={6} md={4} className="mb-4">
-                <div className="rounded-lg mt-4 border  p-4" style={{ backgroundColor: item.title }}>
-                  <img src={item.image} alt={item.title} />
-                  <h3 className="mt-4 mb-0 text-white text-center sm:text-black">{item.title}</h3>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        </Container>
+        
+          
+            
+      <Col key={key} xs={12} sm={6} md={4} className="mb-4">
+        <div className="rounded-lg mt-4 border  p-4" >
+          <img src={cardImage} alt={cardName} />
+          <h3 className="mt-4 mb-0 text-center sm:text-black">{cardName}</h3>
+          <h3 className="mt-4 mb-0 text-center sm:text-black">{price}</h3>
+          <button onClick={handleClick} className="bg-[#FFEC99] hover:bg-[#AFD7CA] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">      
+            View Listing
+          </button>
+        </div>
+      </Col>
+         
+          
+        
       );
     }
 
