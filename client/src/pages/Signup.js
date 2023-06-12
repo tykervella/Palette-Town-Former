@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import { BsBrush } from "react-icons/bs";
@@ -10,19 +10,30 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import Auth from "../utils/auth";
+
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [formState, setFormState] = useState({
     username: "",
     email: "",
     password: "",
+    name: "",  
+    bio: "",
   });
   const [showPassword, setShowPassword] = useState(false); // New state variable
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    // Limit the bio to 280 characters
+    if (name === "bio" && value.length > 280) {
+      alert("Bios must be 280 characters or shorter!");
+      return;
+    }
 
     setFormState({
       ...formState,
@@ -42,7 +53,8 @@ const Signup = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-      Auth.login(data.addUser.token);
+      // Auth.login(data.addUser.token);
+      navigate("/login")
     } catch (e) {
       console.error(e);
     }
@@ -87,10 +99,22 @@ const Signup = () => {
                     placeholder="Your username"
                     name="username"
                     type="text"
-                    value={formState.name}
+                    value={formState.username}
                     onChange={handleChange}
                   />
                 </div>
+
+                <div className="mb-3">
+                <p className="text-white  text-xs">Full Name</p>
+                <input
+                  className="form-input bg-transparent border-b-2 border-[#376D5B] w-full text-white focus:outline-none resize-none"
+                  placeholder="Your full name"
+                  name="name"
+                  type="text"
+                  value={formState.name}
+                  onChange={handleChange}
+                />
+              </div>
 
                 <div className="mb-3">
                   <p className="text-white text-xs">User Email</p>
@@ -132,6 +156,18 @@ const Signup = () => {
                       <AiOutlineEye />
                     )}
                   </label>
+                </div>
+
+                <div className="mb-3">
+                <p className="text-white text-xs">Bio</p>
+                <textarea
+                  className="form-input bg-transparent border-b-2 border-[#376D5B] w-full text-white focus:outline-none resize-none"
+                  placeholder="Tell us something about yourself"
+                  name="bio"
+                  value={formState.bio}
+                  onChange={handleChange}
+                />
+                <p className="text-white mt-2">{formState.bio.length}/280</p>
                 </div>
 
                 <div className="flex justify-center">
