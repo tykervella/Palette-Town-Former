@@ -5,7 +5,7 @@ const typeDefs = gql`
   type User {
   _id: ID!
   username: String!
-  name: String!
+  name: String
   profileIMG: String
   email: String!
   password: String
@@ -99,6 +99,9 @@ const typeDefs = gql`
       username: String! 
       email: String!
       password: String!
+      name: String 
+      bio: String   
+      profileIMG: String  
     ): Auth
     
     addDeck(

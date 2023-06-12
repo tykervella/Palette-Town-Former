@@ -92,6 +92,24 @@ query User($username: String!) {
   }
 }`
 
+export const GET_CAUGHT_POSTS = gql`
+query Query($username: String!) {
+  user(username: $username) {
+    caughtPosts {
+      _id
+      color1
+      color2
+      color3
+      color5
+      color4
+      image1
+      postName
+      postOwner
+    }
+  }
+}
+`
+
 export const QUERY_PRODUCTS = gql`
   query getProducts($category: ID) {
     products(category: $category) {

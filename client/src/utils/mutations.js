@@ -68,24 +68,26 @@ export const ADD_POST = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
+  mutation Mutation(
+    $username: String!, 
+    $email: String!, 
+    $password: String!, 
+    $name: String, 
+    $bio: String, 
+    $profileImg: String
   ) {
     addUser(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
-    ) {
-      token
-      user {
-        _id
-      }
+      username: $username, 
+      email: $email, 
+      password: $password, 
+      name: $name, 
+      bio: $bio, 
+      profileIMG: $profileImg) {
+    user {
+      username
     }
   }
+}
 `;
 
 export const CREATE_DECK = gql`

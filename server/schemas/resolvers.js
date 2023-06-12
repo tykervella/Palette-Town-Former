@@ -87,15 +87,24 @@ const resolvers = {
     addUser: async (parent, { 
       username, 
       email, 
-      password 
+      password, 
+      name, 
+      bio, 
+      profileIMG 
     }) => {
       const user = await User.create({ 
-        username, 
-        email, 
-        password });
+        username: username, 
+        email: email, 
+        password: password,
+        name: name, 
+        bio: bio,  
+        profileIMG : profileIMG
+      });
+    
       const token = signToken(user);
       return { token, user };
     },
+    
 
     login: async (parent, { 
       email, 
@@ -117,6 +126,9 @@ const resolvers = {
 
       return { token, user };
     },
+
+   
+    
 
     addDeck: async (parent, { 
       deckOwner, 
