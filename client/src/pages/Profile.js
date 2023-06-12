@@ -98,13 +98,9 @@ const Profile = () => {
   return (
     <Container>
       <h2 className="mb-4 mt-4 text-[#0B3C49]">Your Profile</h2>
-
-<div className="p-4 mb-8 bg-[#4B957E]">
-  <div className="d-flex justify-content-center"> 
-    <div className="bg-[#4B957E] rounded-lg p-2"> 
-      <div className="border-4 border-[#FFEC99] rounded-lg">
-        <Row>
-          <Col md={6} className="border-right border-black pr-4">
+      <div className="p-4 mb-6 bg-[#4B957E] rounded-md">
+        <Row className="border-2 border-[#FFEC99] rounded-md p-2">
+          <Col md={7} lg={8} className="border-black pr-4">
             <ProfileInfo
             
               name={name}
@@ -113,24 +109,21 @@ const Profile = () => {
               className="text-white"
             />
           </Col>
-              <Col md={6} className="text-center">
-                <div className="d-flex flex-column align-items-center">
-                  <div className="w-48 h-48 bg-red-500 rounded-circle mb-3">
-                    <img
-                      src={CircleImage}
-                      alt="Profile Circle"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
-                  <Button className="bg-blue-500 text-xs text-white py-1 px-3 rounded">
-                    Update Profile
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </div>
-        </div>
+          <Col md={5} lg={4} className="text-center">
+            <div className="mt-10 d-flex flex-column align-items-center">
+              <div className="w-52 h-50 bg-[#0B3C49] rounded-circle mb-3">
+                <img
+                  src={CircleImage}
+                  alt="Profile Circle"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <button className="bg-[#FFEC99] text-xl text-[#0B3C49] py-1 px-3 rounded">
+                Update Profile
+              </button>
+            </div>
+          </Col>
+        </Row>
       </div>
 
       <h2 className="mt-14 mb-4 text-[#0B3C49]">Your Palettes</h2>
@@ -147,8 +140,8 @@ const Profile = () => {
 
       <Row>
         <Col md={6}>
-          <Container className="border border-black rounded-lg bg-white text-black">
-            <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
+        <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
+          <Container className="bg-[#4B957E] rounded-lg text-black">
             <Row>
               {decks.map((deck, index) => (
                 <DeckPreview
@@ -165,8 +158,8 @@ const Profile = () => {
           
         </Col>
         <Col md={6}>
-        <Container className="border border-black rounded-lg bg-white text-black">
-            <h2 className="text-[#0B3C49] mb-4 mt-4">Your Listings</h2>
+        <h2 className="text-[#0B3C49] mb-4 mt-4">Your Listings</h2>
+        <Container className="bg-[#4B957E] rounded-lg text-black">
             <Row>
           {listings.map((listing, index) => (
             <FeaturedListing

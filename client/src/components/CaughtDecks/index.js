@@ -1,7 +1,4 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const CaughtDecks = () => {
   const cards = [
@@ -20,22 +17,23 @@ const CaughtDecks = () => {
   ];
 
   return (
-    <>
-      {/* <h2 className="text-black mb-4 mt-4">Caught Decks</h2> */}
-      <Container>
-        <Row className='justify-content-center'>
+    <div className="shadow-lg caught-decks-container bg-[#4B957E] m-4 rounded-xl">
+      <div className="border-2 border-[#FFEC99] rounded-md p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {cards.map((card, index) => (
-            <Col key={index} className='border border-black rounded-xl bg-[#AFD7CA] mt-18 mx-2 mb-2'>
-              <div>
-                <img className="mt-4" src={card.image} alt={card.title} />
-                <h3 className='mt-4 mb-4 text-white text-center'>{card.title}</h3>
+            <div key={index} className="rounded-xl bg-[#FFEC99]">
+              <div className="card-wrapper">
+                <img className="mt-4 w-full" src={card.image} alt={card.title} />
+                <h3 className="mt-4 mb-4 text-[#4B957E] text-center">{card.title}</h3>
               </div>
-            </Col>
+            </div>
           ))}
-        </Row>
-      </Container>
-    </>
+        </div>
+      </div>
+    </div>
   );
 }
 
 export default CaughtDecks;
+
+
