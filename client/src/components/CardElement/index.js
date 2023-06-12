@@ -65,7 +65,7 @@ function CardElement({ cardId, cardImage, cardName, cardType, superType, deckId,
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="Price"
-            className="p-2 m-2 rounded bg-[#AFD7CA] text-black"
+            className="text-center p-2 m-2 rounded bg-[#AFD7CA] text-black"
           />
           <button onClick={handleCreateListing} className="bg-[#AFD7CA] hover:bg-[#FFEC99] text-black p-2 m-2 rounded">
             Create Listing
