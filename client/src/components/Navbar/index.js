@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from '@apollo/client';
+import { useQuery, useApolloClient } from '@apollo/client';
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
 import logo from "../Navbar/assets/pallet-town-logo.png";
@@ -21,17 +21,8 @@ const CustomNavbar = () => {
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const client = useApolloClient();
 
-  const { loading, error, data } = useQuery(GET_CART, { 
-    variables: { username: username },
-    skip: !username
-  });
-  
-  useEffect(() => {
-    if (data && data.user.cart) {
-      setCartItems(data.user.cart);
-    }
-  }, [data]);
 
   useEffect(() => {
     const total = cartItems.reduce((total, item) => total + item.price, 0);
@@ -39,12 +30,29 @@ const CustomNavbar = () => {
   }, [cartItems]);
 
 
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
-
 
   const handleCartModalClose = () => setShowCartModal(false);
-  const handleCartModalShow = () => setShowCartModal(true);
+  const handleCartModalShow = async () => {
+    if (username) {
+      try {
+        const { data } = await client.query({
+          query: GET_CART,
+          variables: { username: username }
+        });
+  
+        if (data && data.user.cart) {
+          setCartItems(data.user.cart);
+        }
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    }
+  
+    setShowCartModal(true);
+  };
+  
+    
+   
 
   const logout = (event) => {
     event.preventDefault();

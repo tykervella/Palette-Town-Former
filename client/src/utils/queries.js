@@ -36,8 +36,8 @@ export const GET_POST = gql`
       postOwner
       postText
       caughtUsers {
-        caughtUserName
-    }
+        username
+      }
   }
 }`
 
@@ -77,6 +77,7 @@ query User($username: String!) {
     name
     username
     decks {
+      _id
       deckName
       cards {
         cardImage

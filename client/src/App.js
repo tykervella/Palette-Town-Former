@@ -16,6 +16,7 @@ import Navbar from './components/Navbar';
 import Marketplace from './pages/Marketplace';
 import Profile from './pages/Profile'
 import Contact from './pages/Contact';
+import Checkout from './pages/Checkout';
 import CreateDeck from './pages/CreateDeck'
 import CreateListing from './pages/CreateListing'
 import CreatePost from './pages/CreatePost'
@@ -71,6 +72,7 @@ function App() {
             <Route path="/listing/create" element={<CreateListing />} />
             <Route path="/listing/:id" element={<MarketItem />} />
             <Route path="/Contact" element={<Contact />}/>
+            <Route path="/Checkout" element={<Checkout />}/>
 
           </Routes>
         </div>

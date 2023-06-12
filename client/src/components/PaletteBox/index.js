@@ -1,13 +1,31 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import Auth from '../../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
 import likeButton from '../TrendingPalettes/assets/pokeball-like.png';
 
+import { ADD_TO_CAUGHT_POSTS, ADD_TO_CAUGHT_USERS } from '../../utils/mutations';
+
 function PaletteBox({ sectionData, postName, postOwner, postId }) {
+  const token = Auth.getToken();
+  const username = token ? Auth.getProfile().data.username : null;
+  const userId = token ? Auth.getProfile().data._id : null;
+
   const navigate = useNavigate();
+  const [addToCaughtPosts] = useMutation(ADD_TO_CAUGHT_POSTS);
+  const [addToCaughtUsers] = useMutation(ADD_TO_CAUGHT_USERS);
 
   const handleClick = () => {
+    navigate(`/post/${postId}`);
+  };
+
+  const handleLike = async () => {
+    // Call the mutations when the like button is clicked
+    await addToCaughtPosts({ variables: { username: username, postId } });
+    await addToCaughtUsers({ variables: { postId, userId }});
+
     navigate(`/post/${postId}`);
   };
 
@@ -32,13 +50,10 @@ function PaletteBox({ sectionData, postName, postOwner, postId }) {
             <Button className="bg-[#0B3C49] text-xs text-[#0B3C49] py-1 px-2 mt-4 sm:mt-0 sm:ml-4 rounded" onClick={handleClick}>
               View Post
             </Button>
-            <a href="#" className="text-red-500 text-2xl ml-0 mt-4 sm:mt-0 sm:ml-4">
-              <img
-                src={likeButton}
-                alt="Like"
-                style={{ width: "30px", height: "auto" }}
-              />
+            <a className="text-red-500 text-2xl ml-0 mt-4 sm:mt-0 sm:ml-4" onClick={handleLike}>
+              <img src={likeButton} alt="Like" style={{ width: "30px", height: "auto", cursor: 'pointer' }}/>
             </a>
+
           </div>
         </div>
       </Col>

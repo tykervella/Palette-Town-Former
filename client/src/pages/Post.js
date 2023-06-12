@@ -142,22 +142,20 @@ const Post = () => {
           <Row className="flex-row justify-content-center rounded bg-[#AFD7CA] p-2 mt-4">
             <div className='border-3 rounded border-[#0B3C49] p-2'>
               <ul className='text-2xl font-bold'>Users who caught this post:</ul>
-              <div className='ml-10 text-gray-500'>
-                {/* username list renders here */}
-                <li className="list-none flex items-center">
-                  <span className="mr-2"><MdCatchingPokemon /></span>asjkldglajwedg
-                </li>
-                <li className="list-none flex items-center">
-                  <span className="mr-2"><MdCatchingPokemon /></span>asjkldglajwedg
-                </li>
-                <li className="list-none flex items-center">
-                  <span className="mr-2"><MdCatchingPokemon /></span>asjkldglajwedg
-                </li>
+                
+                <div className='ml-10 text-gray-500'>
+                  {caughtUsers && caughtUsers.length > 0 && caughtUsers.map((user, index) => (
+                    <li key={index} className="list-none flex items-center">
+                      {user.username}
+                    </li>
+                  ))}
+                </div>
 
-              </div>
+              
 
             </div>
           </Row>
+
         </Col>
 
       </Row>

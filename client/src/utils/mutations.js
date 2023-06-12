@@ -160,6 +160,32 @@ export const ADD_TO_CART = gql`
 }
 `
 
+export const ADD_TO_CAUGHT_POSTS = gql`
+  mutation Mutation(
+    $username: String!, 
+    $postId: ID!
+  ) {
+    addToCaughtPosts(
+      username: $username, 
+      postId: $postId
+    ) {
+      _id
+  }
+}`
+
+export const ADD_TO_CAUGHT_USERS = gql`
+  mutation AddToCaughtUsers(
+    $postId: ID!, 
+    $userId: ID!
+  ) {
+    addToCaughtUsers(
+      postId: $postId, 
+      userId: $userId
+    ) {
+      _id
+  }
+}`
+
 export const REMOVE_CARD = gql`
   mutation Mutation($deckId: ID!, $cardId: String!) {
     removeCard(deckId: $deckId, cardId: $cardId) {
@@ -185,5 +211,20 @@ export const UPDATE_CARD_QUANTITY = gql`
     }
   }
 }`
+
+export const REMOVE_FROM_CART = gql`
+  mutation Mutation(
+    $username: String!, 
+    $listingId: ID!
+  ) {
+    removeFromCart(
+      username: $username, 
+      listingId: $listingId
+    ) {
+      cart {
+        _id
+      }
+    }
+  }`
 
 

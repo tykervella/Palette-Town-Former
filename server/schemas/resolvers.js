@@ -202,21 +202,6 @@ const resolvers = {
     
       return newPost;
     },
-    
-    addToCaughtPosts: async (_, { username, postId }) => {
-      const user = await User.findById(username);
-      user.caughtPosts.push(postId);
-      await user.save();
-      return user;
-    },
-    
-    addToCaughtUsers: async (_, {  postId, username}) => {
-      const post = await Post.findById(postId);
-      post.caughtUsers.push(username);
-      await post.save();
-      return post;
-    },
-
 
     addToCart: async (_, { username, listingId }) => {
       const user = await User.findOne({ username: username });
@@ -225,6 +210,22 @@ const resolvers = {
       await user.save();
       return user;
     },
+
+    addToCaughtPosts: async (_, { username, postId }) => {
+      const user = await User.findOne({ username: username });
+      if (!user) throw new Error('No user found with this username');
+      user.caughtPosts.push(postId);
+      await user.save();
+      return user;
+    },
+    
+    addToCaughtUsers: async (_, {  postId, userId}) => {
+      const post = await Post.findById(postId);
+      post.caughtUsers.push(userId);
+      await post.save();
+      return post;
+    },
+
     
     addCardToDeckList: async (_, { 
       deckId, 
@@ -267,6 +268,18 @@ const resolvers = {
 
       return updatedDeck;
     },
+
+    removeFromCart: async (_, { username, listingId }) => {
+      const user = await User.findOne({ username: username });
+      if (!user) throw new Error('No user found with this username');
+      const index = user.cart.indexOf(listingId);
+      if (index > -1) {
+        user.cart.splice(index, 1);
+      }
+      await user.save();
+      return user;
+    },
+  
 
     updateCardQuantity: async (parent, { 
       deckId, 
