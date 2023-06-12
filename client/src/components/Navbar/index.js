@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useApolloClient } from '@apollo/client';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../../utils/auth";
 import logo from "../Navbar/assets/pallet-town-logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +22,8 @@ const CustomNavbar = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const client = useApolloClient();
+  const navigate = useNavigate();
+
 
 
   useEffect(() => {
@@ -69,6 +71,13 @@ const CustomNavbar = () => {
     }
   
     setShowCartModal(true);
+  };
+
+  const handleGoToMarketplace = (event) => {
+    event.preventDefault()
+    setShowCartModal(false);
+    navigate('/checkout')
+    ;
   };
   
     
@@ -187,6 +196,9 @@ const CustomNavbar = () => {
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleCartModalClose}>
             Close
+          </button>
+          <button className="btn btn-secondary" onClick={handleGoToMarketplace}>
+            Go to Checkout
           </button>
         </Modal.Footer>
       </Modal>

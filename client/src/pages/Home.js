@@ -143,19 +143,19 @@ const Home = () => {
 
         {/* trending palettes */}
 
+    
         <Row>
           <Col>
             <div>
-            {/* <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2> */}
-
-              {postsArr.map((sectionData, index) => (
+              {/* <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2> */}
+              
+              {postsArr.slice(0, 5).map((sectionData, index) => (
                 <PaletteBox
                   key={index}
                   sectionData={sectionData}
                   postName={sectionData[0].postName} // Pass postName to PaletteBox
                   postOwner={sectionData[0].postOwner} // Pass postOwner to PaletteBox
                   postId={sectionData[0].postId} // Pass postOwner to PaletteBox
-
                 />
               ))}
             </div>
@@ -163,8 +163,8 @@ const Home = () => {
         </Row>
 
         {/* bottom row */}
-        <div className="mt-8 d-flex flex-wrap"> 
-          {/* caught decks */}
+        {/* <div className="mt-8 d-flex flex-wrap"> 
+          caught decks
           <Col md={7} className="mb-4">
             <h2 className="text-[#0B3C49] mb-6">Caught Decks</h2>
             <div className="rounded-xl bg-[#4B957E] p-2 m-2">
@@ -172,13 +172,13 @@ const Home = () => {
             </div>
           </Col>
           <Col md={5}>
-            {/* top listings decks */}
+            top listings decks
             <h2 className="text-[#0B3C49] mb-6">Highest Value Listing</h2>
             <div className="rounded-xl bg-[#4B957E] p-4 m-2">
               <TopListing />
             </div>
           </Col>
-        </div>
+        </div> */}
 
         {/* Scroll to top button */}
         {showScrollToTop && (<div className="scroll-to-top animate-bounce" onClick={handleScrollToTop} role="button" tabIndex={0} > <AiOutlineArrowUp /> </div>)}
