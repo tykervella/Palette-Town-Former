@@ -86,7 +86,7 @@ const MarketItem = () => {
               </h2>
               <img src={listing.cardImage} alt={listing.cardName} className="hover:scale-150" />
               <h2 className="text-center text-truncate text-decoration-none bg-[#FFEC99] rounded-lg mt-2">
-                Price: {listing.price}
+                Price: <span className='text-[#376D5B]'>${listing.price}</span>
               </h2>
             </div>
             <div className="ml-10 mt-20 text-white">
