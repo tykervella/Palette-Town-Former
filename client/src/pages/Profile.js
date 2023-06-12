@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/client";
 import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
 
-
 import CircleImage from "./assets/profile-pic.webp";
 import ProfileInfo from "../components/ProfileInfo";
 import PaletteBox from "../components/PaletteBox";
@@ -34,7 +33,7 @@ const Profile = () => {
           const images = user.posts[i];
           const postName = user.posts[i].postName; // Add postName
           const postOwner = user.posts[i].postOwner; // Add postkOwner
-          const postId = user.posts[i]._id
+          const postId = user.posts[i]._id;
 
           const newPost = [
             {
@@ -42,7 +41,7 @@ const Profile = () => {
               image: images.image1,
               postName: postName, // Pass postName
               postOwner: postOwner, // Pass postOwner
-              postId: postId
+              postId: postId,
             },
             {
               title: colors.color2,
@@ -94,13 +93,9 @@ const Profile = () => {
   return (
     <Container>
       <h2 className="mb-4 mt-4 text-[#0B3C49]">Your Profile</h2>
-
-<div className="p-4 mb-8 bg-[#4B957E]">
-  <div className="d-flex justify-content-center"> 
-    <div className="bg-[#4B957E] rounded-lg p-2"> 
-      <div className="border-4 border-[#FFEC99] rounded-lg">
-        <Row>
-          <Col md={6} className="border-right border-black pr-4">
+      <div className="p-4 mb-6 bg-[#4B957E] rounded-md">
+        <Row className="border-4 border-[#FFEC99] rounded-md p-4">
+          <Col md={7} lg={8} className="border-black pr-4">
             <ProfileInfo
               key={userId}
               name={name}
@@ -109,24 +104,21 @@ const Profile = () => {
               className="text-white"
             />
           </Col>
-              <Col md={6} className="text-center">
-                <div className="d-flex flex-column align-items-center">
-                  <div className="w-48 h-48 bg-red-500 rounded-circle mb-3">
-                    <img
-                      src={CircleImage}
-                      alt="Profile Circle"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  </div>
-                  <Button className="bg-blue-500 text-xs text-white py-1 px-3 rounded">
-                    Update Profile
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </div>
-        </div>
+          <Col md={5} lg={4} className="text-center">
+            <div className="mt-10 d-flex flex-column align-items-center">
+              <div className="w-52 h-50 bg-[#0B3C49] rounded-circle mb-3">
+                <img
+                  src={CircleImage}
+                  alt="Profile Circle"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <button className="bg-[#FFEC99] text-xl text-[#0B3C49] py-1 px-3 rounded">
+                Update Profile
+              </button>
+            </div>
+          </Col>
+        </Row>
       </div>
 
       <h2 className="mt-14 mb-4 text-[#0B3C49]">Your Palettes</h2>
