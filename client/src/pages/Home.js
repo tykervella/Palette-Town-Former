@@ -22,7 +22,7 @@ const Home = () => {
   const checkStatus = (endpoint) => {
     return token ? `${endpoint}` : "/login";
   };
-  
+
   const handleClick = () => {
     const endpoint = checkStatus("/marketplace");
     navigate(endpoint);
@@ -116,26 +116,22 @@ const Home = () => {
   return (
     <div className="">
       <Container>
-        {/* start of dark mode toggle button */}
-        {/* <div class="toggle">
-          <input type="checkbox" id="toggle" className="hidden" />
-          <label for="toggle"></label>
-        </div> */}
 
-        {/* banner */}
         <Row>
-          <Col className="banner-section shadow-lg rounded-xl p-20 m-2 bg-[#AFD7CA]">
+          <Col className="banner-section shadow-lg rounded-xl p-20 bg-[#AFD7CA]">
             <Row className="text-center"></Row>
 
             <Row className="float-right">
               {/* banner marketplace button */}
-              <div id="container">
-                <button className="learn-more" onClick={handleClick}>
-                  <span className="circle" aria-hidden="true">
-                    <span className="icon arrow"></span>
-                  </span>
-                  <span className="button-text">Marketplace</span>
-                </button>
+              <div id="container" className="bg-[#4B957E] p-4 rounded-lg">
+                <div className="border-2 border-[#FFEC99] p-2 rounded">
+                  <button className="learn-more" onClick={handleClick}>
+                    <span className="circle" aria-hidden="true">
+                      <span className="icon arrow"></span>
+                    </span>
+                    <span className="button-text">Marketplace</span>
+                  </button>
+                </div>
               </div>
             </Row>
           </Col>
@@ -143,12 +139,12 @@ const Home = () => {
 
         {/* trending palettes */}
 
-    
+
         <Row>
           <Col>
             <div>
               {/* <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2> */}
-              
+
               {postsArr.slice(0, 5).map((sectionData, index) => (
                 <PaletteBox
                   key={index}

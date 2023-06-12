@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useApolloClient } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import Auth from "../utils/auth";
+import { Container, Row, Col } from "react-bootstrap";
 
 import { GET_CART } from '../utils/queries';
 import CartItem from '../components/CartItem';
@@ -43,29 +44,32 @@ const Checkout = () => {
   }, [username, client]);
 
 
-
   return (
-    <div>
-      <h1>Checkout</h1>
-      
+    <Container className="mt-5 text-center shadow-lg mb-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
+      <h1 className="mb-10">Checkout</h1>
+
       {cartItems.length > 0 ? (
-        cartItems.map((item, index) => (
-          <CartItem
-            key={index}
-            listingId={item._id}
-            cardImage={item.cardImage}
-            cardName={item.cardName}
-            price={item.price}
-          />
-        ))
+        <Row className="cart-items-container">
+          {cartItems.map((item, index) => (
+            <Col key={index} xs={12} md={6} lg={6} xl={6}>
+              <CartItem
+                listingId={item._id}
+                cardImage={item.cardImage}
+                cardName={item.cardName}
+                price={item.price}
+              />
+            </Col>
+          ))}
+        </Row>
       ) : (
-        <div>No Items in your Cart...</div>
+        <div className="text-center mb-4">No Items in your Cart...</div>
       )}
-  
-      <div>Total: {totalPrice}</div>
-    </div>
+
+      <div className="d-flex justify-content-end p-4">
+        <h5 className="mr-3">Total: <span className="text-[#4B957E]">${totalPrice}</span></h5>
+      </div>
+    </Container>
   );
 }
-
 
 export default Checkout;

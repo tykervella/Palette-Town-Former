@@ -40,7 +40,7 @@ const CustomNavbar = () => {
             query: GET_CART,
             variables: { username: username }
           });
-    
+
           if (data && data.user.cart) {
             setCartItems(data.user.cart);
           }
@@ -61,7 +61,7 @@ const CustomNavbar = () => {
           query: GET_CART,
           variables: { username: username }
         });
-  
+
         if (data && data.user.cart) {
           setCartItems(data.user.cart);
         }
@@ -69,7 +69,7 @@ const CustomNavbar = () => {
         console.error("Error fetching cart:", error);
       }
     }
-  
+
     setShowCartModal(true);
   };
 
@@ -77,11 +77,11 @@ const CustomNavbar = () => {
     event.preventDefault()
     setShowCartModal(false);
     navigate('/checkout')
-    ;
+      ;
   };
-  
-    
-   
+
+
+
 
   const logout = (event) => {
     event.preventDefault();
@@ -120,7 +120,7 @@ const CustomNavbar = () => {
                   Create Listing
                 </NavDropdown.Item>
               </NavDropdown>
-              
+
               <Link to={checkStatus("marketplace")} style={{ textDecoration: "none" }}>
                 <span className="nav-link text-white me-4">Marketplace</span>
               </Link>
@@ -156,13 +156,13 @@ const CustomNavbar = () => {
               )}
               {token && (
                 <Nav.Link className="text-white" onClick={handleCartModalShow}>
-                <FontAwesomeIcon icon={faShoppingCart} />
-                {cartQuantity > 0 && (
-                  <span className="bg-red-500 text-white rounded-full px-2 ml-1">
-                    {cartQuantity}
-                  </span>
-                )}
-              </Nav.Link>
+                  <FontAwesomeIcon icon={faShoppingCart} />
+                  {cartQuantity > 0 && (
+                    <span className="bg-red-500 text-white rounded-full px-2 ml-1">
+                      {cartQuantity}
+                    </span>
+                  )}
+                </Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
@@ -173,24 +173,28 @@ const CustomNavbar = () => {
         <Modal.Header closeButton>
           <Modal.Title>Your Cart</Modal.Title>
         </Modal.Header>
-        
+
         <Modal.Body>
-          {cartItems.length > 0 && cartItems.map((item, index) => 
-            <CartItem 
+          {cartItems.length > 0 && cartItems.map((item, index) =>
+            <CartItem
               key={index}
-              listingId={item._id} 
-              cardImage={item.cardImage} 
-              cardName={item.cardName} 
+              listingId={item._id}
+              cardImage={item.cardImage}
+              cardName={item.cardName}
               price={item.price}
             />
           )}
 
           {cartItems.length === 0 && (
-          <div>No Items in your Cart...</div>
+            <div>No Items in your Cart...</div>
           )}
 
-          Total: {totalPrice}
-
+          <div className="d-flex justify-content-between align-items-end mt-4">
+            <div></div>
+            <div>
+              Total: <span className="text-[#4B957E]">${totalPrice}</span>
+            </div>
+          </div>
         </Modal.Body>
 
         <Modal.Footer>

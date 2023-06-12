@@ -19,11 +19,11 @@ const Listing = (props) => {
         <img src={props.images} alt={props.cardName} className='w-full hover:scale-150 mt-4 rounded-xl' />
       </div>
       {/* card type */}
-      <p className='text-center text-white mt-2'>Card Type: <span className='text-[#AFD7CA]'>{props.cardTypes}</span></p>
+      {/* <p className='text-center text-white mt-2'>Card Type: <span className='text-[#AFD7CA]'>{props.cardTypes}</span></p> */}
 
       {/* card details */}
       <div className='card-details'>
-        <Row>
+        <Row className='mt-4'>
           <Col>
             {/* card price */}
             <p className='mt-2 text-white'>Price: <span className='text-[#AFD7CA]'>${props.price.toFixed(2)}</span></p>
@@ -35,7 +35,7 @@ const Listing = (props) => {
             </button>
           </Col>
         </Row>
-        <p className='text-white'>Seller: {props.seller}</p>
+        {/* <p className='text-white'>Seller: {props.seller}</p> */}
       </div>
       </div>
     </Col>
