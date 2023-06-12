@@ -22,8 +22,11 @@ const CustomNavbar = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const { loading, error, data } = useQuery(GET_CART, { variables: { username: username } });
-
+  const { loading, error, data } = useQuery(GET_CART, { 
+    variables: { username: username },
+    skip: !username
+  });
+  
   useEffect(() => {
     if (data && data.user.cart) {
       setCartItems(data.user.cart);
