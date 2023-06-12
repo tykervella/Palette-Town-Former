@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
+import { BsBrush } from "react-icons/bs";
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
@@ -10,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import Auth from "../utils/auth";
+import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -57,22 +59,20 @@ const Login = () => {
         {/* left column */}
         <Col md={8} className="d-none d-md-block">
           <div className="loginLogo rounded-3xl shadow-xl d-flex flex-column align-items-center justify-content-center">
-            <div className="text-center pt-5 font-bold">
-              <h1 className="pt-10">No account?</h1>
-              <h2 className="pt-4">Click below to Sign Up!</h2>
+            <div className="mb-4 text-center pt-5 font-bold">
+              <h1 className="pt-10 text-4xl mb-2 font-bold">
+                No account? Click below to Enter PaletteTown!
+              </h1>
               <div className="mt-10 px-4">
-                <p className="text-center text-xl">
-                  <span className="mx-auto">
-                    Want to enter PaletteTown? Catch and create decks to explore
-                    color hexcode palettes you're proud of.
-                  </span>
-                  <span className="mx-auto">
-                    Gotta catch 'em all and unlock the vibrant world of colors!
+                <p className="mt-2 text-center text-xl">
+                  <span className="mx-auto mb-2 font-bold">
+                    Gotta catch 'em all and create decks to explore color
+                    hexcode palettes.
                   </span>
                 </p>
               </div>
-              <button className="btn-block bg-[#0B3C49] hover:bg-[#4B957E] text-white py-3 px-6 rounded-lg text-xl">
-                <Link to="/signup" className="text-white text-decoration-none">
+              <button className="mt-4 btn-block bg-[#0B3C49] hover:bg-[#4B957E] text-white py-3 px-6 rounded-lg text-xl">
+                <Link to="/signup" className=" text-white text-decoration-none">
                   Sign Up
                 </Link>
               </button>
@@ -82,8 +82,10 @@ const Login = () => {
 
         {/* right column */}
         <Col md={4} className="bg-[#0B3C49] rounded-3xl shadow-xl text-white">
-          <h1 className="pt-10 text-center">Palette Town</h1>
-          <h2 className="pt-10 text-center">Where Hexcodes Choose YOU!</h2>
+          <h1 className="text-white pt-10 text-center mt-16">Palette Town</h1>
+          <h2 className="text-xl text-white pt-2 text-center italic">
+            Where Hexcodes Choose YOU!
+          </h2>
           {data ? (
             <p>
               Success! You may now head{" "}
@@ -91,11 +93,11 @@ const Login = () => {
             </p>
           ) : (
             <div className="d-flex flex-column justify-content-center align-items-center">
-              <form onSubmit={handleFormSubmit} className="px-4">
+              <form onSubmit={handleFormSubmit} className="mt-6 px-4">
                 <div className="mb-3">
-                  <p className="text-xs mt-4">User Email</p>
+                  <p className="text-xs mt-14">User Email</p>
                   <input
-                    className="form-input bg-transparent border-b-2 w-full border-[#376D5B] text-white focus:outline-none resize-none"
+                    className="form-input bg-transparent border-b-2 w-full sm:w-80 border-[#376D5B] text-white focus:outline-none resize-none"
                     placeholder="example@example.com"
                     name="email"
                     type="email"
@@ -108,7 +110,7 @@ const Login = () => {
                   <p className="text-xs">Password</p>
                   <div className="input-icon">
                     <input
-                      className="form-input bg-transparent border-b-2 border-[#376D5B] w-80 text-white focus:outline-none resize-none"
+                      className="form-input bg-transparent border-b-2 sm:w-80 border-[#376D5B] w-full text-white focus:outline-none resize-none"
                       placeholder="******"
                       name="password"
                       type={showPassword ? "text" : "password"} // Dynamically set the input type based on showPassword state
@@ -124,7 +126,7 @@ const Login = () => {
                     />
                     <label
                       htmlFor="showPassword"
-                      className="icon-label text-xl text-white"
+                      className="ml-2 icon-label text-xl text-white"
                       style={{ cursor: "pointer" }}
                     >
                       {showPassword ? (
@@ -138,7 +140,7 @@ const Login = () => {
 
                 <div className="flex justify-center">
                   <button
-                    className="mt-2 mb-4 btn-block bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-3 px-6 rounded-lg text-xl"
+                    className="mt-4 mb-4 text-black btn-block bg-[#FFEC99] hover:bg-[#4B957E] font-bold py-3 px-6 rounded-lg text-lg"
                     style={{ cursor: "pointer", minWidth: "120px" }}
                     type="submit"
                   >
