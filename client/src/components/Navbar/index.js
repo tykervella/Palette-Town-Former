@@ -29,7 +29,27 @@ const CustomNavbar = () => {
     setTotalPrice(total.toFixed(2));
   }, [cartItems]);
 
+  // red notification for cart
+  useEffect(() => {
+    if (username) {
+      const fetchCart = async () => {
+        try {
+          const { data } = await client.query({
+            query: GET_CART,
+            variables: { username: username }
+          });
+    
+          if (data && data.user.cart) {
+            setCartItems(data.user.cart);
+          }
+        } catch (error) {
+          console.error("Error fetching cart:", error);
+        }
+      };
 
+      fetchCart();
+    }
+  }, [username, client]);
 
   const handleCartModalClose = () => setShowCartModal(false);
   const handleCartModalShow = async () => {
@@ -64,6 +84,8 @@ const CustomNavbar = () => {
   };
 
   console.log(cartItems)
+
+  const cartQuantity = cartItems.length;
 
   return (
     <>
@@ -125,8 +147,13 @@ const CustomNavbar = () => {
               )}
               {token && (
                 <Nav.Link className="text-white" onClick={handleCartModalShow}>
-                  <FontAwesomeIcon icon={faShoppingCart} />
-                </Nav.Link>
+                <FontAwesomeIcon icon={faShoppingCart} />
+                {cartQuantity > 0 && (
+                  <span className="bg-red-500 text-white rounded-full px-2 ml-1">
+                    {cartQuantity}
+                  </span>
+                )}
+              </Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
