@@ -63,7 +63,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/deck/create" element={<CreateDeck />}/>
+            <Route path="/deck/create" element={<CreateDeck />} />
             <Route path="/deck/:_id" element={<DeckBuilder />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/post/publish/:_id" element={<CreatePost />} />
@@ -71,8 +71,8 @@ function App() {
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/listing/create" element={<CreateListing />} />
             <Route path="/listing/:id" element={<MarketItem />} />
-            <Route path="/Contact" element={<Contact />}/>
-            <Route path="/Checkout" element={<Checkout />}/>
+            <Route path="/Contact" element={<Contact />} />
+            <Route path="/Checkout" element={<Checkout />} />
 
           </Routes>
         </div>
