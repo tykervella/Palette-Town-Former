@@ -2,23 +2,21 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-  type CaughtPost {
-    caughtPostName: String!
-  }
-
   type User {
-    _id: ID!
-    username: String!
-    name: String!
-    profileIMG: String
-    email: String!
-    password: String
-    decks: [Deck!]
-    listings: [Listing!]
-    posts: [Post!]
-    bio: String
-    caughtPosts: [CaughtPost!]
-  }
+  _id: ID!
+  username: String!
+  name: String!
+  profileIMG: String
+  email: String!
+  password: String
+  decks: [Deck!]
+  listings: [Listing!]
+  posts: [Post!]
+  bio: String
+  caughtPosts: [Post!]
+  cart: [Listing!]  # Added cart field
+}
+
 
   type Deck {
     _id: ID!
@@ -37,10 +35,6 @@ const typeDefs = gql`
     quantity: Int!
   }
 
-  type CaughtUser {
-    caughtUserName: String!
-  }
-
   type Post {
     _id: ID!
     postOwner: String!
@@ -48,7 +42,6 @@ const typeDefs = gql`
     deckName: String!
     postText: String
     createdAt: String
-    caughtUsers: [CaughtUser!]
     color1: String!
     color2: String!
     color3: String!
@@ -59,6 +52,7 @@ const typeDefs = gql`
     image3: String!
     image4: String!
     image5: String!
+    caughtPosts: [User!]
     captureCount: Int!
   }
 
@@ -112,15 +106,6 @@ const typeDefs = gql`
       deckName: String!
     ): Deck
 
-    addCaughtPost(
-      userId: ID!
-      caughtPostName: String!
-    ): User
-
-    addCaughtUser(
-      postId: ID!
-      caughtUserName: String!
-    ):Post
 
     addListing(
       cardId: String!
@@ -157,6 +142,21 @@ const typeDefs = gql`
       cardType: String!
       superType: String!
     ): Deck
+    
+    addToCaughtUsers(
+      postId: ID!
+      username: String!
+    ): Post
+
+    addToCaughtPosts(
+      username: String!, 
+      postId: ID!
+    ): User
+    
+    addToCart(
+      username: String!, 
+      listingId: ID!
+    ): User
     
     removeCard(
       deckId: ID!

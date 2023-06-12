@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Deck, Listing, Post } = require('../models');
 const { signToken } = require('../utils/auth');
+const { ObjectId } = require('mongodb');
 
 // Helper function to find a deck by ID
 async function findDeckById(deckId) {
@@ -24,14 +25,18 @@ const resolvers = {
       return User.find()
         .populate('decks')
         .populate('listings')
-        .populate('posts');
+        .populate('posts')
+        .populate('cart')
+        .populate('caughtPosts');
     },
 
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .populate('decks')
         .populate('listings')
-        .populate('posts');
+        .populate('posts')
+        .populate('cart')
+        .populate('caughtPosts');
     },
    
     decks: async (parent, { username }) => {
@@ -54,100 +59,27 @@ const resolvers = {
         .sort({ createdAt: -1 });
     },
 
-    // listing: async (_, { searchQuery, 
-    //   input: { selectedTypes, selectedColors, sortOption } }) => {
-    //   let filteredListings = await Listing.find();
-        
-    //   if (searchQuery) {
-    //     const searchRegex = new RegExp(searchQuery, 'i');
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       listing.cardName.match(searchRegex)
-    //     );
-    //   }
-
-    //   if (selectedTypes.length > 0) {
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       selectedTypes.includes(listing.cardType)
-    //     );
-    //   }
-
-    //   if (selectedColors.length > 0) {
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       selectedColors.includes(listing.cardColor)
-    //     );
-    //   }
-
-    //   if (sortOption) {
-    //     if (sortOption === 'nameAsc') {
-    //       filteredListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
-    //     } else if (sortOption === 'nameDesc') {
-    //       filteredListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
-    //     } else if (sortOption === 'priceAsc') {
-    //       filteredListings.sort((a, b) => a.price - b.price);
-    //     } else if (sortOption === 'priceDesc') {
-    //       filteredListings.sort((a, b) => b.price - a.price);
-    //     }
-    //   }
-
-    //   return filteredListings;
-    // },
+    listing: async (parent, { listingId }, context) => {
+      return await Listing.findOne({ _id: ObjectId(listingId) });
+    },
 
     allListings: async () => {
       return Listing.find();
     },
 
     posts: async () => {
-      const posts = await Post
-        .find()
-        .exec();
+      const posts = await Post.find()
+        .populate('caughtUsers');
       
         return posts
           .sort((a, b) => b.captureCount - a.captureCount);
     },
+
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId })
-        .exec();
+        .populate('caughtUsers');
     },
-    
-    // getFilteredListings: async (_, { searchQuery, selectedTypes, selectedColors }) => {
-    //   let filteredListings = await Listing.find();
-
-    //   if (searchQuery) {
-    //     const searchRegex = new RegExp(searchQuery, 'i');
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       listing.cardName.match(searchRegex)
-    //     );
-    //   }
-
-    //   if (selectedTypes.length > 0) {
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       selectedTypes.includes(listing.cardType)
-    //     );
-    //   }
-
-    //   if (selectedColors.length > 0) {
-    //     filteredListings = filteredListings.filter((listing) =>
-    //       selectedColors.includes(listing.cardColor)
-    //     );
-    //   }
-
-    //   return filteredListings;
-    // },
-    // getSortedListings: async (_, { sortOption }) => {
-    //   let sortedListings = await Listing.find();
-
-    //   if (sortOption === 'nameAsc') {
-    //     sortedListings.sort((a, b) => a.cardName.localeCompare(b.cardName));
-    //   } else if (sortOption === 'nameDesc') {
-    //     sortedListings.sort((a, b) => b.cardName.localeCompare(a.cardName));
-    //   } else if (sortOption === 'priceAsc') {
-    //     sortedListings.sort((a, b) => a.price - b.price);
-    //   } else if (sortOption === 'priceDesc') {
-    //     sortedListings.sort((a, b) => b.price - a.price);
-    //   }
-
-    //   return sortedListings;
-    // }
+  
   },
 
   Mutation: {
@@ -271,34 +203,29 @@ const resolvers = {
       return newPost;
     },
     
-    addCaughtPost: async (parent, { 
-      userId, 
-      caughtPostName
-    }) => {
-      
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: userId },
-        { $push: { caughtPosts: {caughtPostName: caughtPostName }  } },
-        { new: true }
-      );
-
-      return updatedUser;
+    addToCaughtPosts: async (_, { username, postId }) => {
+      const user = await User.findById(username);
+      user.caughtPosts.push(postId);
+      await user.save();
+      return user;
+    },
+    
+    addToCaughtUsers: async (_, {  postId, username}) => {
+      const post = await Post.findById(postId);
+      post.caughtUsers.push(username);
+      await post.save();
+      return post;
     },
 
-    addCaughtUser: async (parent, {  
-      postId,
-      caughtUser
-    }) => {
-      
-      const updatedPost = await Post.findOneAndUpdate(
-        { _id: postId },
-        { $push: { caughtUsers: {caughtUser, caughtUser }  } },
-        { new: true }
-      );
 
-      return updatedPost;
+    addToCart: async (_, { username, listingId }) => {
+      const user = await User.findOne({ username: username });
+      if (!user) throw new Error('No user found with this username');
+      user.cart.push(listingId);
+      await user.save();
+      return user;
     },
-
+    
     addCardToDeckList: async (_, { 
       deckId, 
       cardId, 

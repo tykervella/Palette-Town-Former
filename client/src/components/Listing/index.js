@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const ProductList = (props) => {
+const Listing = (props) => {
 
   return (
     <Col className='rounded-xl bg-[#0B3C49] shadow-lg p-2'>
@@ -26,7 +26,7 @@ const ProductList = (props) => {
         <Row>
           <Col>
             {/* card price */}
-            <p className='mt-2 text-white'>Price: <span className='text-[#AFD7CA]'>${props.price}</span></p>
+            <p className='mt-2 text-white'>Price: <span className='text-[#AFD7CA]'>${props.price.toFixed(2)}</span></p>
           </Col>
           <Col>
             {/* go to listing button */}
@@ -42,4 +42,4 @@ const ProductList = (props) => {
   );
 };
 
-export default ProductList;
+export default Listing;

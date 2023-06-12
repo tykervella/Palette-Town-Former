@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function DeckBuilder() {
+function CreateListing() {
   const { _id } = useParams();
   const [cards, setCards] = useState([]);
   const [decklist, setDecklist] = useState([]);
@@ -84,6 +84,7 @@ function DeckBuilder() {
   }, []);
 
 
+
   return (
     <Container className="my-4 d-flex justify-content-center">
       <div className="bg-[#4B957E] rounded-lg p-4 shadow-lg">
@@ -110,4 +111,4 @@ function DeckBuilder() {
   );   
 }
 
-export default DeckBuilder;
+export default CreateListing;
