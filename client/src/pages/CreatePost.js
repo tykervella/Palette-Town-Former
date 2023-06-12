@@ -158,27 +158,28 @@ const CreatePost = () => {
 
       const generateSortedImages = () => {
         const images = [];
+        const tempCardList = JSON.parse(JSON.stringify(cardList));  // Deep copy of cardList
         sortedCardTypes.forEach((cardType) => {
           if (cardType !== "other") { // Exclude "other" type
-            const card = cardList.find(
+            const card = tempCardList.find(
               (card) => card.cardType === cardType
             );
-
+      
             if (card) {
               const cardImage = card.cardIMG
               images.push(cardImage);
-
-              const index = cardList.findIndex((card) => card.cardIMG === cardImage);
-
-              // Remove the element at the found index from cardList
+      
+              const index = tempCardList.findIndex((card) => card.cardIMG === cardImage);
+      
+              // Remove the element at the found index from tempCardList
               if (index !== -1) {
-                cardList.splice(index, 1);
+                tempCardList.splice(index, 1);
               }
-
+      
             }
           }
         });
-
+      
         setSortedImages(images);
       };
 
@@ -190,8 +191,9 @@ const CreatePost = () => {
   const [addPost, { loading: postLoading, error: postError, data: postData }] = useMutation(ADD_POST);
 
 
-  const handleAddPost = async () => {
+  const handleAddPost = async (event) => {
     try {
+      event.preventDefault();
       console.log(deckName)
 
       const modifiedCardTypes = {};

@@ -22,23 +22,22 @@ function Marketplace() {
     return <div>Loading...</div>
   };
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
+  // const handleSearch = (query) => {
+  //   setSearchQuery(query);
+  // };
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
+  // const handleCategoryChange = (category) => {
+  //   setSelectedCategory(category);
+  // };
 
-  const handleSort = (option) => {
-    setSortOption(option);
-  };
+  // const handleSort = (option) => {
+  //   setSortOption(option);
+  // };
 
   return (
     <Container>
-      <Row>
-        {/* left column */}
-        <Col md={8}>
+      <Row className="justify-content-md-center justify-content-center">        {/* left column */}
+        <Col md={10}>
           <Row xs={1} sm={2} md={4} lg={4} className="g-4">
             {loading ? (
               <p>Loading listings...</p>
@@ -58,10 +57,10 @@ function Marketplace() {
             )}
           </Row>
         </Col>
-        {/* right column */}
+        {/* right column
         <Col className="">
           <CategoryMenu onSearch={handleSearch} onSort={handleSort} />
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );

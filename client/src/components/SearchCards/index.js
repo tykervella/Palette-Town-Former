@@ -44,13 +44,20 @@ const SearchCards = ({ onSearch }) => {
   const handleInputChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
-
+  
     if (inputName === "cardName") {
       setCardName(inputValue);
       sessionStorage.setItem("cardName", inputValue);
     } else if (inputName === "cardType") {
       setCardType(inputValue);
       sessionStorage.setItem("cardType", inputValue);
+      
+      // Reset cardSubtype and cardColor when cardType changes
+      setCardSubtype("0");
+      sessionStorage.setItem("cardSubtype", "0");
+      setCardColor("0");
+      sessionStorage.setItem("cardColor", "0");
+  
     } else if (inputName === "cardSubtype") {
       setCardSubtype(inputValue);
       sessionStorage.setItem("cardSubtype", inputValue);
@@ -59,6 +66,7 @@ const SearchCards = ({ onSearch }) => {
       sessionStorage.setItem("cardColor", inputValue);
     }
   };
+  
 
   const handleRefresh = () => {
     sessionStorage.removeItem("cardName");
