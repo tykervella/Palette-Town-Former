@@ -167,14 +167,14 @@ const Home = () => {
           {/* caught decks */}
           <Col md={7} className="mb-4">
             <h2 className="text-[#0B3C49] mb-6">Caught Decks</h2>
-            <div className="border border-black rounded-xl bg-[#4B957E] p-2 m-2">
+            <div className="rounded-xl bg-[#4B957E] p-2 m-2">
               <CaughtDecks />
             </div>
           </Col>
           <Col md={5}>
             {/* top listings decks */}
             <h2 className="text-[#0B3C49] mb-6">Highest Value Listing</h2>
-            <div className="border border-black rounded-xl bg-[#4B957E] p-12 m-4">
+            <div className="rounded-xl bg-[#4B957E] p-4 m-2">
               <TopListing />
             </div>
           </Col>

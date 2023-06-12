@@ -17,11 +17,11 @@ const CaughtDecks = () => {
   ];
 
   return (
-    <div className="caught-decks-container bg-[#4B957E] m-4 rounded-xl">
-      <div className="border-4 border-[#FFEC99] rounded-md p-4">
+    <div className="shadow-lg caught-decks-container bg-[#4B957E] m-4 rounded-xl">
+      <div className="border-2 border-[#FFEC99] rounded-md p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {cards.map((card, index) => (
-            <div key={index} className="border border-black rounded-xl bg-[#FFEC99]">
+            <div key={index} className="rounded-xl bg-[#FFEC99]">
               <div className="card-wrapper">
                 <img className="mt-4 w-full" src={card.image} alt={card.title} />
                 <h3 className="mt-4 mb-4 text-[#4B957E] text-center">{card.title}</h3>

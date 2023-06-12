@@ -99,7 +99,7 @@ const Profile = () => {
     <Container>
       <h2 className="mb-4 mt-4 text-[#0B3C49]">Your Profile</h2>
       <div className="p-4 mb-6 bg-[#4B957E] rounded-md">
-        <Row className="border-4 border-[#FFEC99] rounded-md p-4">
+        <Row className="border-2 border-[#FFEC99] rounded-md p-2">
           <Col md={7} lg={8} className="border-black pr-4">
             <ProfileInfo
             
@@ -140,8 +140,8 @@ const Profile = () => {
 
       <Row>
         <Col md={6}>
-          <Container className="border border-black rounded-lg bg-white text-black">
-            <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
+        <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
+          <Container className="bg-[#4B957E] rounded-lg text-black">
             <Row>
               {decks.map((deck, index) => (
                 <DeckPreview
@@ -158,8 +158,8 @@ const Profile = () => {
           
         </Col>
         <Col md={6}>
-        <Container className="border border-black rounded-lg bg-white text-black">
-            <h2 className="text-[#0B3C49] mb-4 mt-4">Your Listings</h2>
+        <h2 className="text-[#0B3C49] mb-4 mt-4">Your Listings</h2>
+        <Container className="bg-[#4B957E] rounded-lg text-black">
             <Row>
           {listings.map((listing, index) => (
             <FeaturedListing

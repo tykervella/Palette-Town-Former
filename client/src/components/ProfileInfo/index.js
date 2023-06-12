@@ -13,7 +13,7 @@ function ProfileInfo({ key, name, username, bio }) {
   };
 
   return (
-    <Container key={key} className="text-white bg-[#4B957E]">
+    <Container key={key} className="shadow-lg text-white bg-[#4B957E]">
       <Row className="mb-3 mt-4" key={name}>
         <Col md={10}>
           <h5>Name:</h5>
