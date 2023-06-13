@@ -71,7 +71,7 @@ const Profile = () => {
 
       updatePostsArr();
       setListings(user.listings);
-      setDecks(user.decks)     
+      setDecks(user.decks)
     }
   }, [data]);
 
@@ -94,7 +94,7 @@ const Profile = () => {
   const name = data.user.name;
   const bio = data.user.bio;
   const user = data.user;
-  
+
   return (
     <Container>
       <h2 className="mb-4 mt-4 text-[#0B3C49]">Your Profile</h2>
@@ -102,7 +102,7 @@ const Profile = () => {
         <Row className="border-2 border-[#FFEC99] rounded-md p-2">
           <Col md={7} lg={8} className="border-black pr-4">
             <ProfileInfo
-            
+
               name={name}
               username={user_name}
               bio={bio}
@@ -126,7 +126,7 @@ const Profile = () => {
         </Row>
       </div>
 
-      <h2 className="mt-14 mb-4 text-[#0B3C49]">Your Palettes</h2>
+      <h2 className="mt-14 mb-4 text-[#0B3C49] text-center font-bold">Your Palettes</h2>
 
       {postsArr.map((sectionData, index) => (
         <PaletteBox
@@ -140,13 +140,13 @@ const Profile = () => {
 
       <Row>
         <Col md={6}>
-        <h2 className="text-[#0B3C49] mb-4 mt-4">Your Decks</h2>
-          <Container className="bg-[#4B957E] rounded-lg text-black">
+          <h2 className="text-[#0B3C49] mb-4 mt-4 text-center font-bold">Your Decks</h2>
+          <Container className="bg-[#4B957E] rounded-lg text-black shadow-lg">
             <Row>
               {decks.map((deck, index) => (
                 <DeckPreview
                   key={index}
-                  deckId={deck._id} 
+                  deckId={deck._id}
                   deckName={deck.deckName}
                   cardImage={deck.cards[0]?.cardImage || false} // Use optional chaining operator to check for undefined
                 />
@@ -154,25 +154,28 @@ const Profile = () => {
             </Row>
 
           </Container>
-          
-          
+
+
         </Col>
         <Col md={6}>
-        <h2 className="text-[#0B3C49] mb-4 mt-4">Your Listings</h2>
-        <Container className="bg-[#4B957E] rounded-lg text-black">
-            <Row>
-          {listings.map((listing, index) => (
-            <FeaturedListing
-              key={index}
-              listingId={listing._id} 
-              cardName={listing.cardName}
-              cardImage={listing.cardImage}
-              price={listing.price}
-            />
-          ))}
-          </Row>
-
-        </Container>
+          <h2 className="text-[#0B3C49] mb-4 mt-4 text-center font-bold">Your Listings</h2>
+          <Container className="bg-[#4B957E] rounded-lg text-black shadow-lg">
+            {listings.length === 0 ? (
+              <p className="text-center">No current listings</p>
+            ) : (
+              <Row>
+                {listings.map((listing, index) => (
+                  <FeaturedListing
+                    key={index}
+                    listingId={listing._id}
+                    cardName={listing.cardName}
+                    cardImage={listing.cardImage}
+                    price={listing.price}
+                  />
+                ))}
+              </Row>
+            )}
+          </Container>
         </Col>
       </Row>
 

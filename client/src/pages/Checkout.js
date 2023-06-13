@@ -105,8 +105,6 @@ const Checkout = () => {
   };
   
   
-
-
   return (
     <Container className="mt-5 text-center shadow-lg mb-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
       <h1 className="mb-10">Checkout</h1>
@@ -132,7 +130,7 @@ const Checkout = () => {
         <h5 className="mr-3">Total: <span className="text-[#4B957E]">${totalPrice}</span></h5>
       </div>
 
-      <button onClick={handleCheckout} className="checkout-button">Checkout</button>
+      <button onClick={handleCheckout} className="checkout-button text-2xl text-white bg-[#0B3C49] p-2 rounded hover:bg-[#4B957E] mb-4">Checkout</button>
 
     </Container>
   );
