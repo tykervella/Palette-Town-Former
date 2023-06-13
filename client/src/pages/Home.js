@@ -114,8 +114,7 @@ const Home = () => {
 
 
   return (
-    <div className="">
-      <Container>
+      <Container className="mb-4">
 
         <Row>
           <Col className="banner-section shadow-lg rounded-xl p-20 bg-[#AFD7CA]">
@@ -143,7 +142,7 @@ const Home = () => {
         <Row>
           <Col>
             <div>
-              {/* <h2 className="text-[#0B3C49] mb-6">Trending Palettes</h2> */}
+              <h2 className="text-[#0B3C49] mb-6 mt-6 font-bold text-center">Trending Palettes</h2>
 
               {postsArr.slice(0, 5).map((sectionData, index) => (
                 <PaletteBox
@@ -180,7 +179,6 @@ const Home = () => {
         {showScrollToTop && (<div className="scroll-to-top animate-bounce" onClick={handleScrollToTop} role="button" tabIndex={0} > <AiOutlineArrowUp /> </div>)}
 
       </Container>
-    </div>
   );
 };
 
