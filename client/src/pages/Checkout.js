@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/client';
 
 
 import { GET_CART } from '../utils/queries';
-import { REMOVE_FROM_CART} from '../utils/mutations';
+import { REMOVE_LISTING } from '../utils/mutations';
 import CartItem from '../components/CartItem';
 
 
@@ -20,32 +20,10 @@ const Checkout = () => {
   const client = useApolloClient();
   const stripePromise = loadStripe("pk_test_51NIKBUE8H0olH7rAq4x67BpaEWrBjgaHUU1VrfPUQt0ANI6FXL21E8vvwLzeAIDdZQrAfZFv2AQ8Qx3U2UWdgLor00bYZryjyK");
 
-  
-  const [removeFromCart] = useMutation(REMOVE_FROM_CART);
+  const [removeListing] = useMutation(REMOVE_LISTING);
 
-  const handleRemoveFromCart = async (listingId) => {
-    try {
-      await removeFromCart({
-        variables: {
-          username: username,
-          listingId: listingId
-        },
-      });
-    } catch (error) {
-      console.error("Error removing item from cart", error);
-    }
-  };
 
-  const removeAllItemsFromCart = async () => {
-    for (const item of cartItems) {
-      try {
-        await handleRemoveFromCart(item._id);
-      } catch (error) {
-        console.error('Error removing listing:', error);
-      }
-    }
-    // Refresh the window location to reflect the changes in cart
-  };
+
 
   useEffect(() => {
     const total = cartItems.reduce((total, item) => total + item.price, 0);
@@ -74,8 +52,6 @@ const Checkout = () => {
   }, [username, client]);
 
   const handleCheckout = async () => {
-    await removeAllItemsFromCart();
-
     // Load Stripe.js
     const stripe = await stripePromise;
   
@@ -101,6 +77,15 @@ const Checkout = () => {
       // If `redirectToCheckout` fails due to a browser or network
       // error, display the localized error message to your customer
       console.error(result.error.message);
+    } else {
+      // If successful, remove the listings from the database
+      for (const item of cartItems) {
+        try {
+          await removeListing({ variables: { listingId: item._id } });
+        } catch (error) {
+          console.error('Error removing listing:', error);
+        }
+      }
     }
   };
   
