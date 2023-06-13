@@ -20,7 +20,7 @@ const resolvers = {
   },
 
   Query: {
-    
+
     users: async () => {
       return User.find()
         .populate('decks')
@@ -38,7 +38,7 @@ const resolvers = {
         .populate('cart')
         .populate('caughtPosts');
     },
-   
+
     decks: async (parent, { username }) => {
       const params = username ? { deckOwner: username } : {};
       return Deck.find(params)
@@ -70,45 +70,45 @@ const resolvers = {
     posts: async () => {
       const posts = await Post.find()
         .populate('caughtUsers');
-      
-        return posts
-          .sort((a, b) => b.captureCount - a.captureCount);
+
+      return posts
+        .sort((a, b) => b.captureCount - a.captureCount);
     },
 
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId })
         .populate('caughtUsers');
     },
-  
+
   },
 
   Mutation: {
 
-    addUser: async (parent, { 
-      username, 
-      email, 
-      password, 
-      name, 
-      bio, 
-      profileIMG 
+    addUser: async (parent, {
+      username,
+      email,
+      password,
+      name,
+      bio,
+      profileIMG
     }) => {
-      const user = await User.create({ 
-        username: username, 
-        email: email, 
+      const user = await User.create({
+        username: username,
+        email: email,
         password: password,
-        name: name, 
-        bio: bio,  
-        profileIMG : profileIMG
+        name: name,
+        bio: bio,
+        profileIMG: profileIMG
       });
-    
+
       const token = signToken(user);
       return { token, user };
     },
-    
 
-    login: async (parent, { 
-      email, 
-      password 
+
+    login: async (parent, {
+      email,
+      password
     }) => {
       const user = await User.findOne({ email });
 
@@ -127,16 +127,16 @@ const resolvers = {
       return { token, user };
     },
 
-   
-    
 
-    addDeck: async (parent, { 
-      deckOwner, 
-      deckName 
+
+
+    addDeck: async (parent, {
+      deckOwner,
+      deckName
     }) => {
-      const deck = await Deck.create({ 
-        deckOwner: deckOwner, 
-        deckName: deckName 
+      const deck = await Deck.create({
+        deckOwner: deckOwner,
+        deckName: deckName
       });
 
       await User.findOneAndUpdate(
@@ -147,14 +147,14 @@ const resolvers = {
       return deck;
     },
 
-    addListing: async (parent, { 
-      cardId, 
-      cardName, 
-      cardImage, 
-      cardType, 
-      superType, 
-      price, 
-      seller 
+    addListing: async (parent, {
+      cardId,
+      cardName,
+      cardImage,
+      cardType,
+      superType,
+      price,
+      seller
     }) => {
       const newListing = await Listing.create({
         cardId: cardId,
@@ -206,12 +206,12 @@ const resolvers = {
         image4: image4,
         image5: image5
       });
-    
+
       await User.findOneAndUpdate(
         { username: postOwner },
         { $addToSet: { posts: newPost._id } }
       );
-    
+
       return newPost;
     },
 
@@ -230,22 +230,22 @@ const resolvers = {
       await user.save();
       return user;
     },
-    
-    addToCaughtUsers: async (_, {  postId, userId}) => {
+
+    addToCaughtUsers: async (_, { postId, userId }) => {
       const post = await Post.findById(postId);
       post.caughtUsers.push(userId);
       await post.save();
       return post;
     },
 
-    
-    addCardToDeckList: async (_, { 
-      deckId, 
-      cardId, 
-      cardName, 
-      cardImage, 
-      cardType, 
-      superType 
+
+    addCardToDeckList: async (_, {
+      deckId,
+      cardId,
+      cardName,
+      cardImage,
+      cardType,
+      superType
     }) => {
 
       // Find the deck by deckId and add the card
@@ -268,13 +268,13 @@ const resolvers = {
       return deck;
     },
 
-    removeCard: async (parent, { 
-      deckId, 
-      cardId 
+    removeCard: async (parent, {
+      deckId,
+      cardId
     }) => {
       const updatedDeck = await Deck.findOneAndUpdate(
         { _id: deckId },
-        { $pull: { cards: {cardId: cardId } } },
+        { $pull: { cards: { cardId: cardId } } },
         { new: true }
       );
 
@@ -283,10 +283,10 @@ const resolvers = {
 
     removeListing: async (parent, { listingId }) => {
       const listing = await Listing.findOneAndDelete({ _id: listingId });
-    
+
       return listing;
     },
-    
+
 
     removeFromCart: async (_, { username, listingId }) => {
       const user = await User.findOne({ username: username });
@@ -298,12 +298,12 @@ const resolvers = {
       await user.save();
       return user;
     },
-  
 
-    updateCardQuantity: async (parent, { 
-      deckId, 
-      cardId, 
-      quantity 
+
+    updateCardQuantity: async (parent, {
+      deckId,
+      cardId,
+      quantity
     }) => {
       const deck = await findDeckById(deckId);
       if (!deck) {
