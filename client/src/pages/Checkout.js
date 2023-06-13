@@ -14,7 +14,9 @@ const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const client = useApolloClient();
   const stripePromise = loadStripe("pk_test_51NIKBUE8H0olH7rAq4x67BpaEWrBjgaHUU1VrfPUQt0ANI6FXL21E8vvwLzeAIDdZQrAfZFv2AQ8Qx3U2UWdgLor00bYZryjyK");
+
   const [removeListing] = useMutation(REMOVE_LISTING);
+
   useEffect(() => {
     const total = cartItems.reduce((total, item) => total + item.price, 0);
     setTotalPrice(total.toFixed(2));
@@ -70,6 +72,7 @@ const Checkout = () => {
       }
     }
   };
+
   return (
     <Container className="mt-5 text-center shadow-lg mb-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
       <h1 className="mb-10">Checkout</h1>
@@ -92,7 +95,9 @@ const Checkout = () => {
       <div className="d-flex justify-content-end p-4">
         <h5 className="mr-3">Total: <span className="text-[#4B957E]">${totalPrice}</span></h5>
       </div>
+
       <button onClick={handleCheckout} className="checkout-button text-2xl text-white bg-[#0B3C49] p-2 rounded hover:bg-[#4B957E] mb-4">Checkout</button>
+
     </Container>
   );
 }
