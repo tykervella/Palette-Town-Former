@@ -6,7 +6,7 @@ require('dotenv').config();
 
 
 
-const stripe = require('stripe')(process.env.SK_TEST);
+const stripe = require('stripe')("sk_test_51NIKBUE8H0olH7rA7dTTTH00otoAjErjCaiNylHp2jGPWV50fFjYj4Juvx0gKVSrYYtF8DGfgkvXr7mqVEVhAW98003du8fxVj");
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
