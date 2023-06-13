@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -6,6 +6,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    trim: true,
+  },
+  name: {
+    type: String,
+    maxlength: 30,
+},
+  profileIMG: {
+    type: String,
     trim: true,
   },
   email: {
@@ -19,12 +27,36 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  decks: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Deck',
     },
   ],
+  listings: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Listing',
+    },
+  ],
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+    },
+  ],
+  bio: {
+    type: String,
+    maxlength: 280,
+  },
+  caughtPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+  }],
+  cart: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Listing',
+  }],
 });
 
 userSchema.pre('save', async function (next) {
