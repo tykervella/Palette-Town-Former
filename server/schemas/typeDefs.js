@@ -171,16 +171,10 @@ const typeDefs = gql`
       listingId: ID!
     ): User
 
-    removeFromCaughtPosts(
-      username: String!
-      postId: ID!
-    ): User
+    removeListing(
+      listingId: ID!
+    ): Listing
 
-    removeFromCaughtUsers(
-      postId: ID!
-      username: String!
-    ): Post
-    
     updateCardQuantity(
       deckId: ID! 
       cardId: ID! 

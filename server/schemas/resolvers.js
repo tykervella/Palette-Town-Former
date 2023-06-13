@@ -281,6 +281,13 @@ const resolvers = {
       return updatedDeck;
     },
 
+    removeListing: async (parent, { listingId }) => {
+      const listing = await Listing.findOneAndDelete({ _id: listingId });
+    
+      return listing;
+    },
+    
+
     removeFromCart: async (_, { username, listingId }) => {
       const user = await User.findOne({ username: username });
       if (!user) throw new Error('No user found with this username');

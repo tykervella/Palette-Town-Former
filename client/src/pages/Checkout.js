@@ -3,9 +3,12 @@ import { useApolloClient } from '@apollo/client';
 import Auth from "../utils/auth";
 import { Container, Row, Col } from "react-bootstrap";
 import { loadStripe } from "@stripe/stripe-js";
+import { useMutation } from '@apollo/client';
+
 
 
 import { GET_CART } from '../utils/queries';
+import { REMOVE_LISTING } from '../utils/mutations';
 import CartItem from '../components/CartItem';
 
 
@@ -16,6 +19,8 @@ const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const client = useApolloClient();
   const stripePromise = loadStripe("pk_test_51NIKBUE8H0olH7rAq4x67BpaEWrBjgaHUU1VrfPUQt0ANI6FXL21E8vvwLzeAIDdZQrAfZFv2AQ8Qx3U2UWdgLor00bYZryjyK");
+
+  const [removeListing] = useMutation(REMOVE_LISTING);
 
 
 
@@ -72,8 +77,18 @@ const Checkout = () => {
       // If `redirectToCheckout` fails due to a browser or network
       // error, display the localized error message to your customer
       console.error(result.error.message);
+    } else {
+      // If successful, remove the listings from the database
+      for (const item of cartItems) {
+        try {
+          await removeListing({ variables: { listingId: item._id } });
+        } catch (error) {
+          console.error('Error removing listing:', error);
+        }
+      }
     }
   };
+  
   
 
 

@@ -3,8 +3,10 @@ const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 require('dotenv').config();
+const cors = require('cors');
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+const stripe = require('stripe')("sk_test_51NIKBUE8H0olH7rA7dTTTH00otoAjErjCaiNylHp2jGPWV50fFjYj4Juvx0gKVSrYYtF8DGfgkvXr7mqVEVhAW98003du8fxVj");
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -19,6 +21,9 @@ const server = new ApolloServer({
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Enable CORS
+app.use(cors());
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -41,8 +46,8 @@ app.post('/create-checkout-session', async (req, res) => {
     payment_method_types: ['card'],
     line_items,
     mode: 'payment',
-    success_url: `http://localhost:3001/success`,
-    cancel_url: `http://localhost:3001/cancel`,
+    success_url: `http://localhost:3000/checkout`,
+    cancel_url: `http://localhost:3001/checkout`,
   });
 
   res.json({ id: session.id });
@@ -52,7 +57,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-// Create a new instance of an cd ../ Apollo server with the GraphQL schema
+// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
@@ -67,3 +72,4 @@ const startApolloServer = async () => {
 
 // Call the async function to start the server
 startApolloServer();
+
