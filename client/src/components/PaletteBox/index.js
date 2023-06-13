@@ -22,11 +22,15 @@ function PaletteBox({ sectionData, postName, postOwner, postId }) {
   };
 
   const handleLike = async () => {
-    // Call the mutations when the like button is clicked
-    await addToCaughtPosts({ variables: { username: username, postId } });
-    await addToCaughtUsers({ variables: { postId, userId } });
-
-    navigate(`/post/${postId}`);
+    if (username) {
+      // Call the mutations when the like button is clicked
+      await addToCaughtPosts({ variables: { username: username, postId } });
+      await addToCaughtUsers({ variables: { postId, userId } });
+      navigate(`/post/${postId}`);
+    } else {
+      navigate(`/login`);
+    }
+  
   };
 
   return (
@@ -54,13 +58,13 @@ function PaletteBox({ sectionData, postName, postOwner, postId }) {
                   <button className="mb-2 bg-[#FFEC99] hover:bg-[#AFD7CA] text-sm text-black py-1 px-2 rounded overflow-ellipsis whitespace-nowrap" onClick={handleClick}>
                     View Post
                   </button>
-                  {/* <a href="#" className="text-red-500 text-1xl ml-1"> */}
+                  <a href="#" className="text-red-500 text-1xl ml-1" onClick={handleLike}>
                   <img
                     src={likeButton}
                     alt="Like"
                     className="ml-2 mb-1 w-14 h-6"
                   />
-                  {/* </a> */}
+                  </a>
                 </div>
               </div>
             </div>
