@@ -18,7 +18,7 @@ function FeaturedListing({ key, listingId, cardName, cardImage, price }) {
       <div className="mt-4 shadow-lg rounded-lg border-2 border-[#FFEC99] p-4">
         <img className="hover:scale-150 mt-4" src={cardImage} alt={cardName} />
         <h3 className="mb-2 truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-1 text-sm overflow-hidden overflow-ellipsis whitespace-nowrap">{cardName}</h3>
-        <h3 className="mb-2 truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-1 text-sm overflow-hidden overflow-ellipsis whitespace-nowrap">${price}</h3>
+        <h3 className="mb-2 truncate text-center mt-2 text-white bg-[#0B3C49] rounded p-1 text-sm overflow-hidden overflow-ellipsis whitespace-nowrap">{price}</h3>
         <button
             onClick={handleClick}
             className="bg-[#AFD7CA] hover:bg-[#FFEC99] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 whitespace-nowrap"
