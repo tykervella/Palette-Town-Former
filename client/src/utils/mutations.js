@@ -197,6 +197,14 @@ export const REMOVE_CARD = gql`
     }
 }`
 
+export const REMOVE_LISTING = gql`
+mutation Mutation($listingId: ID!) {
+  removeListing(listingId: $listingId) {
+    _id
+  }
+}
+`;
+
 export const UPDATE_CARD_QUANTITY = gql`
   mutation Mutation(
     $deckId: ID! 
